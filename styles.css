@@ -381,21 +381,3 @@ button:active {
 .chatbox img:hover {
   transform: scale(1.05);
 }
-
-.install-btn {
-  position: fixed;
-  bottom: 25px;
-  left: 25px;
-  padding: 10px 18px;
-  border-radius: 8px;
-  border: none;
-  background: linear-gradient(135deg, #4e8cff, #2658e0);
-  color: #fff;
-  font-size: 0.95rem;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(90,157,248,0.4);
-  transition: all 0.25s ease;
-}
-.install-btn:hover {
-  transform: translateY(-2px);
-}

@@ -7,15 +7,10 @@
   "theme_color": "#5a9df8",
   "description": "Secure offline vault to store personal documents.",
   "icons": [
-    {
-      "src": "",
+   {
+      "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
-    },
-    {
-      "src": "",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+   }
+          ]
 }
