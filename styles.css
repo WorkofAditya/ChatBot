@@ -373,3 +373,11 @@ button:active {
 }
 .toast.success { border-color: rgba(50, 255, 140, 0.4); }
 .toast.error { border-color: rgba(255, 80, 80, 0.5); }
+
+.chatbox img {
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+.chatbox img:hover {
+  transform: scale(1.05);
+}
