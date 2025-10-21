@@ -1,9 +1,9 @@
 {
-    "name": "ChatBot",
-    "short_name": "ChatBot",
+    "name": "Airlink",
+    "short_name": "Airlink",
     "icons": [
        {
-          "src": "/android-chrome-192x192.png",
+          "src": "icons/192.png",
           "sizes": "192x192",
           "type": "image/png"
        }
