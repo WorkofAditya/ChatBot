@@ -45,7 +45,7 @@ function removeTyping(el) {
   if (el && el.parentNode) el.parentNode.removeChild(el);
 }
 
-// Toast Feedback
+// Toast Feedback 
 function showToast(msg, type = 'info') {
   const toast = document.createElement('div');
   toast.className = `toast ${type}`;
@@ -58,7 +58,7 @@ function showToast(msg, type = 'info') {
   }, 3000);
 }
 
-// Chat Logic
+// Chat Logic 
 sendBtn.onclick = () => {
   const text = userInput.value.trim();
   if (!text) return;
@@ -73,35 +73,83 @@ sendBtn.onclick = () => {
     const doc = findDoc(text);
 
     if (doc) {
-      let reply = `${doc.name}: ${doc.value}`;
-      if (doc.info) reply += `\n${doc.info}`;
-      addMessage(reply, 'bot');
+  let reply = `${doc.name}: ${doc.value}`;
+  if (doc.info) reply += `\n${doc.info}`;
+
+  addMessage(reply, 'bot');
+
+  if (doc.file) {
+    if (doc.file.type.startsWith('image/')) {
+      const img = document.createElement('img');
+      img.src = doc.file.data;
+      img.alt = doc.file.name;
+      img.style.maxWidth = '180px';
+      img.style.borderRadius = '10px';
+      img.style.marginTop = '6px';
+      img.style.display = 'block';
+      chatbox.appendChild(img);
     } else {
+      const link = document.createElement('a');
+      link.href = doc.file.data;
+      link.download = doc.file.name;
+      link.textContent = `📎 Download ${doc.file.name}`;
+      link.style.display = 'inline-block';
+      link.style.marginTop = '6px';
+      link.style.color = '#8ab4ff';
+      chatbox.appendChild(link);
+    }
+    chatbox.scrollTop = chatbox.scrollHeight;
+  }
+}
+
+     else {
       addMessage('No record found for that query.', 'bot');
     }
   }, 400 + Math.random() * 600); // Natural delay
 };
 
-// Add Document Popup 
+// Add Document Popup
 addDocBtn.onclick = () => (popup.style.display = 'flex');
 cancelBtn.onclick = () => (popup.style.display = 'none');
 
-saveDocBtn.onclick = () => {
+saveDocBtn.onclick = async () => {
   const name = document.getElementById('docName').value.trim();
   const value = document.getElementById('docValue').value.trim();
   const info = document.getElementById('docInfo').value.trim();
+  const fileInput = document.getElementById('docFile');
+  const file = fileInput.files[0];
 
-  if (!name || !value) return showToast('Document name and value are required', 'error');
+  if (!name || !value) {
+    return showToast('Document name and value are required', 'error');
+  }
 
-  vault.push({ name, value, info });
+  let fileData = null;
+  if (file) {
+    fileData = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve({
+        name: file.name,
+        type: file.type,
+        data: reader.result // base64 data
+      });
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  vault.push({ name, value, info, file: fileData });
   saveVault();
+
   popup.style.display = 'none';
   document.getElementById('docName').value = '';
   document.getElementById('docValue').value = '';
   document.getElementById('docInfo').value = '';
+  fileInput.value = '';
+
   addMessage(`${name} added successfully.`, 'bot');
   showToast('Document added successfully', 'success');
 };
+
 
 // Clear Vault
 clearBtn.onclick = () => {
@@ -124,7 +172,7 @@ exportBtn.onclick = () => {
   showToast('Vault exported', 'success');
 };
 
-// Import Vault 
+// Import Vault
 importBtn.onclick = () => importFile.click();
 
 importFile.onchange = (e) => {
