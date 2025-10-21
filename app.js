@@ -1,3 +1,48 @@
+// IndexedDB Wrapper
+const DB_NAME = "VaultDB";
+const STORE_NAME = "documents";
+const DB_VERSION = 1;
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+    request.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, { keyPath: "id", autoIncrement: true });
+      }
+    };
+    request.onsuccess = (e) => resolve(e.target.result);
+    request.onerror = (e) => reject(e.target.error);
+  });
+}
+
+async function saveDocToDB(doc) {
+  const db = await openDB();
+  const tx = db.transaction(STORE_NAME, "readwrite");
+  tx.objectStore(STORE_NAME).add(doc);
+  return tx.complete;
+}
+
+async function getAllDocs() {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, "readonly");
+    const store = tx.objectStore(STORE_NAME);
+    const request = store.getAll();
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = reject;
+  });
+}
+
+async function clearVaultDB() {
+  const db = await openDB();
+  const tx = db.transaction(STORE_NAME, "readwrite");
+  tx.objectStore(STORE_NAME).clear();
+  return tx.complete;
+}
+
 // DOM Elements
 const chatbox = document.getElementById('chatbox');
 const userInput = document.getElementById('userInput');
@@ -11,8 +56,6 @@ const exportBtn = document.getElementById('exportBtn');
 const importBtn = document.getElementById('importBtn');
 const importFile = document.getElementById('importFile');
 
-let vault = JSON.parse(localStorage.getItem('vaultData')) || [];
-
 // Helper Functions
 function addMessage(text, sender) {
   const div = document.createElement('div');
@@ -22,9 +65,11 @@ function addMessage(text, sender) {
   chatbox.scrollTop = chatbox.scrollHeight;
 }
 
-function saveVault() {
-  localStorage.setItem('vaultData', JSON.stringify(vault));
-}
+let vault = [];
+(async () => {
+  vault = await getAllDocs();
+})();
+
 
 function findDoc(query) {
   query = query.toLowerCase();
@@ -130,15 +175,16 @@ saveDocBtn.onclick = async () => {
       reader.onload = () => resolve({
         name: file.name,
         type: file.type,
-        data: reader.result // base64 data
+        data: reader.result
       });
       reader.onerror = reject;
       reader.readAsDataURL(file);
     });
   }
 
-  vault.push({ name, value, info, file: fileData });
-  saveVault();
+  const doc = { name, value, info, file: fileData };
+  await saveDocToDB(doc);
+  vault.push(doc);
 
   popup.style.display = 'none';
   document.getElementById('docName').value = '';
@@ -147,15 +193,16 @@ saveDocBtn.onclick = async () => {
   fileInput.value = '';
 
   addMessage(`${name} added successfully.`, 'bot');
-  showToast('Document added successfully', 'success');
+  showToast('Document saved securely in vault', 'success');
 };
 
 
+
 // Clear Vault
-clearBtn.onclick = () => {
+clearBtn.onclick = async () => {
   if (confirm('Are you sure you want to clear the vault?')) {
+    await clearVaultDB();
     vault = [];
-    saveVault();
     addMessage('Vault cleared successfully.', 'bot');
     showToast('Vault cleared', 'success');
   }
