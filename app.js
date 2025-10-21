@@ -222,19 +222,42 @@ exportBtn.onclick = () => {
 // Import Vault
 importBtn.onclick = () => importFile.click();
 
-importFile.onchange = (e) => {
+importFile.onchange = async (e) => {
   const file = e.target.files[0];
   if (!file) return;
 
   const reader = new FileReader();
-  reader.onload = (event) => {
+  reader.onload = async (event) => {
     try {
-      vault = JSON.parse(event.target.result);
-      saveVault();
-      addMessage('Vault imported successfully.', 'bot');
-      showToast('Vault imported', 'success');
-    } catch {
-      showToast('Invalid file format', 'error');
+      const data = JSON.parse(event.target.result);
+
+      // Validate it’s an array
+      if (!Array.isArray(data)) {
+        alert("Invalid file format. Expected a list of documents.");
+        return;
+      }
+
+      // Convert legacy entries (from old localStorage system)
+      const converted = data.map(d => {
+        return {
+          name: d.name || "Unnamed",
+          value: d.value || "",
+          info: d.info || "",
+          file: d.file || null, // may already be a DataURL or null
+        };
+      });
+
+      // Save each document to IndexedDB
+      for (const doc of converted) {
+        await saveDocToDB(doc);
+      }
+
+      vault = await getAllDocs();
+      addMessage("Vault imported successfully.", "bot");
+      showToast("Vault imported successfully!", "success");
+    } catch (err) {
+      console.error("Import error:", err);
+      alert("Invalid file format or corrupted JSON.");
     }
   };
   reader.readAsText(file);
