@@ -73,7 +73,7 @@ let vault = [];
 
 function findDoc(query) {
   query = query.toLowerCase();
-  return vault.find(d => query.includes(d.name.toLowerCase()) || d.name.toLowerCase().includes(query));
+  return vault.filter(d => query.includes(d.name.toLowerCase()) || d.name.toLowerCase().includes(query));
 }
 
 // Typing Animation
@@ -115,43 +115,56 @@ sendBtn.onclick = () => {
 
   setTimeout(() => {
     removeTyping(typingEl);
-    const doc = findDoc(text);
 
-    if (doc) {
-  let reply = `${doc.name}: ${doc.value}`;
-  if (doc.info) reply += `\n${doc.info}`;
+    const matches = findDoc(text); // now returns multiple docs
 
-  addMessage(reply, 'bot');
+    if (matches.length > 0) {
+      matches.forEach((doc, index) => {
+        let reply = `${index + 1}. ${doc.name}: ${doc.value}`;
+        if (doc.info) reply += `<br>${doc.info}`;
+        addMessage(reply, 'bot');
 
-  if (doc.file) {
-    if (doc.file.type.startsWith('image/')) {
-      const img = document.createElement('img');
-      img.src = doc.file.data;
-      img.alt = doc.file.name;
-      img.style.maxWidth = '180px';
-      img.style.borderRadius = '10px';
-      img.style.marginTop = '6px';
-      img.style.display = 'block';
-      chatbox.appendChild(img);
+        if (doc.file) {
+          if (doc.file.type.startsWith('image/')) {
+            const img = document.createElement('img');
+            img.src = doc.file.data;
+            img.alt = doc.file.name;
+            img.style.maxWidth = '180px';
+            img.style.borderRadius = '10px';
+            img.style.marginTop = '6px';
+            img.style.display = 'block';
+            chatbox.appendChild(img);
+          } else {
+            const link = document.createElement('a');
+            link.href = doc.file.data;
+            link.download = doc.file.name;
+            link.textContent = `Download ${doc.file.name}`;
+            link.style.display = 'inline-block';
+            link.style.marginTop = '6px';
+            link.style.color = '#8ab4ff';
+            chatbox.appendChild(link);
+          }
+        }
+      });
+
+      setTimeout(() => {
+        chatbox.scrollTop = chatbox.scrollHeight;
+      }, 200);
     } else {
-      const link = document.createElement('a');
-      link.href = doc.file.data;
-      link.download = doc.file.name;
-      link.textContent = `📎 Download ${doc.file.name}`;
-      link.style.display = 'inline-block';
-      link.style.marginTop = '6px';
-      link.style.color = '#8ab4ff';
-      chatbox.appendChild(link);
-    }
-    chatbox.scrollTop = chatbox.scrollHeight;
-  }
-}
-
-     else {
       addMessage('No record found for that query.', 'bot');
     }
   }, 400 + Math.random() * 600); // Natural delay
 };
+
+
+// Pressing Enter also sends the message
+userInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    sendBtn.click();
+  }
+});
+
 
 // Add Document Popup
 addDocBtn.onclick = () => (popup.style.display = 'flex');
@@ -164,7 +177,7 @@ saveDocBtn.onclick = async () => {
   const fileInput = document.getElementById('docFile');
   const file = fileInput.files[0];
 
-  if (!name || !value) {
+  if (!name) {
     return showToast('Document name and value are required', 'error');
   }
 
@@ -271,3 +284,23 @@ if ("serviceWorker" in navigator) {
       .catch((err) => console.error("Service Worker failed:", err));
   });
 }
+
+function addMessage(content, sender) {
+  const div = document.createElement('div');
+  div.className = sender === 'user' ? 'user-message' : 'bot-message';
+
+  // Render HTML if content contains <br> or <a> or <img>
+  if (typeof content === "string" && (content.includes("<br>") || content.includes("<a") || content.includes("<img"))) {
+    div.innerHTML = content;
+  } else {
+    div.textContent = content;
+  }
+
+  chatbox.appendChild(div);
+
+  // Auto-scroll
+  setTimeout(() => {
+    chatbox.scrollTop = chatbox.scrollHeight;
+  }, 1000);
+}
+
