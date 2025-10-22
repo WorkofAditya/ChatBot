@@ -381,3 +381,15 @@ button:active {
 .chatbox img:hover {
   transform: scale(1.05);
 }
+
+.popup-actions {
+  display: flex;
+  justify-content: space-between; /* puts buttons at ends */
+  gap: 12px; /* space between buttons */
+  margin-top: 12px;
+}
+
+.popup-actions button {
+  flex: 1; /* buttons take equal width */
+  padding: 10px 0;
+}
