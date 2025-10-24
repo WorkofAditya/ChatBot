@@ -134,6 +134,15 @@ sendBtn.onclick = () => {
             img.style.marginTop = '6px';
             img.style.display = 'block';
             chatbox.appendChild(img);
+
+            const downloadLink = document.createElement('a');
+            downloadLink.href = doc.file.data;
+            downloadLink.download = doc.file.name;
+            downloadLink.textContent = `Download ${doc.file.name}`;
+            downloadLink.style.display = 'inline-block';
+            downloadLink.style.marginTop = '6px';
+            downloadLink.style.color = '#8ab4ff';
+            chatbox.appendChild(downloadLink);
           } else {
             const link = document.createElement('a');
             link.href = doc.file.data;
