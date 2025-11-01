@@ -1,0 +1,35 @@
+## v1.0
+- 2025-10-24 [Adityasinh Sodha] (a1f770e): Update cache version to vault-cache-v3
+- 2025-10-24 [Adityasinh Sodha] (533ee84): Implement image download link in chatbox
+- 2025-10-22 [Adityasinh Sodha] (4d69b0e): Update cache version to vault-cache-v2
+- 2025-10-22 [Adityasinh Sodha] (73a18c0): Add styles for popup actions layout
+- 2025-10-22 [Adityasinh Sodha] (07392ef): Wrap buttons in a div for better layout
+- 2025-10-22 [Adityasinh Sodha] (8060ec6): Refactor findDoc to use filter and handle multiple results
+- 2025-10-22 [Adityasinh Sodha] (bfdbf68): Remove redundant background color code
+- 2025-10-22 [Adityasinh Sodha] (8e60278): Change background color to #1649FF
+- 2025-10-22 [Adityasinh Sodha] (2f61eee): Add files via upload
+- 2025-10-22 [Adityasinh Sodha] (9a00001): Delete icons/favicon.ico
+- 2025-10-22 [Adityasinh Sodha] (16d1571): Register service worker on window load
+- 2025-10-22 [Adityasinh Sodha] (787cdce): Add service worker for caching assets
+- 2025-10-22 [Adityasinh Sodha] (c840969): Update README with project details and features
+- 2025-10-21 [Adityasinh Sodha] (a7e10dd): Add files via upload
+- 2025-10-21 [Adityasinh Sodha] (7bfc4e6): Delete icons/192.png
+- 2025-10-21 [Adityasinh Sodha] (d8c9218): Add files via upload
+- 2025-10-21 [Adityasinh Sodha] (bba97e2): Delete icons/favicon.ico
+- 2025-10-21 [Adityasinh Sodha] (4ae4f96): Change theme color in manifest.json
+- 2025-10-21 [Adityasinh Sodha] (ff8d2b0): Update manifest.json
+- 2025-10-21 [Adityasinh Sodha] (912db99): test update
+- 2025-10-21 [Adityasinh Sodha] (047fff3): test commit
+- 2025-10-21 [Adityasinh Sodha] (20731d7): test commit
+- 2025-10-21 [Adityasinh Sodha] (5e5bae4): Update
+- 2025-10-21 [Adityasinh Sodha] (f08cc8f): added PWA
+- 2025-10-21 [Adityasinh Sodha] (fa417f9): Enhance file import with validation and error handling
+- 2025-10-21 [Adityasinh Sodha] (b2bb455): Refactor vault data storage to use IndexedDB
+- 2025-10-21 [Adityasinh Sodha] (6657fcf): Refactor toast feedback and document handling
+- 2025-10-21 [Adityasinh Sodha] (bb47745): Add file input for optional document attachment
+- 2025-10-21 [Adityasinh Sodha] (e34b21f): Add hover effect and shadow to chatbox images
+- 2025-10-21 [Adityasinh Sodha] (f9d396c): Enhance chat features and improve vault handling
+- 2025-10-21 [Adityasinh Sodha] (a5f6816): Add typing animation and toast notification styles
+- 2025-10-21 [Adityasinh Sodha] (5964ddb): Add files via upload
+- 2025-10-21 [Adityasinh Sodha] (2dbf8ae): Add MIT License file
+- 2025-10-21 [Adityasinh Sodha] (2e3a381): Initial commit
