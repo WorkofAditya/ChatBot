@@ -1,35 +1,35 @@
 ## v1.0
-- 2025-10-24 [Adityasinh Sodha] (a1f770e): Update cache version to vault-cache-v3
-- 2025-10-24 [Adityasinh Sodha] (533ee84): Implement image download link in chatbox
-- 2025-10-22 [Adityasinh Sodha] (4d69b0e): Update cache version to vault-cache-v2
-- 2025-10-22 [Adityasinh Sodha] (73a18c0): Add styles for popup actions layout
-- 2025-10-22 [Adityasinh Sodha] (07392ef): Wrap buttons in a div for better layout
-- 2025-10-22 [Adityasinh Sodha] (8060ec6): Refactor findDoc to use filter and handle multiple results
-- 2025-10-22 [Adityasinh Sodha] (bfdbf68): Remove redundant background color code
-- 2025-10-22 [Adityasinh Sodha] (8e60278): Change background color to #1649FF
-- 2025-10-22 [Adityasinh Sodha] (2f61eee): Add files via upload
-- 2025-10-22 [Adityasinh Sodha] (9a00001): Delete icons/favicon.ico
-- 2025-10-22 [Adityasinh Sodha] (16d1571): Register service worker on window load
-- 2025-10-22 [Adityasinh Sodha] (787cdce): Add service worker for caching assets
-- 2025-10-22 [Adityasinh Sodha] (c840969): Update README with project details and features
-- 2025-10-21 [Adityasinh Sodha] (a7e10dd): Add files via upload
-- 2025-10-21 [Adityasinh Sodha] (7bfc4e6): Delete icons/192.png
-- 2025-10-21 [Adityasinh Sodha] (d8c9218): Add files via upload
-- 2025-10-21 [Adityasinh Sodha] (bba97e2): Delete icons/favicon.ico
-- 2025-10-21 [Adityasinh Sodha] (4ae4f96): Change theme color in manifest.json
-- 2025-10-21 [Adityasinh Sodha] (ff8d2b0): Update manifest.json
-- 2025-10-21 [Adityasinh Sodha] (912db99): test update
-- 2025-10-21 [Adityasinh Sodha] (047fff3): test commit
-- 2025-10-21 [Adityasinh Sodha] (20731d7): test commit
-- 2025-10-21 [Adityasinh Sodha] (5e5bae4): Update
-- 2025-10-21 [Adityasinh Sodha] (f08cc8f): added PWA
-- 2025-10-21 [Adityasinh Sodha] (fa417f9): Enhance file import with validation and error handling
-- 2025-10-21 [Adityasinh Sodha] (b2bb455): Refactor vault data storage to use IndexedDB
-- 2025-10-21 [Adityasinh Sodha] (6657fcf): Refactor toast feedback and document handling
-- 2025-10-21 [Adityasinh Sodha] (bb47745): Add file input for optional document attachment
-- 2025-10-21 [Adityasinh Sodha] (e34b21f): Add hover effect and shadow to chatbox images
-- 2025-10-21 [Adityasinh Sodha] (f9d396c): Enhance chat features and improve vault handling
-- 2025-10-21 [Adityasinh Sodha] (a5f6816): Add typing animation and toast notification styles
-- 2025-10-21 [Adityasinh Sodha] (5964ddb): Add files via upload
-- 2025-10-21 [Adityasinh Sodha] (2dbf8ae): Add MIT License file
-- 2025-10-21 [Adityasinh Sodha] (2e3a381): Initial commit
+- 2025-10-24 [Adityasinh Sodha] ([a1f770e](https://github.com/WorkofAditya/ChatBot/commit/a1f770eede5a8888bf1a3f491676c62da4e1491f)): Update cache version to vault-cache-v3
+- 2025-10-24 [Adityasinh Sodha] ([533ee84](https://github.com/WorkofAditya/ChatBot/commit/533ee84fe11be09a05612dac3e867a310e499280)): Implement image download link in chatbox
+- 2025-10-22 [Adityasinh Sodha] ([4d69b0e](https://github.com/WorkofAditya/ChatBot/commit/4d69b0ebb16f0aa01620cb567e4ff75ffd542a4d)): Update cache version to vault-cache-v2
+- 2025-10-22 [Adityasinh Sodha] ([73a18c0](https://github.com/WorkofAditya/ChatBot/commit/73a18c071b80edc08fca463c4325302450f75e85)): Add styles for popup actions layout
+- 2025-10-22 [Adityasinh Sodha] ([07392ef](https://github.com/WorkofAditya/ChatBot/commit/07392ef61325da4e57b846636a2a97c6781e7850)): Wrap buttons in a div for better layout
+- 2025-10-22 [Adityasinh Sodha] ([8060ec6](https://github.com/WorkofAditya/ChatBot/commit/8060ec67c31ac5caefa01ad841c9c55023e427af)): Refactor findDoc to use filter and handle multiple results
+- 2025-10-22 [Adityasinh Sodha] ([bfdbf68](https://github.com/WorkofAditya/ChatBot/commit/bfdbf6869111dc7444039532d81a57af27f0e896)): Remove redundant background color code
+- 2025-10-22 [Adityasinh Sodha] ([8e60278](https://github.com/WorkofAditya/ChatBot/commit/8e602782319a4d5e459976646c035e6900381101)): Change background color to #1649FF
+- 2025-10-22 [Adityasinh Sodha] ([2f61eee](https://github.com/WorkofAditya/ChatBot/commit/2f61eee5424763548ee988431d7c5c9c39cd2ab3)): Add files via upload
+- 2025-10-22 [Adityasinh Sodha] ([9a00001](https://github.com/WorkofAditya/ChatBot/commit/9a000017d861bd1c36fb5768cacc01c1d4f62c59)): Delete icons/favicon.ico
+- 2025-10-22 [Adityasinh Sodha] ([16d1571](https://github.com/WorkofAditya/ChatBot/commit/16d1571532682595ab119a909c779c7e8e176bc4)): Register service worker on window load
+- 2025-10-22 [Adityasinh Sodha] ([787cdce](https://github.com/WorkofAditya/ChatBot/commit/787cdceac0cc6366bfbe61bd4c4845f886596e29)): Add service worker for caching assets
+- 2025-10-22 [Adityasinh Sodha] ([c840969](https://github.com/WorkofAditya/ChatBot/commit/c840969e153c1551cfcd21d84f4b885b2d06c945)): Update README with project details and features
+- 2025-10-21 [Adityasinh Sodha] ([a7e10dd](https://github.com/WorkofAditya/ChatBot/commit/a7e10dd446fb2074ff55b9eb7298e490da36fdcc)): Add files via upload
+- 2025-10-21 [Adityasinh Sodha] ([7bfc4e6](https://github.com/WorkofAditya/ChatBot/commit/7bfc4e6c9be7455c8a450902926b38c209627729)): Delete icons/192.png
+- 2025-10-21 [Adityasinh Sodha] ([d8c9218](https://github.com/WorkofAditya/ChatBot/commit/d8c92184b48ee53e1361494423cbec7ff37fed55)): Add files via upload
+- 2025-10-21 [Adityasinh Sodha] ([bba97e2](https://github.com/WorkofAditya/ChatBot/commit/bba97e2fb891f7e1390f8c139efc3a674cc8db78)): Delete icons/favicon.ico
+- 2025-10-21 [Adityasinh Sodha] ([4ae4f96](https://github.com/WorkofAditya/ChatBot/commit/4ae4f965d13909c942ba5852fc52618189b78e8c)): Change theme color in manifest.json
+- 2025-10-21 [Adityasinh Sodha] ([ff8d2b0](https://github.com/WorkofAditya/ChatBot/commit/ff8d2b03bfe4c15d54f0802d46707860fc35637c)): Update manifest.json
+- 2025-10-21 [Adityasinh Sodha] ([912db99](https://github.com/WorkofAditya/ChatBot/commit/912db99a0aed5512b83ad6270d5f750c8080d485)): test update
+- 2025-10-21 [Adityasinh Sodha] ([047fff3](https://github.com/WorkofAditya/ChatBot/commit/047fff3fc726f7d563f1dd4a87bf5648aaa3184b)): test commit
+- 2025-10-21 [Adityasinh Sodha] ([20731d7](https://github.com/WorkofAditya/ChatBot/commit/20731d7040d395c785e909ae6eeda00b8da10bc7)): test commit
+- 2025-10-21 [Adityasinh Sodha] ([5e5bae4](https://github.com/WorkofAditya/ChatBot/commit/5e5bae4010d79012b1ffd50f039d15d4e02019c4)): Update
+- 2025-10-21 [Adityasinh Sodha] ([f08cc8f](https://github.com/WorkofAditya/ChatBot/commit/f08cc8faffdfb7908618209192a68fc1f4bbe062)): added PWA
+- 2025-10-21 [Adityasinh Sodha] ([fa417f9](https://github.com/WorkofAditya/ChatBot/commit/fa417f9c695ef51df5e382466643499032cfc4c9)): Enhance file import with validation and error handling
+- 2025-10-21 [Adityasinh Sodha] ([b2bb455](https://github.com/WorkofAditya/ChatBot/commit/b2bb455eec38592b6d40f950da869c60406550df)): Refactor vault data storage to use IndexedDB
+- 2025-10-21 [Adityasinh Sodha] ([6657fcf](https://github.com/WorkofAditya/ChatBot/commit/6657fcf7b31dc51fd93f4b566e5e5abb150b6c2f)): Refactor toast feedback and document handling
+- 2025-10-21 [Adityasinh Sodha] ([bb47745](https://github.com/WorkofAditya/ChatBot/commit/bb47745cb986ddf293791e571822f29ae747c5d7)): Add file input for optional document attachment
+- 2025-10-21 [Adityasinh Sodha] ([e34b21f](https://github.com/WorkofAditya/ChatBot/commit/e34b21fddb0644ef1814b03554ff80ea34306ce2)): Add hover effect and shadow to chatbox images
+- 2025-10-21 [Adityasinh Sodha] ([f9d396c](https://github.com/WorkofAditya/ChatBot/commit/f9d396c42e50699f3147afc5440f85661ec57e1f)): Enhance chat features and improve vault handling
+- 2025-10-21 [Adityasinh Sodha] ([a5f6816](https://github.com/WorkofAditya/ChatBot/commit/a5f681632a7ba3079b10626517cb07f280ba57eb)): Add typing animation and toast notification styles
+- 2025-10-21 [Adityasinh Sodha] ([5964ddb](https://github.com/WorkofAditya/ChatBot/commit/5964ddb977830eff9e0fd8480cfbb282154a4741)): Add files via upload
+- 2025-10-21 [Adityasinh Sodha] ([2dbf8ae](https://github.com/WorkofAditya/ChatBot/commit/2dbf8ae448b4d536b5bb972aeb312ba0e7da47ef)): Add MIT License file
+- 2025-10-21 [Adityasinh Sodha] ([2e3a381](https://github.com/WorkofAditya/ChatBot/commit/2e3a381b4bc9b359589febdb20133874d452b488)): Initial commit
