@@ -1,7 +1,7 @@
 body {
   margin: 0;
   height: 100vh;
-  background: radial-gradient(circle at 30% 20%, #0e111b, #080a12 80%);
+  background: #141414;
   color: #e9ecf5;
   font-family: "Inter", "Poppins", sans-serif;
   display: flex;
@@ -34,8 +34,8 @@ body {
 .vault-container h1 {
   font-size: 1.6rem;
   font-weight: 600;
-  color: #c8d2ff;
-  text-shadow: 0 0 12px rgba(110, 160, 255, 0.3);
+  color: #fcfcfc;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
   letter-spacing: 0.8px;
   margin-bottom: 8px;
 }
@@ -80,11 +80,12 @@ body {
 }
 
 .user-message {
-  background: linear-gradient(135deg, #3e7bff, #2950e3);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fcfcfc;
   align-self: flex-end;
   border-bottom-right-radius: 4px;
-  box-shadow: 0 0 10px rgba(90, 150, 255, 0.4);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
 }
 
 .bot-message {
@@ -120,8 +121,8 @@ body {
 }
 
 button {
-  background: linear-gradient(135deg, #4b84ff, #3064e8);
-  color: #fff;
+  background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
+  color: #fcfcfc;
   border: none;
   border-radius: 12px;
   padding: 10px 15px;
@@ -132,12 +133,13 @@ button {
 }
 
 button:hover {
-  box-shadow: 0 0 12px rgba(80, 140, 255, 0.5);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
   transform: translateY(-1px);
 }
 
 button:active {
   transform: scale(0.97);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
 }
 
 .fab-container {
@@ -223,7 +225,7 @@ button:active {
 
 .popup-content h2 {
   margin: 0 0 5px;
-  color: #cfd8ff;
+  color: #fcfcfc;
   font-size: 1.25rem;
   text-align: center;
 }
@@ -304,8 +306,8 @@ button:active {
 
 .vault-toolbar button {
   background: rgba(255, 255, 255, 0.08);
-  color: #cfd8ff;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fcfcfc;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 10px;
   padding: 8px 16px;
   font-size: 0.85rem;
@@ -316,8 +318,8 @@ button:active {
 
 .vault-toolbar button:hover {
   background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  box-shadow: 0 0 12px rgba(110, 150, 255, 0.4);
+  color: #fcfcfc;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
   transform: translateY(-1px);
 }
 
@@ -392,4 +394,10 @@ button:active {
 .popup-actions button {
   flex: 1; /* buttons take equal width */
   padding: 10px 0;
+}
+
+.vault-container,
+.chatbox,
+.popup-content {
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.05);
 }
