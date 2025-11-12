@@ -12,7 +12,6 @@
 <div class="vault-container">
   <h1>Chatbot</h1>
   <div class="vault-toolbar">
-    <button id="addDocBtn" title="Add Document">Add</button>
     <button id="clearBtn" title="Clear Vault">Clear</button>
     <button id="exportBtn" title="Export Vault">Export</button>
     <button id="importBtn" title="Import Vault">Import</button>
@@ -23,14 +22,19 @@
       <span></span><span></span><span></span>
     </div>
   </div>
-  <div class="input-area">
-  <input type="text" id="userInput" placeholder="Type your query...">
-  <button id="sendBtn" title="Send">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M12 5L6 11H10V19H14V11H18L12 5Z" fill="#141414"/>
-  </svg>
-</button>
 
+<div class="input-area">
+  <button id="addDocBtn" title="Add Document">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
+      <path d="M12 5v14m-7-7h14" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <input type="text" id="userInput" placeholder="Type your query...">
+
+  <button id="sendBtn" title="Send">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M12 5L6 11H10V19H14V11H18L12 5Z" fill="#141414"/>
     </svg>
   </button>
 </div>
