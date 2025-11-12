@@ -117,39 +117,67 @@ body {
 }
 
 #sendBtn {
-  all: unset; 
+  all: unset;
   position: absolute;
-  right: 8px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #fcfcfc;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.15s ease;
+  transition: all 0.25s ease;
+  border-radius: 50%;
 }
 
 #sendBtn:hover {
-  background: #ffffffcc; 
+  background: rgba(255, 255, 255, 0.08); /* smooth white fill */
   transform: translateY(-50%) scale(1.08);
-}
-
-#sendBtn svg {
-  width: 26px;
-  height: 26px;
-  fill: #141414;         /* fills arrow with black */
-  stroke: none;          /* removes border */
-  transform: rotate(0deg); /* no tilt — points straight up */
-  transition: transform 0.2s ease;
 }
 
 #sendBtn:active {
   transform: translateY(-50%) scale(0.95);
-  opacity: 0.9;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#sendBtn svg {
+  width: 22px;
+  height: 22px;
+  stroke: #ffffff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  transform: rotate(45deg);
+  transition: all 0.25s ease;
+}
+
+#sendBtn:hover svg {
+  stroke: #111; 
+}
+
+#sendBtn:active svg {
+  stroke: #000;
+}
+
+#sendBtn svg {
+  width: 22px;
+  height: 22px;
+  transform: rotate(45deg);
+  transition: fill 0.18s ease, stroke 0.18s ease, transform 0.25s ease;
+}
+
+#sendBtn svg path {
+  fill: none;
+  stroke: #ffffff;
+}
+
+#sendBtn:hover svg path,
+#sendBtn:active svg path {
+  fill: #ffffff;    
+  stroke: #ffffff;  
 }
 
 
@@ -494,4 +522,32 @@ button:active {
 .popup-actions button {
   flex: 1; /* buttons take equal width */
   padding: 10px 0;
+}
+
+#addDocBtn {
+  all: unset;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+#addDocBtn:hover {
+  background: rgba(90, 157, 248, 0.15);
+  border-color: rgba(90, 157, 248, 0.4);
+  box-shadow: 0 0 10px rgba(90, 157, 248, 0.3);
+  transform: translateY(-1px);
+}
+
+#addDocBtn:active {
+  transform: scale(0.95);
+  background: rgba(90, 157, 248, 0.25);
+  box-shadow: 0 0 8px rgba(90, 157, 248, 0.25);
 }
