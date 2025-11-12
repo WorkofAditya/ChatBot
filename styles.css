@@ -97,10 +97,61 @@ body {
 }
 
 .input-area {
+  position: relative;
+  width: 100%;
   display: flex;
-  gap: 10px;
-  margin-top: 5px;
+  align-items: center;
+  margin-top: 10px;
 }
+
+#userInput {
+  width: 100%;
+  padding: 12px 48px 12px 16px; /* space for button */
+  border: none;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fcfcfc;
+  font-size: 15px;
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+#sendBtn {
+  all: unset; 
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fcfcfc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+#sendBtn:hover {
+  background: #ffffffcc; 
+  transform: translateY(-50%) scale(1.08);
+}
+
+#sendBtn svg {
+  width: 26px;
+  height: 26px;
+  fill: #141414;         /* fills arrow with black */
+  stroke: none;          /* removes border */
+  transform: rotate(0deg); /* no tilt — points straight up */
+  transition: transform 0.2s ease;
+}
+
+#sendBtn:active {
+  transform: translateY(-50%) scale(0.95);
+  opacity: 0.9;
+}
+
 
 .input-area input {
   flex: 1;
@@ -200,52 +251,95 @@ button:active {
 .popup {
   position: fixed;
   inset: 0;
-  background: rgba(8, 10, 20, 0.7);
   display: none;
   justify-content: center;
   align-items: center;
   z-index: 100;
-  backdrop-filter: blur(12px);
+  background: rgba(10, 10, 15, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  animation: fadeIn 0.25s ease-in-out;
 }
 
 .popup-content {
-  background: rgba(22, 26, 40, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 28px 24px;
-  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 32px 26px;
   width: 100%;
-  max-width: 380px;
+  max-width: 400px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  animation: fadeIn 0.25s ease-in-out;
-  color: #dbe2ff;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  gap: 16px;
+  color: #f1f2f6;
+  transition: all 0.3s ease;
 }
 
 .popup-content h2 {
-  margin: 0 0 5px;
-  color: #fcfcfc;
-  font-size: 1.25rem;
   text-align: center;
+  font-size: 1.3rem;
+  color: #ffffff;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.08);
 }
 
 .popup-content input,
 .popup-content textarea {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
   padding: 10px 12px;
   font-size: 0.9rem;
-  color: #e4e6eb;
+  color: #eaeaea;
   resize: none;
+  transition: all 0.25s ease;
 }
 
 .popup-content input:focus,
 .popup-content textarea:focus {
   outline: none;
-  border-color: #619eff;
-  box-shadow: 0 0 8px rgba(90, 157, 248, 0.4);
+  border-color: rgba(90, 157, 248, 0.4);
+  box-shadow: 0 0 8px rgba(90, 157, 248, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.popup-content label {
+  font-size: 0.85rem;
+  color: #c9cce2;
+  margin-top: 4px;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.popup-actions button {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
+  color: #fcfcfc;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.popup-actions button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.popup-actions button:active {
+  transform: scale(0.96);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
 }
 
 .typing-indicator {
@@ -394,10 +488,4 @@ button:active {
 .popup-actions button {
   flex: 1; /* buttons take equal width */
   padding: 10px 0;
-}
-
-.vault-container,
-.chatbox,
-.popup-content {
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.05);
 }
