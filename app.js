@@ -18,12 +18,33 @@ function openDB() {
   });
 }
 
+// Wait for a transaction to complete (native IndexedDB)
+function waitForTx(tx) {
+  return new Promise((resolve, reject) => {
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+    tx.onabort = () => reject(tx.error || new Error('Transaction aborted'));
+  });
+}
+
+
 async function saveDocToDB(doc) {
   const db = await openDB();
   const tx = db.transaction(STORE_NAME, "readwrite");
-  tx.objectStore(STORE_NAME).add(doc);
-  return tx.complete;
+  const store = tx.objectStore(STORE_NAME);
+  const req = store.add(doc);
+
+  const id = await new Promise((resolve, reject) => {
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+
+  // Wait for tx to fully complete (safety)
+  await waitForTx(tx);
+
+  return id; // returned autoIncrement id
 }
+
 
 async function getAllDocs() {
   const db = await openDB();
@@ -40,7 +61,7 @@ async function clearVaultDB() {
   const db = await openDB();
   const tx = db.transaction(STORE_NAME, "readwrite");
   tx.objectStore(STORE_NAME).clear();
-  return tx.complete;
+  await waitForTx(tx);
 }
 
 // DOM Elements
@@ -57,13 +78,25 @@ const importBtn = document.getElementById('importBtn');
 const importFile = document.getElementById('importFile');
 
 // Helper Functions
-function addMessage(text, sender) {
+function addMessage(content, sender) {
   const div = document.createElement('div');
   div.className = sender === 'user' ? 'user-message' : 'bot-message';
-  div.textContent = text;
+
+  // Render HTML if content contains <br> or <a> or <img>
+  if (typeof content === "string" && (content.includes("<br>") || content.includes("<a") || content.includes("<img"))) {
+    div.innerHTML = content;
+  } else {
+    div.textContent = content;
+  }
+
   chatbox.appendChild(div);
-  chatbox.scrollTop = chatbox.scrollHeight;
+
+  // Auto-scroll
+  setTimeout(() => {
+    chatbox.scrollTop = chatbox.scrollHeight;
+  }, 1000);
 }
+
 
 let vault = [];
 (async () => {
@@ -73,7 +106,7 @@ let vault = [];
 
 function findDoc(query) {
   query = query.toLowerCase();
-  return vault.filter(d => query.includes(d.name.toLowerCase()) || d.name.toLowerCase().includes(query));
+  return vault.filter(d => d.name.toLowerCase().includes(query));
 }
 
 // Typing Animation
@@ -122,7 +155,6 @@ const lower = text.toLowerCase();
 // Greetings
 const greetings = ["hi", "hello", "hey", "hola", "yo", "sup", "good morning", "good evening"];
 if (greetings.some(g => lower === g || lower.startsWith(g))) {
-  removeTyping(typingEl);
   addMessage("Hello! How can I help you today?", "bot");
   return;
 }
@@ -144,7 +176,6 @@ if (intentWords.some(w => lower.includes(w))) {
   const intentMatches = findDoc(keyword);
 
   if (intentMatches.length > 0) {
-    removeTyping(typingEl);
     intentMatches.forEach((doc, index) => {
   let reply = `${index + 1}. ${doc.name}: ${doc.value}`;
   if (doc.info) reply += `<br>${doc.info}`;
@@ -186,6 +217,73 @@ if (intentWords.some(w => lower.includes(w))) {
 
     return;
   }
+}
+
+// SHOW ALL DOCUMENTS COMMAND
+const showAllCmds = [
+  "show all",
+  "show all documents",
+  "show my documents",
+  "show my docs",
+  "list all",
+  "list documents",
+  "list all documents",
+  "show everything",
+  "all documents",
+  "all files",
+  "my documents",
+  "my files"
+];
+
+if (showAllCmds.some(cmd => lower === cmd || lower.includes(cmd))) {
+
+  if (vault.length === 0) {
+    addMessage("Your vault is empty. Add a document first!", "bot");
+    return;
+  }
+
+  addMessage(`You have ${vault.length} stored documents:`, "bot");
+
+  vault.forEach((doc, index) => {
+    let reply = `${index + 1}. ${doc.name}: ${doc.value}`;
+    if (doc.info) reply += `<br>${doc.info}`;
+    addMessage(reply, 'bot');
+
+    // FILE HANDLING
+    if (doc.file) {
+      if (doc.file.type.startsWith("image/")) {
+        const img = document.createElement("img");
+        img.src = doc.file.data;
+        img.alt = doc.file.name;
+        img.style.maxWidth = "180px";
+        img.style.borderRadius = "10px";
+        img.style.marginTop = "6px";
+        img.style.display = "block";
+        chatbox.appendChild(img);
+
+        const downloadLink = document.createElement("a");
+        downloadLink.href = doc.file.data;
+        downloadLink.download = doc.file.name;
+        downloadLink.textContent = `Download ${doc.file.name}`;
+        downloadLink.style.display = "inline-block";
+        downloadLink.style.marginTop = "6px";
+        downloadLink.style.color = "#8ab4ff";
+        chatbox.appendChild(downloadLink);
+
+      } else {
+        const link = document.createElement("a");
+        link.href = doc.file.data;
+        link.download = doc.file.name;
+        link.textContent = `Download ${doc.file.name}`;
+        link.style.display = "inline-block";
+        link.style.marginTop = "6px";
+        link.style.color = "#8ab4ff";
+        chatbox.appendChild(link);
+      }
+    }
+  });
+
+  return; // prevent normal search
 }
 
 
@@ -249,49 +347,99 @@ userInput.addEventListener("keypress", (e) => {
 
 
 // Add Document Popup
-addDocBtn.onclick = () => (popup.style.display = 'flex');
+addDocBtn.onclick = () => {
+  // Reset edit mode
+  saveDocBtn.removeAttribute("data-edit-id");
+
+  // Clear inputs (fresh add)
+  document.getElementById("docName").value = "";
+  document.getElementById("docValue").value = "";
+  document.getElementById("docInfo").value = "";
+  document.getElementById("docFile").value = "";
+
+  // Open popup
+  popup.style.display = "flex";
+};
+
 cancelBtn.onclick = () => (popup.style.display = 'none');
 
 saveDocBtn.onclick = async () => {
-  const name = document.getElementById('docName').value.trim();
-  const value = document.getElementById('docValue').value.trim();
-  const info = document.getElementById('docInfo').value.trim();
-  const fileInput = document.getElementById('docFile');
+  const editId = saveDocBtn.getAttribute("data-edit-id");
+  const name = document.getElementById("docName").value.trim();
+  const value = document.getElementById("docValue").value.trim();
+  const info = document.getElementById("docInfo").value.trim();
+  const fileInput = document.getElementById("docFile");
   const file = fileInput.files[0];
 
-  if (!name) {
-    return showToast('Document name and value are required', 'error');
-  }
+  if (!name) return showToast("Document name is required", "error");
 
   let fileData = null;
   if (file) {
-    fileData = await new Promise((resolve, reject) => {
+    fileData = await new Promise((resolve) => {
       const reader = new FileReader();
-      reader.onload = () => resolve({
-        name: file.name,
-        type: file.type,
-        data: reader.result
-      });
-      reader.onerror = reject;
+      reader.onload = () =>
+        resolve({ name: file.name, type: file.type, data: reader.result });
       reader.readAsDataURL(file);
     });
   }
+// EDIT
+if (editId) {
+  const db = await openDB();
+  const tx = db.transaction(STORE_NAME, "readwrite");
+  const store = tx.objectStore(STORE_NAME);
 
-  const doc = { name, value, info, file: fileData };
-  await saveDocToDB(doc);
-  vault.push(doc);
+  // FIXED: store.get() does NOT return a promise
+  const oldDoc = await new Promise((resolve) => {
+    const r = store.get(Number(editId));
+    r.onsuccess = () => resolve(r.result);
+  });
 
-  popup.style.display = 'none';
-  document.getElementById('docName').value = '';
-  document.getElementById('docValue').value = '';
-  document.getElementById('docInfo').value = '';
-  fileInput.value = '';
+  const updatedDoc = {
+    ...oldDoc,
+    name,
+    value,
+    info,
+    file: fileData ? fileData : oldDoc.file,
+  };
 
-  addMessage(`${name} added successfully.`, 'bot');
-  showToast('Document saved securely in vault', 'success');
+  const putReq = store.put(updatedDoc);
+
+await new Promise((resolve, reject) => {
+  putReq.onsuccess = () => resolve(putReq.result);
+  putReq.onerror = () => reject(putReq.error);
+});
+
+// Wait for tx to complete
+await waitForTx(tx);
+
+// Reload vault so array matches DB contents
+vault = await getAllDocs();
+
+popup.style.display = "none";
+saveDocBtn.removeAttribute("data-edit-id");
+
+
+
+  addMessage(`${name} updated successfully.`, "bot");
+  showToast("Document updated!", "success");
+  return;
+}
+
+//add
+  const newDoc = { name, value, info, file: fileData };
+  await saveDocToDB(newDoc);
+  vault = await getAllDocs();
+
+  popup.style.display = "none";
+  showToast("Document saved!", "success");
+
+  document.getElementById("docName").value = "";
+  document.getElementById("docValue").value = "";
+  document.getElementById("docInfo").value = "";
+  fileInput.value = "";
+
+  saveDocBtn.removeAttribute("data-edit-id");
 };
-
-
 
 // Clear Vault
 clearBtn.onclick = async () => {
@@ -367,29 +515,105 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-function addMessage(content, sender) {
-  const div = document.createElement('div');
-  div.className = sender === 'user' ? 'user-message' : 'bot-message';
-
-  // Render HTML if content contains <br> or <a> or <img>
-  if (typeof content === "string" && (content.includes("<br>") || content.includes("<a") || content.includes("<img"))) {
-    div.innerHTML = content;
-  } else {
-    div.textContent = content;
-  }
-
-  chatbox.appendChild(div);
-
-  // Auto-scroll
-  setTimeout(() => {
-    chatbox.scrollTop = chatbox.scrollHeight;
-  }, 1000);
-}
-
 // Always show welcome message on page load
 window.addEventListener("load", () => {
   addMessage(
     "Welcome to ChatBot",
     "bot"
   );
+});
+
+document.getElementById("editDocsBtn").onclick = async () => {
+    const db = await openDB();
+    const tx = db.transaction(STORE_NAME, "readonly");
+    const store = tx.objectStore(STORE_NAME);
+    const req = store.getAll();
+
+    req.onsuccess = () => {
+        const docs = req.result;
+        const list = document.getElementById("editDocsList");
+        list.innerHTML = "";
+
+        docs.forEach(doc => {
+            const item = document.createElement("div");
+            item.className = "edit-doc-item";
+
+            item.innerHTML = `
+                <span><strong>${doc.name}</strong></span>
+                <div class="edit-buttons">
+                    <button class="edit-btn" data-id="${doc.id}">Edit</button>
+                    <button class="delete-btn" data-id="${doc.id}">Delete</button>
+                </div>
+            `;
+
+            list.appendChild(item);
+        });
+
+        document.getElementById("editPopup").style.display = "flex";
+    };
+};
+
+document.getElementById("closeEditPopup").onclick = () => {
+    document.getElementById("editPopup").style.display = "none";
+};
+  
+document.getElementById("editDocsList").addEventListener("click", async (e) => {
+    const target = e.target;
+
+    // DELETE BUTTON
+    if (target.classList.contains("delete-btn")) {
+    const id = Number(target.dataset.id);
+
+    const db = await openDB();
+    const tx = db.transaction(STORE_NAME, "readwrite");
+    const store = tx.objectStore(STORE_NAME);
+
+    const delReq = store.delete(id);
+
+    await new Promise((resolve, reject) => {
+      delReq.onsuccess = () => resolve();
+      delReq.onerror = () => reject(delReq.error);
+    });
+
+    await waitForTx(tx);
+
+    // Remove DOM item AND reload vault from DB
+    const itemEl = target.closest('.edit-doc-item');
+    if (itemEl) itemEl.remove();
+
+    vault = await getAllDocs();
+
+    showToast("Document deleted!", "success");
+    return;
+}
+
+    // EDIT BUTTON
+    if (target.classList.contains("edit-btn")) {
+        const id = Number(target.dataset.id);
+
+        const db = await openDB();
+        const store = db.transaction(STORE_NAME, "readonly").objectStore(STORE_NAME);
+        const req = store.get(id);
+
+        req.onsuccess = () => {
+            const doc = req.result;
+
+            // Fill popup fields
+            document.getElementById("docName").value = doc.name;
+            document.getElementById("docValue").value = doc.value;
+            document.getElementById("docInfo").value = doc.info || "";
+            document.getElementById("docFile").value = "";
+
+            // Mark popup as EDIT MODE
+            saveDocBtn.setAttribute("data-edit-id", id);
+
+            // Close edit list
+            document.getElementById("editPopup").style.display = "none";
+
+            // Open form popup
+            popup.style.display = "flex";
+        };
+
+        return;
+    }
 });
