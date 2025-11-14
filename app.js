@@ -116,6 +116,45 @@ sendBtn.onclick = () => {
   setTimeout(() => {
     removeTyping(typingEl);
 
+    // Conversational handling
+const lower = text.toLowerCase();
+
+// Greetings
+const greetings = ["hi", "hello", "hey", "hola", "yo", "sup", "good morning", "good evening"];
+if (greetings.some(g => lower === g || lower.startsWith(g))) {
+  removeTyping(typingEl);
+  addMessage("👋 Hello! How can I help you today?", "bot");
+  return;
+}
+
+// Natural language doc requests
+const intentWords = ["give me", "give me my", "show me", "show me my", "open", "get", "my", "card", "file", "document", "info"];
+if (intentWords.some(w => lower.includes(w))) {
+  // Extract keyword
+  const keyword = lower
+    .replace("give me", "")
+    .replace("give me my", "")
+    .replace("show me", "")
+    .replace("show me my", "")
+    .replace("open", "")
+    .replace("get", "")
+    .replace("my", "")
+    .trim();
+
+  const intentMatches = findDoc(keyword);
+
+  if (intentMatches.length > 0) {
+    removeTyping(typingEl);
+    intentMatches.forEach((doc, index) => {
+      let reply = `${index + 1}. ${doc.name}: ${doc.value}`;
+      if (doc.info) reply += `<br>${doc.info}`;
+      addMessage(reply, "bot");
+    });
+    return;
+  }
+}
+
+
     const matches = findDoc(text); // now returns multiple docs
 
     if (matches.length > 0) {
@@ -313,3 +352,10 @@ function addMessage(content, sender) {
   }, 1000);
 }
 
+// Send welcome message only once when user opens chatbot
+window.addEventListener("load", () => {
+  if (!localStorage.getItem("vaultBotWelcomed")) {
+    addMessage("Welcome", "bot");
+    localStorage.setItem("vaultBotWelcomed", "yes");
+  }
+});
