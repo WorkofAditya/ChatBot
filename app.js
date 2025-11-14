@@ -123,7 +123,7 @@ const lower = text.toLowerCase();
 const greetings = ["hi", "hello", "hey", "hola", "yo", "sup", "good morning", "good evening"];
 if (greetings.some(g => lower === g || lower.startsWith(g))) {
   removeTyping(typingEl);
-  addMessage("👋 Hello! How can I help you today?", "bot");
+  addMessage("Hello! How can I help you today?", "bot");
   return;
 }
 
@@ -146,10 +146,44 @@ if (intentWords.some(w => lower.includes(w))) {
   if (intentMatches.length > 0) {
     removeTyping(typingEl);
     intentMatches.forEach((doc, index) => {
-      let reply = `${index + 1}. ${doc.name}: ${doc.value}`;
-      if (doc.info) reply += `<br>${doc.info}`;
-      addMessage(reply, "bot");
-    });
+  let reply = `${index + 1}. ${doc.name}: ${doc.value}`;
+  if (doc.info) reply += `<br>${doc.info}`;
+  addMessage(reply, "bot");
+
+  // FILE HANDLING (IMPORTANT)
+  if (doc.file) {
+    if (doc.file.type.startsWith("image/")) {
+      const img = document.createElement("img");
+      img.src = doc.file.data;
+      img.alt = doc.file.name;
+      img.style.maxWidth = "180px";
+      img.style.borderRadius = "10px";
+      img.style.marginTop = "6px";
+      img.style.display = "block";
+      chatbox.appendChild(img);
+
+      const downloadLink = document.createElement("a");
+      downloadLink.href = doc.file.data;
+      downloadLink.download = doc.file.name;
+      downloadLink.textContent = `Download ${doc.file.name}`;
+      downloadLink.style.display = "inline-block";
+      downloadLink.style.marginTop = "6px";
+      downloadLink.style.color = "#8ab4ff";
+      chatbox.appendChild(downloadLink);
+
+    } else {
+      const link = document.createElement("a");
+      link.href = doc.file.data;
+      link.download = doc.file.name;
+      link.textContent = `Download ${doc.file.name}`;
+      link.style.display = "inline-block";
+      link.style.marginTop = "6px";
+      link.style.color = "#8ab4ff";
+      chatbox.appendChild(link);
+    }
+  }
+});
+
     return;
   }
 }
@@ -352,10 +386,10 @@ function addMessage(content, sender) {
   }, 1000);
 }
 
-// Send welcome message only once when user opens chatbot
+// Always show welcome message on page load
 window.addEventListener("load", () => {
-  if (!localStorage.getItem("vaultBotWelcomed")) {
-    addMessage("Welcome", "bot");
-    localStorage.setItem("vaultBotWelcomed", "yes");
-  }
+  addMessage(
+    "Welcome to ChatBot",
+    "bot"
+  );
 });
