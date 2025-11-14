@@ -429,7 +429,7 @@ saveDocBtn.removeAttribute("data-edit-id");
   const newDoc = { name, value, info, file: fileData };
   await saveDocToDB(newDoc);
   vault = await getAllDocs();
-
+  addMessage(`${name} was safely stored to vault.`, "bot");
   popup.style.display = "none";
   showToast("Document saved!", "success");
 
