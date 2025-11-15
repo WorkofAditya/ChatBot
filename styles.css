@@ -551,3 +551,57 @@ button:active {
   background: rgba(90, 157, 248, 0.25);
   box-shadow: 0 0 8px rgba(90, 157, 248, 0.25);
 }
+
+.edit-doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edit-doc-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 14px;
+  border-radius: 14px;
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.edit-doc-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.edit-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: 0.25s ease;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.edit-btn {
+  background: rgba(80, 150, 255, 0.15);
+}
+
+.edit-btn:hover {
+  background: rgba(80, 150, 255, 0.3);
+}
+
+.delete-btn {
+  background: rgba(255, 70, 70, 0.15);
+}
+
+.delete-btn:hover {
+  background: rgba(255, 70, 70, 0.3);
+}
