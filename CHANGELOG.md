@@ -1,3 +1,20 @@
+## Unreleased
+- 2025-11-14 [Adityasinh Sodha] ([03bf64b](https://github.com/WorkofAditya/ChatBot/commit/03bf64b9963bc81ccaee5e5d18c119d0b79d103c)): Update cache version to vault-cache-v5
+- 2025-11-14 [Adityasinh Sodha] ([4280efb](https://github.com/WorkofAditya/ChatBot/commit/4280efb0206d538b13f5b07e53dc0c22cddaa354)): Add confirmation message after saving document
+- 2025-11-14 [Adityasinh Sodha] ([8a1c5a1](https://github.com/WorkofAditya/ChatBot/commit/8a1c5a1c3345e4f475291f5eb93ee59349c3fc8c)): Refactor DB functions and enhance message handling
+- 2025-11-14 [Adityasinh Sodha] ([cddea42](https://github.com/WorkofAditya/ChatBot/commit/cddea4278723518900581aacb5bd1541428aaa08)): Add edit and save functionality to popup forms
+- 2025-11-14 [Adityasinh Sodha] ([ad0439d](https://github.com/WorkofAditya/ChatBot/commit/ad0439d280269bb0a44d1c720cd1e981c8681128)): Refactor greeting and file handling logic
+- 2025-11-14 [Adityasinh Sodha] ([bf44340](https://github.com/WorkofAditya/ChatBot/commit/bf443408fd407610de88d95b6431091a0cca2f87)): Implement conversational handling in chatbot
+- 2025-11-12 [Adityasinh Sodha] ([ee64e9c](https://github.com/WorkofAditya/ChatBot/commit/ee64e9cf33dfe393f6eac88b581966bdd76fca9e)): Update cache version to vault-cache-v4
+- 2025-11-12 [Adityasinh Sodha] ([0bd7df9](https://github.com/WorkofAditya/ChatBot/commit/0bd7df9bb091f0feaa68ca7a6afb411c9c12c277)): Refactor styles for send and add document buttons
+- 2025-11-12 [Adityasinh Sodha] ([3adef64](https://github.com/WorkofAditya/ChatBot/commit/3adef64288ac17caf1a7565bb60d3e136b6448fa)): Add "Add Document" button to input area
+- 2025-11-12 [Adityasinh Sodha] ([00f8c98](https://github.com/WorkofAditya/ChatBot/commit/00f8c98a468bcf9107ecef729642d4415133b1bf)): Update button styles in popup actions
+- 2025-11-12 [Adityasinh Sodha] ([bab7e29](https://github.com/WorkofAditya/ChatBot/commit/bab7e29dbf3a38f145083a6cb2fd6ed522978028)): Refactor styles for input area and popup components
+- 2025-11-12 [Adityasinh Sodha] ([2246b19](https://github.com/WorkofAditya/ChatBot/commit/2246b19ea31029da27de6b3a9fe262d8c1ef29e5)): Enhance send button with SVG icon
+- 2025-11-11 [Adityasinh Sodha] ([1b73549](https://github.com/WorkofAditya/ChatBot/commit/1b73549aa3240eb5cdcd24d9aedad82ce584e912)): Update styles for improved UI appearance
+- 2025-11-02 [Adityasinh Sodha] ([c1b7c77](https://github.com/WorkofAditya/ChatBot/commit/c1b7c77d5e8237baf3db008a9796f44186d68929)): Added links for each commit in CHANGELOG
+- 2025-11-02 [Adityasinh Sodha] ([931934e](https://github.com/WorkofAditya/ChatBot/commit/931934ef4ccf0745de30993311460d90115d2275)): Add CHANGELOG.md with version 1.0 details
+
 ## v1.0
 - 2025-10-24 [Adityasinh Sodha] ([a1f770e](https://github.com/WorkofAditya/ChatBot/commit/a1f770eede5a8888bf1a3f491676c62da4e1491f)): Update cache version to vault-cache-v3
 - 2025-10-24 [Adityasinh Sodha] ([533ee84](https://github.com/WorkofAditya/ChatBot/commit/533ee84fe11be09a05612dac3e867a310e499280)): Implement image download link in chatbox
@@ -33,3 +50,4 @@
 - 2025-10-21 [Adityasinh Sodha] ([5964ddb](https://github.com/WorkofAditya/ChatBot/commit/5964ddb977830eff9e0fd8480cfbb282154a4741)): Add files via upload
 - 2025-10-21 [Adityasinh Sodha] ([2dbf8ae](https://github.com/WorkofAditya/ChatBot/commit/2dbf8ae448b4d536b5bb972aeb312ba0e7da47ef)): Add MIT License file
 - 2025-10-21 [Adityasinh Sodha] ([2e3a381](https://github.com/WorkofAditya/ChatBot/commit/2e3a381b4bc9b359589febdb20133874d452b488)): Initial commit
+
