@@ -562,30 +562,34 @@ document.getElementById("editDocsList").addEventListener("click", async (e) => {
 
     // DELETE BUTTON
     if (target.classList.contains("delete-btn")) {
-    const id = Number(target.dataset.id);
+  const id = Number(target.dataset.id);
 
-    const db = await openDB();
-    const tx = db.transaction(STORE_NAME, "readwrite");
-    const store = tx.objectStore(STORE_NAME);
+  if (!confirm("Are you sure you want to delete this document?")) {
+    return; 
+  }
 
-    const delReq = store.delete(id);
+  const db = await openDB();
+  const tx = db.transaction(STORE_NAME, "readwrite");
+  const store = tx.objectStore(STORE_NAME);
 
-    await new Promise((resolve, reject) => {
-      delReq.onsuccess = () => resolve();
-      delReq.onerror = () => reject(delReq.error);
-    });
+  const delReq = store.delete(id);
 
-    await waitForTx(tx);
+  await new Promise((resolve, reject) => {
+    delReq.onsuccess = () => resolve();
+    delReq.onerror = () => reject(delReq.error);
+  });
 
-    // Remove DOM item AND reload vault from DB
-    const itemEl = target.closest('.edit-doc-item');
-    if (itemEl) itemEl.remove();
+  await waitForTx(tx);
 
-    vault = await getAllDocs();
+  const itemEl = target.closest('.edit-doc-item');
+  if (itemEl) itemEl.remove();
 
-    showToast("Document deleted!", "success");
-    return;
+  vault = await getAllDocs();
+
+  showToast("Document deleted!", "success");
+  return;
 }
+
 
     // EDIT BUTTON
     if (target.classList.contains("edit-btn")) {
