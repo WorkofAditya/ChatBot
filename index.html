@@ -12,10 +12,7 @@
 <div class="vault-container">
   <h1>Chatbot</h1>
   <div class="vault-toolbar">
-    <button id="editDocsBtn" type="button" title="Edit Documents">Edit</button>
-    <button id="clearBtn" title="Clear Vault">Clear</button>
-    <button id="exportBtn" title="Export Vault">Export</button>
-    <button id="importBtn" title="Import Vault">Import</button>
+    <button id="editDocsBtn" type="button" title="Edit Documents">Manage</button>
   </div>
 
   <div class="chatbox" id="chatbox">
@@ -60,14 +57,20 @@
   </div>
 </div>
 
-<!-- Edit LIST popup (separate, sibling) -->
 <div class="popup" id="editPopup">
   <div class="popup-content" style="max-height: 420px; overflow-y: auto;">
     <h2>Edit Documents</h2>
     <div id="editDocsList" class="edit-doc-list"></div>
-    <div class="popup-actions">
-      <button id="closeEditPopup" type="button">Close</button>
-    </div>
+    
+    </div> 
+
+<div class="edit-actions">
+  <button id="exportBtn">Export</button>
+  <button id="importBtn">Import</button>
+  <button id="clearBtn">Delete all</button>
+  <button id="closeEditPopup">Close</button>
+</div>
+
   </div>
 </div>
 
