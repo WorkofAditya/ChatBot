@@ -1,4 +1,10 @@
-## Unreleased
+## v1.5
+- 2025-11-16 [Adityasinh Sodha] ([bdc821e](https://github.com/WorkofAditya/ChatBot/commit/bdc821ead3c2c1c98bddc2915dbab8bf7be58187)): Update cache version to vault-cache-v6
+- 2025-11-16 [Adityasinh Sodha] ([129c77f](https://github.com/WorkofAditya/ChatBot/commit/129c77f5143f5d25a1bac8529b0409e37ae9b46e)): Add confirmation prompt before individual document deletion
+- 2025-11-16 [Adityasinh Sodha] ([c8628b3](https://github.com/WorkofAditya/ChatBot/commit/c8628b3be539c614d26905f724eec52829c2faef)): Add styles for export, clear, import buttons and popup
+- 2025-11-16 [Adityasinh Sodha] ([61da6a0](https://github.com/WorkofAditya/ChatBot/commit/61da6a0e6723ab77fac8492cf7bdcac53e607e84)): Modify vault toolbar and edit popup buttons
+- 2025-11-15 [Adityasinh Sodha] ([cbf4f7e](https://github.com/WorkofAditya/ChatBot/commit/cbf4f7ed1cdc98aed8eb2dd6414c6536c71d6043)): Add styles for edit document list and buttons
+- 2025-11-15 [Adityasinh Sodha] ([2523be3](https://github.com/WorkofAditya/ChatBot/commit/2523be3c38a953b80e1288220cba4c8497188691)): Update CHANGELOG with recent changes
 - 2025-11-14 [Adityasinh Sodha] ([03bf64b](https://github.com/WorkofAditya/ChatBot/commit/03bf64b9963bc81ccaee5e5d18c119d0b79d103c)): Update cache version to vault-cache-v5
 - 2025-11-14 [Adityasinh Sodha] ([4280efb](https://github.com/WorkofAditya/ChatBot/commit/4280efb0206d538b13f5b07e53dc0c22cddaa354)): Add confirmation message after saving document
 - 2025-11-14 [Adityasinh Sodha] ([8a1c5a1](https://github.com/WorkofAditya/ChatBot/commit/8a1c5a1c3345e4f475291f5eb93ee59349c3fc8c)): Refactor DB functions and enhance message handling
