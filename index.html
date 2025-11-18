@@ -9,39 +9,35 @@
 <link rel="manifest" href="manifest.json" />
 </head>
 <body>
+<!-- MAIN VAULT CONTAINER -->
 <div class="vault-container">
   <h1>Chatbot</h1>
   <div class="vault-toolbar">
     <button id="editDocsBtn" type="button" title="Edit Documents">Manage</button>
+    <button id="aboutBtn" class="toolbar-btn">About</button>
   </div>
-
   <div class="chatbox" id="chatbox">
     <div class="typing-indicator" id="typingIndicator">
       <span></span><span></span><span></span>
     </div>
   </div>
-
-<div class="input-area">
-  <button id="addDocBtn" title="Add Document">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
-      <path d="M12 5v14m-7-7h14" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </button>
-
-  <input type="text" id="userInput" placeholder="Type your query...">
-
-  <button id="sendBtn" title="Send">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-      <path d="M12 5L6 11H10V19H14V11H18L12 5Z" fill="#141414"/>
-    </svg>
-  </button>
-</div>
-
-
+  <div class="input-area">
+    <button id="addDocBtn" title="Add Document">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
+        <path d="M12 5v14m-7-7h14" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <input type="text" id="userInput" placeholder="Type your query...">
+    <button id="sendBtn" title="Send">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 5L6 11H10V19H14V11H18L12 5Z" fill="#141414"/>
+      </svg>
+    </button>
+  </div>
   <input type="file" id="importFile" accept="application/json" style="display:none;">
 </div>
 
-<!-- Add / Edit FORM popup -->
+<!-- ADD DOCUMENT POPUP -->
 <div class="popup" id="popup">
   <div class="popup-content">
     <h2 id="popupTitle">Add Document</h2>
@@ -57,25 +53,37 @@
   </div>
 </div>
 
+<!-- EDIT DOCUMENT POPUP -->
 <div class="popup" id="editPopup">
   <div class="popup-content" style="max-height: 420px; overflow-y: auto;">
     <h2>Edit Documents</h2>
     <div id="editDocsList" class="edit-doc-list"></div>
-    
-    </div> 
-
-<div class="edit-actions">
-  <button id="exportBtn">Export</button>
-  <button id="importBtn">Import</button>
-  <button id="clearBtn">Delete all</button>
-  <button id="closeEditPopup">Close</button>
-</div>
-
+  </div>
+  <div class="edit-actions">
+    <button id="exportBtn">Export</button>
+    <button id="importBtn">Import</button>
+    <button id="clearBtn">Delete all</button>
+    <button id="closeEditPopup">Close</button>
   </div>
 </div>
 
+<!-- ABOUT POPUP -->
+<div id="aboutPopup" class="about-popup">
+  <div class="about-box">
+    <button id="closeAbout" class="about-close-btn">✕</button>
+    <h2 class="about-title">ChatBot</h2>
 
+    <img src="icons/192.png" class="about-logo">
 
+    <p class="about-desc">A secure offline chatbot vault that stores your personal documents, notes, and files locally, no internet or servers required. <b>made to keep your data truly <i>yours</i>.</b></p>
+
+    <div class="about-links-row">
+  <a href="https://github.com/WorkofAditya/ChatBot" target="_blank">GitHub</a>
+  <a href="https://codepen.io/WorkofAditya/pen/azNBRWr" target="_blank">CodePen</a>
+</div>
+    <p class="about-dev">Developed by <b>Adityasinh Sodha</b></p>
+        <p class="about-version">Version: <b>v1.5</b></p>
+  </div>
 </div>
 <script src="app.js"></script>
 </body>
