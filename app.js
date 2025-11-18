@@ -621,3 +621,23 @@ document.getElementById("editDocsList").addEventListener("click", async (e) => {
         return;
     }
 });
+
+// About popup
+const aboutPopup = document.getElementById("aboutPopup");
+const aboutBtn = document.getElementById("aboutBtn");
+const closeAbout = document.getElementById("closeAbout");
+
+// Open About popup
+aboutBtn.onclick = () => {
+  aboutPopup.style.display = "flex";
+};
+
+// Close About popup
+closeAbout.onclick = () => {
+  aboutPopup.style.display = "none";
+};
+
+// Close when clicking outside the box
+aboutPopup.onclick = e => {
+  if (e.target === aboutPopup) aboutPopup.style.display = "none";
+};
