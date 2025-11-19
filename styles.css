@@ -835,3 +835,85 @@ button:active {
   .about-logo { width: 70px; height: 70px; }
   .about-details div { max-height: 180px; }
 }
+
+.changelog-box-inner {
+  padding: 14px;
+  max-height: 68vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+/* compact center heading */
+.changelog-box-inner h2.about-title {
+  text-align: center;
+  margin: 4px 0;
+  padding: 0;
+  line-height: 1.1;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+#changelogBody {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 12px;
+  max-height: 52vh;
+  overflow-y: auto;
+  color: #e5e7f3;
+  white-space: normal;
+}
+
+/* markdown headings */
+#changelogBody h1,
+#changelogBody h2,
+#changelogBody h3 {
+  color: #fff;
+  font-weight: 600;
+}
+
+#changelogBody h2 {
+  margin: 4px 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* text */
+#changelogBody p {
+  margin: 4px 0;
+  color: #e5e7f3;
+}
+
+/* list spacing */
+#changelogBody ul,
+#changelogBody ol {
+  margin: 14px 0 14px 22px !important;
+  padding: 0;
+}
+
+#changelogBody li {
+  margin: 4px 0 !important;
+}
+
+
+/* code blocks */
+#changelogBody code,
+#changelogBody pre {
+  background: rgba(0,0,0,0.55);
+  color: #dfe6ff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+  font-size: .82rem;
+}
+
+#changelogBody ul + ul,
+#changelogBody ol + ol,
+#changelogBody ul + ol,
+#changelogBody ol + ul {
+  margin-top: 10px;
+}
+
