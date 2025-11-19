@@ -641,3 +641,175 @@ closeAbout.onclick = () => {
 aboutPopup.onclick = e => {
   if (e.target === aboutPopup) aboutPopup.style.display = "none";
 };
+
+const openChangelogBtn = document.getElementById("openChangelogBtn");
+const changelogPopup = document.getElementById("changelogPopup");
+const closeChangelogBtn = document.getElementById("closeChangelogBtn");
+const refreshChangelogBtn = document.getElementById("refreshChangelogBtn");
+const changelogBody = document.getElementById("changelogBody");
+
+function escapeHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function inlineFormat(text) {
+  text = escapeHtml(text);
+  text = text.replace(/`([^`]+)`/g, "<code>$1</code>");
+  text = text.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  text = text.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+  text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer noopener">$1</a>');
+  return text;
+}
+
+function parseMarkdown(md) {
+  const lines = md.replace(/\r\n/g, "\n").split("\n");
+  let out = "";
+  let inCode = false;
+  let codeBuffer = "";
+  let inList = false;
+  let listType = null;
+  let paraBuffer = [];
+
+  function flushPara() {
+    if (paraBuffer.length === 0) return;
+    out += `<p>${inlineFormat(paraBuffer.join(" "))}</p>\n`;
+    paraBuffer = [];
+  }
+
+  function closeList() {
+    if (!inList) return;
+    out += `</${listType}>\n`;
+    inList = false;
+    listType = null;
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    const raw = lines[i];
+
+    if (raw.trim().startsWith("```")) {
+      if (!inCode) {
+        flushPara();
+        closeList();
+        inCode = true;
+        codeBuffer = "";
+        continue;
+      } else {
+        out += `<pre><code>${escapeHtml(codeBuffer)}</code></pre>\n`;
+        inCode = false;
+        codeBuffer = "";
+        continue;
+      }
+    }
+
+    if (inCode) {
+      codeBuffer += raw + "\n";
+      continue;
+    }
+
+    const line = raw;
+
+    if (/^---+$/.test(line.trim())) {
+      flushPara();
+      closeList();
+      out += "<hr>\n";
+      continue;
+    }
+
+    const hMatch = line.match(/^(#{1,6})\s+(.*)/);
+    if (hMatch) {
+      flushPara();
+      closeList();
+      const level = hMatch[1].length;
+      out += `<h${level}>${inlineFormat(hMatch[2].trim())}</h${level}>\n`;
+      continue;
+    }
+
+    const olMatch = line.match(/^\s*\d+\.\s+(.*)/);
+    if (olMatch) {
+      flushPara();
+      if (!inList || listType !== "ol") {
+        closeList();
+        inList = true;
+        listType = "ol";
+        out += "<ol>\n";
+      }
+      out += `<li>${inlineFormat(olMatch[1].trim())}</li>\n`;
+      continue;
+    }
+
+    const ulMatch = line.match(/^\s*[-+*]\s+(.*)/);
+    if (ulMatch) {
+      flushPara();
+      if (!inList || listType !== "ul") {
+        closeList();
+        inList = true;
+        listType = "ul";
+        out += "<ul>\n";
+      }
+      out += `<li>${inlineFormat(ulMatch[1].trim())}</li>\n`;
+      continue;
+    }
+
+    if (line.trim() === "") {
+      flushPara();
+      closeList();
+      continue;
+    }
+
+    paraBuffer.push(line.trim());
+  }
+
+  flushPara();
+  closeList();
+  if (inCode) out += `<pre><code>${escapeHtml(codeBuffer)}</code></pre>\n`;
+
+  return out || "<p style='opacity:.6;'>No changelog content</p>";
+}
+
+async function fetchChangelogRaw() {
+  const urls = [
+    "https://raw.githubusercontent.com/WorkofAditya/ChatBot/refs/heads/main/CHANGELOG.md",
+    "https://raw.githubusercontent.com/WorkofAditya/ChatBot/main/CHANGELOG.md"
+  ];
+  for (const u of urls) {
+    try {
+      const res = await fetch(u);
+      if (!res.ok) throw new Error("not ok");
+      return await res.text();
+    } catch (e) {}
+  }
+  throw new Error("fetch failed");
+}
+
+async function loadChangelogToPopup() {
+  changelogBody.innerHTML = '<p style="opacity:.6;">Loading changelog…</p>';
+  try {
+    const md = await fetchChangelogRaw();
+    const html = parseMarkdown(md);
+    changelogBody.innerHTML = html;
+    changelogBody.scrollTop = 0;
+  } catch (err) {
+    changelogBody.innerHTML = '<p style="opacity:.6;">Unable to load changelog.</p>';
+  }
+}
+
+openChangelogBtn.addEventListener("click", () => {
+  changelogPopup.style.display = "flex";
+  loadChangelogToPopup();
+});
+
+closeChangelogBtn.addEventListener("click", () => {
+  changelogPopup.style.display = "none";
+});
+
+refreshChangelogBtn.addEventListener("click", () => {
+  loadChangelogToPopup();
+});
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") changelogPopup.style.display = "none";
+});
+
+changelogPopup.addEventListener("click", (e) => {
+  if (e.target === changelogPopup) changelogPopup.style.display = "none";
+});
