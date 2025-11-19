@@ -13,6 +13,7 @@
 <div class="vault-container">
   <h1>Chatbot</h1>
   <div class="vault-toolbar">
+    <button id="openChangelogBtn" class="change-btn">Changelog</button>
     <button id="editDocsBtn" type="button" title="Edit Documents">Manage</button>
     <button id="aboutBtn" class="toolbar-btn">About</button>
   </div>
@@ -85,6 +86,19 @@
         <p class="about-version">Version: <b>v1.5</b></p>
   </div>
 </div>
+
+<div id="changelogPopup" class="about-popup">
+  <div class="about-box changelog-box-inner">
+    <h2 class="about-title">Changelog</h2>
+    <div id="changelogBody"></div>
+    <div class="popup-actions">
+      <button id="refreshChangelogBtn">Refresh</button>
+      <button id="closeChangelogBtn">Close</button>
+    </div>
+  </div>
+</div>
+
+
 <script src="app.js"></script>
 </body>
 </html>
