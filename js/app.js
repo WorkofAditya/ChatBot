@@ -77,6 +77,22 @@ const exportBtn = document.getElementById('exportBtn');
 const importBtn = document.getElementById('importBtn');
 const importFile = document.getElementById('importFile');
 
+async function generatePdfThumbnail(pdfDataURL) {
+  const pdf = await pdfjsLib.getDocument({ url: pdfDataURL }).promise;
+  const page = await pdf.getPage(1);
+
+  const viewport = page.getViewport({ scale: 1 });
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = viewport.width;
+  canvas.height = viewport.height;
+
+  await page.render({ canvasContext: ctx, viewport }).promise;
+
+  return canvas.toDataURL();
+}
+
 function renderFile(doc) {
   if (!doc.file) return;
 
@@ -90,7 +106,6 @@ function renderFile(doc) {
     img.style.display = "block";
     img.style.cursor = "pointer";
 
-    // --- OPEN POPUP MODAL ---
     img.addEventListener("click", () => {
       imgModalContent.src = doc.file.data;
       imgModal.style.display = "flex";
@@ -106,19 +121,93 @@ function renderFile(doc) {
     downloadLink.style.marginTop = "6px";
     downloadLink.style.color = "#8ab4ff";
     chatbox.appendChild(downloadLink);
-
-  } else {
-    const link = document.createElement("a");
-    link.href = doc.file.data;
-    link.download = doc.file.name;
-    link.textContent = `Download ${doc.file.name}`;
-    link.style.display = "inline-block";
-    link.style.marginTop = "6px";
-    link.style.color = "#8ab4ff";
-    chatbox.appendChild(link);
+    return;
   }
+
+  // PDF
+  if (doc.file.type === "application/pdf") {
+    const canvas = document.createElement("canvas");
+    canvas.style.width = "180px";
+    canvas.style.borderRadius = "10px";
+    canvas.style.marginTop = "6px";
+    canvas.style.cursor = "pointer";
+    chatbox.appendChild(canvas);
+
+    // If thumbnail already cached use it 
+    if (doc.pdfThumb) {
+      const img = new Image();
+      img.src = doc.pdfThumb;
+
+      img.onload = () => {
+        const ctx = canvas.getContext("2d");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+      };
+
+    } else {
+      // Generate thumbnail and cache it
+      const loadingTask = pdfjsLib.getDocument({
+        data: atob(doc.file.data.split(",")[1])
+      });
+
+      loadingTask.promise.then(pdf => {
+        pdf.getPage(1).then(page => {
+          const viewport = page.getViewport({ scale: 0.3 });
+          const ctx = canvas.getContext("2d");
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+
+          page.render({ canvasContext: ctx, viewport: viewport }).promise.then(() => {
+            // SAVE THUMBNAIL 
+            const thumbData = canvas.toDataURL("image/png");
+            doc.pdfThumb = thumbData;   // cached
+            updateDocument(doc.id, { pdfThumb: thumbData }); // DB update
+          });
+        });
+      });
+    }
+
+    // Download Link
+    const downloadLink = document.createElement("a");
+    downloadLink.href = doc.file.data;
+    downloadLink.download = doc.file.name;
+    downloadLink.textContent = `Download ${doc.file.name}`;
+    downloadLink.style.display = "inline-block";
+    downloadLink.style.marginTop = "6px";
+    downloadLink.style.color = "#8ab4ff";
+    chatbox.appendChild(downloadLink);
+
+    return;
+  }
+
+  const link = document.createElement("a");
+  link.href = doc.file.data;
+  link.download = doc.file.name;
+  link.textContent = `Download ${doc.file.name}`;
+  link.style.display = "inline-block";
+  link.style.marginTop = "6px";
+  link.style.color = "#8ab4ff";
+  chatbox.appendChild(link);
 }
 
+function updateDocument(id, updates) {
+  const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+  request.onsuccess = () => {
+    const db = request.result;
+    const tx = db.transaction(STORE_NAME, "readwrite");
+    const store = tx.objectStore(STORE_NAME);
+
+    const getReq = store.get(id);
+
+    getReq.onsuccess = () => {
+      const doc = getReq.result;
+      Object.assign(doc, updates);
+      store.put(doc);
+    };
+  };
+}
 
 // Helper Functions
 function addMessage(content, sender) {
