@@ -1,4 +1,5 @@
 ## Unreleased
+- **2025-11-21** ([73d6dd1](https://github.com/WorkofAditya/ChatBot/commit/73d6dd1d81dedebc04f50410526e5748c9a69dde)): **Add export-ignore for CHANGELOG.md**
 - **2025-11-21** ([15e90c3](https://github.com/WorkofAditya/ChatBot/commit/15e90c348c4a8adc981e19c53c2f25803cf069a9)): **Add GitHub Actions workflow for changelog updates**
 - **2025-11-21** ([afaccc8](https://github.com/WorkofAditya/ChatBot/commit/afaccc8a6072666cd982f8201f72e5b238db2775)): **Refactor file handling into renderFile function**
 - **2025-11-21** ([3803f90](https://github.com/WorkofAditya/ChatBot/commit/3803f90a2e181ca22dbc6d7ef12488b966f2b00e)): **Add styles for image modal and zoom animation**
