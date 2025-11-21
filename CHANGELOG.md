@@ -1,4 +1,5 @@
 ## Unreleased
+- **2025-11-21** ([e173520](https://github.com/WorkofAditya/ChatBot/commit/e1735201b0ff6c0d73541b2498c3f995d8438139)): **Add styles for PDF modal and viewer**
 - **2025-11-21** ([49cbbe3](https://github.com/WorkofAditya/ChatBot/commit/49cbbe37b8196fa76432dc36468bd3f6616bd870)): **Integrate PDF.js for PDF viewing functionality**
 - **2025-11-21** ([ad62ce9](https://github.com/WorkofAditya/ChatBot/commit/ad62ce9a783afc0e9601e976180653c7e9c0c196)): **Uploaded pdf.min.js and pdf.worker.min.js**
 - **2025-11-21** ([ad7667c](https://github.com/WorkofAditya/ChatBot/commit/ad7667c2c191b7d024609db4c3e91c028aa6e398)): **Rename app.js to js/app.js**
