@@ -1,9 +1,11 @@
-const CACHE_NAME = "vault-cache-v9";
+const CACHE_NAME = "vault-cache-v8";
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
   "./styles.css",
-  "./app.js",
+  "./js/app.js",
+  "./js/pdf.min.js",
+  "./js/pdf.worker.min.js",
   "./manifest.json",
   "./icons/192.png",
   "./icons/favicon.ico"
