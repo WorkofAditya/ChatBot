@@ -1,4 +1,5 @@
 ## Unreleased
+- **2025-11-21** ([39a6b7c](https://github.com/WorkofAditya/ChatBot/commit/39a6b7ca514a7027cd808763da28a97c94d63a27)): **Skip pages for auto-update commit message**
 - **2025-11-21** ([01253a7](https://github.com/WorkofAditya/ChatBot/commit/01253a72d18f8ebad252dc4cd116fb5b93453c79)): **Delete .gitattributes**
 - **2025-11-21** ([73d6dd1](https://github.com/WorkofAditya/ChatBot/commit/73d6dd1d81dedebc04f50410526e5748c9a69dde)): **Add export-ignore for CHANGELOG.md**
 - **2025-11-21** ([15e90c3](https://github.com/WorkofAditya/ChatBot/commit/15e90c348c4a8adc981e19c53c2f25803cf069a9)): **Add GitHub Actions workflow for changelog updates**
