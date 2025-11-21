@@ -1,5 +1,10 @@
-
 ## Unreleased
+- **2025-11-21** ([15e90c3](https://github.com/WorkofAditya/ChatBot/commit/15e90c348c4a8adc981e19c53c2f25803cf069a9)): **Add GitHub Actions workflow for changelog updates**
+- **2025-11-21** ([afaccc8](https://github.com/WorkofAditya/ChatBot/commit/afaccc8a6072666cd982f8201f72e5b238db2775)): **Refactor file handling into renderFile function**
+- **2025-11-21** ([3803f90](https://github.com/WorkofAditya/ChatBot/commit/3803f90a2e181ca22dbc6d7ef12488b966f2b00e)): **Add styles for image modal and zoom animation**
+- **2025-11-21** ([1c1d9b4](https://github.com/WorkofAditya/ChatBot/commit/1c1d9b4dfff84d4309943322d59810bf144ad501)): **Add image modal div to index.html**
+- **2025-11-19** ([c59a1f2](https://github.com/WorkofAditya/ChatBot/commit/c59a1f25afc790d1afc0becd187b8e6a11f5ec96)): **Update cache version to vault-cache-v8**
+- **2025-11-19** ([6a26a5b](https://github.com/WorkofAditya/ChatBot/commit/6a26a5bcb1a9762104ce9a59f82c9088eba5d7c7)): **Update CHANGELOG Structure to remove author's name**
 - **2025-11-19** ([aea37c0](https://github.com/WorkofAditya/ChatBot/commit/aea37c0db14a6d1756f65d78761b13c7fd2301c3)): **Updated CHANGELOG Structure**
 - **2025-11-19** ([59e6f20](https://github.com/WorkofAditya/ChatBot/commit/59e6f20c9925d9b5678d4ed31dadf86629d52a91)): **Added Changelog logic to fetch content from github raw**
 - **2025-11-19** ([f5ceb7b](https://github.com/WorkofAditya/ChatBot/commit/f5ceb7bc1f9895823909495429f6a95ec1d915a9)): **Added style to changelog menu and headings**
@@ -8,6 +13,7 @@
 - **2025-11-18** ([24427d4](https://github.com/WorkofAditya/ChatBot/commit/24427d480326dd5664bedff520fc22aacc266216)): **Implement About popup functionality**
 - **2025-11-18** ([312ccd4](https://github.com/WorkofAditya/ChatBot/commit/312ccd4ad40741dbb10a67bf8b63a91b1b456916)): **Implement styles for about popup component**
 - **2025-11-18** ([ad2c48d](https://github.com/WorkofAditya/ChatBot/commit/ad2c48db84e4169ded5e84460d0f6f10a7f860fb)): **Refactor HTML structure and add About popup**
+
 ## v1.5
 - **2025-11-16** ([4eee1be](https://github.com/WorkofAditya/ChatBot/commit/4eee1beafdf935d754488e4bf352f2748f7fe0da)): **Update CHANGELOG for version 1.5 release**
 - **2025-11-16** ([bdc821e](https://github.com/WorkofAditya/ChatBot/commit/bdc821ead3c2c1c98bddc2915dbab8bf7be58187)): **Update cache version to vault-cache-v6**
@@ -31,6 +37,7 @@
 - **2025-11-11** ([1b73549](https://github.com/WorkofAditya/ChatBot/commit/1b73549aa3240eb5cdcd24d9aedad82ce584e912)): **Update styles for improved UI appearance**
 - **2025-11-02** ([c1b7c77](https://github.com/WorkofAditya/ChatBot/commit/c1b7c77d5e8237baf3db008a9796f44186d68929)): **Added links for each commit in CHANGELOG**
 - **2025-11-02** ([931934e](https://github.com/WorkofAditya/ChatBot/commit/931934ef4ccf0745de30993311460d90115d2275)): **Add CHANGELOG.md with version 1.0 details**
+
 ## v1.0
 - **2025-10-24** ([a1f770e](https://github.com/WorkofAditya/ChatBot/commit/a1f770eede5a8888bf1a3f491676c62da4e1491f)): **Update cache version to vault-cache-v3**
 - **2025-10-24** ([533ee84](https://github.com/WorkofAditya/ChatBot/commit/533ee84fe11be09a05612dac3e867a310e499280)): **Implement image download link in chatbox**
@@ -66,3 +73,4 @@
 - **2025-10-21** ([5964ddb](https://github.com/WorkofAditya/ChatBot/commit/5964ddb977830eff9e0fd8480cfbb282154a4741)): **Add files via upload**
 - **2025-10-21** ([2dbf8ae](https://github.com/WorkofAditya/ChatBot/commit/2dbf8ae448b4d536b5bb972aeb312ba0e7da47ef)): **Add MIT License file**
 - **2025-10-21** ([2e3a381](https://github.com/WorkofAditya/ChatBot/commit/2e3a381b4bc9b359589febdb20133874d452b488)): **Initial commit**
+
