@@ -1,4 +1,4 @@
-# Chatbot
+# Chatbot 
 
 **Chatbot** is a secure, privacy-focused web app that works entirely offline.  
 It lets you chat with your personal vault to quickly find, store, and manage important documents, notes, and files, all safely saved in your browser using IndexedDB.
