@@ -7,6 +7,11 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="icons/favicon.ico" type="image/ico">
 <link rel="manifest" href="manifest.json" />
+<script src="js/pdf.min.js"></script>
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "js/pdf.worker.min.js";
+</script>
+
 </head>
 <body>
 <!-- MAIN VAULT CONTAINER -->
@@ -102,6 +107,10 @@
   <img id="imgModalContent">
 </div>
 
-<script src="app.js"></script>
+<div id="pdfModal">
+  <iframe id="pdfModalViewer"></iframe>
+</div>
+
+<script src="js/app.js"></script>
 </body>
 </html>
