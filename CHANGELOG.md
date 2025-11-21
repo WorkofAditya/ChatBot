@@ -1,4 +1,5 @@
 ## Unreleased
+- **2025-11-21** ([5f71d04](https://github.com/WorkofAditya/ChatBot/commit/5f71d040bab287643cb5516ae40bbb516fd939ad)): **Remove '[skip pages]' from changelog commit message**
 - **2025-11-21** ([267ca74](https://github.com/WorkofAditya/ChatBot/commit/267ca7479cfa7ea2754d1de736b4fba8707b3813)): **Update cache version to vault-cache-v9**
 - **2025-11-21** ([39a6b7c](https://github.com/WorkofAditya/ChatBot/commit/39a6b7ca514a7027cd808763da28a97c94d63a27)): **Skip pages for auto-update commit message**
 - **2025-11-21** ([01253a7](https://github.com/WorkofAditya/ChatBot/commit/01253a72d18f8ebad252dc4cd116fb5b93453c79)): **Delete .gitattributes**
