@@ -947,3 +947,23 @@ button:active {
     opacity: 1;
   }
 }
+
+/* -------- PDF MODAL -------- */
+#pdfModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(12px);
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+#pdfModalViewer {
+  width: 90%;
+  height: 90%;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
