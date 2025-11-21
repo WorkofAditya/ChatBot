@@ -917,3 +917,33 @@ button:active {
   margin-top: 10px;
 }
 
+#imgModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(12px);
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+#imgModalContent {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  animation: zoomIn 0.15s ease-out;
+}
+
+/* animation */
+@keyframes zoomIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
