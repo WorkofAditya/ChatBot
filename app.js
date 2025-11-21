@@ -77,6 +77,49 @@ const exportBtn = document.getElementById('exportBtn');
 const importBtn = document.getElementById('importBtn');
 const importFile = document.getElementById('importFile');
 
+function renderFile(doc) {
+  if (!doc.file) return;
+
+  if (doc.file.type.startsWith("image/")) {
+    const img = document.createElement("img");
+    img.src = doc.file.data;
+    img.alt = doc.file.name;
+    img.style.maxWidth = "180px";
+    img.style.borderRadius = "10px";
+    img.style.marginTop = "6px";
+    img.style.display = "block";
+    img.style.cursor = "pointer";
+
+    // --- OPEN POPUP MODAL ---
+    img.addEventListener("click", () => {
+      imgModalContent.src = doc.file.data;
+      imgModal.style.display = "flex";
+    });
+
+    chatbox.appendChild(img);
+
+    const downloadLink = document.createElement("a");
+    downloadLink.href = doc.file.data;
+    downloadLink.download = doc.file.name;
+    downloadLink.textContent = `Download ${doc.file.name}`;
+    downloadLink.style.display = "inline-block";
+    downloadLink.style.marginTop = "6px";
+    downloadLink.style.color = "#8ab4ff";
+    chatbox.appendChild(downloadLink);
+
+  } else {
+    const link = document.createElement("a");
+    link.href = doc.file.data;
+    link.download = doc.file.name;
+    link.textContent = `Download ${doc.file.name}`;
+    link.style.display = "inline-block";
+    link.style.marginTop = "6px";
+    link.style.color = "#8ab4ff";
+    chatbox.appendChild(link);
+  }
+}
+
+
 // Helper Functions
 function addMessage(content, sender) {
   const div = document.createElement('div');
@@ -181,38 +224,8 @@ if (intentWords.some(w => lower.includes(w))) {
   if (doc.info) reply += `<br>${doc.info}`;
   addMessage(reply, "bot");
 
-  // FILE HANDLING (IMPORTANT)
-  if (doc.file) {
-    if (doc.file.type.startsWith("image/")) {
-      const img = document.createElement("img");
-      img.src = doc.file.data;
-      img.alt = doc.file.name;
-      img.style.maxWidth = "180px";
-      img.style.borderRadius = "10px";
-      img.style.marginTop = "6px";
-      img.style.display = "block";
-      chatbox.appendChild(img);
+  renderFile(doc);
 
-      const downloadLink = document.createElement("a");
-      downloadLink.href = doc.file.data;
-      downloadLink.download = doc.file.name;
-      downloadLink.textContent = `Download ${doc.file.name}`;
-      downloadLink.style.display = "inline-block";
-      downloadLink.style.marginTop = "6px";
-      downloadLink.style.color = "#8ab4ff";
-      chatbox.appendChild(downloadLink);
-
-    } else {
-      const link = document.createElement("a");
-      link.href = doc.file.data;
-      link.download = doc.file.name;
-      link.textContent = `Download ${doc.file.name}`;
-      link.style.display = "inline-block";
-      link.style.marginTop = "6px";
-      link.style.color = "#8ab4ff";
-      chatbox.appendChild(link);
-    }
-  }
 });
 
     return;
@@ -250,37 +263,8 @@ if (showAllCmds.some(cmd => lower === cmd || lower.includes(cmd))) {
     addMessage(reply, 'bot');
 
     // FILE HANDLING
-    if (doc.file) {
-      if (doc.file.type.startsWith("image/")) {
-        const img = document.createElement("img");
-        img.src = doc.file.data;
-        img.alt = doc.file.name;
-        img.style.maxWidth = "180px";
-        img.style.borderRadius = "10px";
-        img.style.marginTop = "6px";
-        img.style.display = "block";
-        chatbox.appendChild(img);
+    renderFile(doc);
 
-        const downloadLink = document.createElement("a");
-        downloadLink.href = doc.file.data;
-        downloadLink.download = doc.file.name;
-        downloadLink.textContent = `Download ${doc.file.name}`;
-        downloadLink.style.display = "inline-block";
-        downloadLink.style.marginTop = "6px";
-        downloadLink.style.color = "#8ab4ff";
-        chatbox.appendChild(downloadLink);
-
-      } else {
-        const link = document.createElement("a");
-        link.href = doc.file.data;
-        link.download = doc.file.name;
-        link.textContent = `Download ${doc.file.name}`;
-        link.style.display = "inline-block";
-        link.style.marginTop = "6px";
-        link.style.color = "#8ab4ff";
-        chatbox.appendChild(link);
-      }
-    }
   });
 
   return; // prevent normal search
@@ -295,36 +279,8 @@ if (showAllCmds.some(cmd => lower === cmd || lower.includes(cmd))) {
         if (doc.info) reply += `<br>${doc.info}`;
         addMessage(reply, 'bot');
 
-        if (doc.file) {
-          if (doc.file.type.startsWith('image/')) {
-            const img = document.createElement('img');
-            img.src = doc.file.data;
-            img.alt = doc.file.name;
-            img.style.maxWidth = '180px';
-            img.style.borderRadius = '10px';
-            img.style.marginTop = '6px';
-            img.style.display = 'block';
-            chatbox.appendChild(img);
+        renderFile(doc);
 
-            const downloadLink = document.createElement('a');
-            downloadLink.href = doc.file.data;
-            downloadLink.download = doc.file.name;
-            downloadLink.textContent = `Download ${doc.file.name}`;
-            downloadLink.style.display = 'inline-block';
-            downloadLink.style.marginTop = '6px';
-            downloadLink.style.color = '#8ab4ff';
-            chatbox.appendChild(downloadLink);
-          } else {
-            const link = document.createElement('a');
-            link.href = doc.file.data;
-            link.download = doc.file.name;
-            link.textContent = `Download ${doc.file.name}`;
-            link.style.display = 'inline-block';
-            link.style.marginTop = '6px';
-            link.style.color = '#8ab4ff';
-            chatbox.appendChild(link);
-          }
-        }
       });
 
       setTimeout(() => {
@@ -812,4 +768,17 @@ window.addEventListener("keydown", (e) => {
 
 changelogPopup.addEventListener("click", (e) => {
   if (e.target === changelogPopup) changelogPopup.style.display = "none";
+});
+
+const imgModal = document.getElementById("imgModal");
+const imgModalContent = document.getElementById("imgModalContent");
+
+// Close modal on background click
+imgModal.addEventListener("click", (e) => {
+  if (e.target === imgModal) imgModal.style.display = "none";
+});
+
+// Close modal on ESC
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") imgModal.style.display = "none";
 });
