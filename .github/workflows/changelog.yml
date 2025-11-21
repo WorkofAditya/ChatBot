@@ -1,0 +1,86 @@
+name: Update Changelog
+
+permissions:
+  contents: write       # IMPORTANT for pushing Changelog.md
+
+on:
+  push:
+    branches:
+      - main            # change if needed
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # we need all tags + full history
+
+      - name: Set Git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Generate Changelog
+        run: |
+          repo_url="https://github.com/${GITHUB_REPOSITORY}"
+
+          # Clear file
+          > CHANGELOG.md
+
+          tags=($(git tag --sort=-creatordate))
+
+          ##############################
+          #       UNRELEASED SECTION
+          ##############################
+          latest_tag=${tags[0]}
+
+          if [ -n "$latest_tag" ]; then
+            echo "## Unreleased" >> CHANGELOG.md
+
+            git log $latest_tag..HEAD \
+              --pretty=format:"- **%ad** ([%h]($repo_url/commit/%H)): **%s**" \
+              --date=short \
+              --invert-grep --grep="Auto-update CHANGELOG.md" \
+              >> CHANGELOG.md
+
+            echo -e "\n" >> CHANGELOG.md
+          fi
+
+          ##############################
+          #       TAGGED RELEASES
+          ##############################
+          for ((i=0; i<${#tags[@]}; i++)); do
+            current_tag=${tags[$i]}
+            next_tag=${tags[$i+1]}
+
+            echo "## $current_tag" >> CHANGELOG.md
+
+            if [ -n "$next_tag" ]; then
+              range="$next_tag..$current_tag"
+            else
+              range="$current_tag"
+            fi
+
+            git log $range \
+              --pretty=format:"- **%ad** ([%h]($repo_url/commit/%H)): **%s**" \
+              --date=short \
+              --invert-grep --grep="Auto-update CHANGELOG.md" \
+              >> CHANGELOG.md
+
+            echo -e "\n" >> CHANGELOG.md
+          done
+
+      - name: Commit & Push Changelog
+        run: |
+          # if no changes, do nothing
+          if git diff --quiet; then
+            echo "No changes in CHANGELOG.md, skipping commit."
+            exit 0
+          fi
+
+          git add CHANGELOG.md
+          git commit -m "Auto-update CHANGELOG.md"
+          git push
