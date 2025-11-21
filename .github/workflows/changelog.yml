@@ -82,5 +82,5 @@ jobs:
           fi
 
           git add CHANGELOG.md
-          git commit -m "Auto-update CHANGELOG.md"
+          git commit -m "[skip pages] Auto-update CHANGELOG.md"
           git push
