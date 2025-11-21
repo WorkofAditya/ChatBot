@@ -1,4 +1,5 @@
 ## Unreleased
+- **2025-11-21** ([ad7667c](https://github.com/WorkofAditya/ChatBot/commit/ad7667c2c191b7d024609db4c3e91c028aa6e398)): **Rename app.js to js/app.js**
 - **2025-11-21** ([5f71d04](https://github.com/WorkofAditya/ChatBot/commit/5f71d040bab287643cb5516ae40bbb516fd939ad)): **Remove '[skip pages]' from changelog commit message**
 - **2025-11-21** ([267ca74](https://github.com/WorkofAditya/ChatBot/commit/267ca7479cfa7ea2754d1de736b4fba8707b3813)): **Update cache version to vault-cache-v9**
 - **2025-11-21** ([39a6b7c](https://github.com/WorkofAditya/ChatBot/commit/39a6b7ca514a7027cd808763da28a97c94d63a27)): **Skip pages for auto-update commit message**
