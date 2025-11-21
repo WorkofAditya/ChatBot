@@ -1,4 +1,5 @@
 ## Unreleased
+- **2025-11-21** ([b5323de](https://github.com/WorkofAditya/ChatBot/commit/b5323dedd3baf2289f6d6670c3b2b9a2d69c99ce)): **Update cache name and file paths in service worker**
 - **2025-11-21** ([7344099](https://github.com/WorkofAditya/ChatBot/commit/734409966c62d9de3e1dcbe3f62129d65425c42c)): **Trigger rebuild**
 - **2025-11-21** ([cbf360b](https://github.com/WorkofAditya/ChatBot/commit/cbf360bf11c3e983d2d3bbff216dfa5d06fdf4a7)): **Implement PDF thumbnail generation and caching**
 - **2025-11-21** ([e173520](https://github.com/WorkofAditya/ChatBot/commit/e1735201b0ff6c0d73541b2498c3f995d8438139)): **Add styles for PDF modal and viewer**
