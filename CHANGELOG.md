@@ -1,4 +1,5 @@
 ## Unreleased
+- **2025-11-27** ([a640f4f](https://github.com/WorkofAditya/ChatBot/commit/a640f4f5a966e5e850e87e6d02d4cc2c25b6c908)): **Add assetlinks.json for Android app verification**
 - **2025-11-27** ([6c33fc4](https://github.com/WorkofAditya/ChatBot/commit/6c33fc4cb9796e7f39d3d8985fb49f8b7c9bcf05)): **Update service worker registration path**
 - **2025-11-27** ([7537e2e](https://github.com/WorkofAditya/ChatBot/commit/7537e2ee3cf0e7ba019a71e3f62ace9efdfb4216)): **Modify manifest.json for new URL and icon paths**
 - **2025-11-27** ([84a78e2](https://github.com/WorkofAditya/ChatBot/commit/84a78e2e44ff566ae35413c5f88ffa573144554d)): **Modify cache files for ChatBot resources**
