@@ -1,4 +1,5 @@
 ## Unreleased
+- **2025-11-27** ([9f0d40e](https://github.com/WorkofAditya/ChatBot/commit/9f0d40e7423ffbc6d479ff90f96b3245a2e593e6)): **Add download section to README**
 - **2025-11-27** ([70c1db9](https://github.com/WorkofAditya/ChatBot/commit/70c1db92adafb7c5a3e34bc244164d37ce44e014)): **Update assetlinks.json with new SHA256 fingerprint**
 - **2025-11-27** ([b4d5019](https://github.com/WorkofAditya/ChatBot/commit/b4d50194b18f802c3209a28314ab294d7fc52472)): **Update package name and SHA256 fingerprint in assetlinks**
 - **2025-11-27** ([cff4b32](https://github.com/WorkofAditya/ChatBot/commit/cff4b32b2e4f9fbf4867055612d084cac60581c4)): **Update service worker registration path**
