@@ -1,12 +1,8 @@
-[
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "dev.pages.chatbot_b3b.twa",
-      "sha256_cert_fingerprints": [
-        "E1:7B:10:35:FB:FF:2E:48:E9:0D:CD:63:40:25:72:76:3A:B2:34:20:18:90:45:CB:D9:44:4F:31:47:16:86:A6"
-      ]
-    }
-  }
-]
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "dev.pages.chatbot_b3b.twa",
+        "sha256_cert_fingerprints": ["68:CF:CD:AF:02:F1:AD:5B:2A:F9:80:BB:2A:3C:3B:8B:1B:F4:C8:EA:86:8A:95:8B:90:E6:DC:A4:5A:50:95:F9"]
+      }
+    }]
