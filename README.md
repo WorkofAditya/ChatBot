@@ -18,6 +18,11 @@ You can safely use it offline to manage sensitive information.
 - IndexedDB (for secure offline storage)  
 - PWA (Progressive Web App) support  
 
+## Download
+
+[<img width="280" height="120" alt="download" src="https://github.com/user-attachments/assets/258b2960-1d52-416e-9c03-0e9472881220" />](https://github.com/WorkofAditya/ChatBot/releases/download/v1.5/Vault.PWA._v1.5.apk)
+
+
 ## Privacy
 No external APIs, no cloud sync, your data never leaves your device.
 
