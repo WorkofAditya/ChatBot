@@ -1,14 +1,15 @@
 {
-    "name": "ChatBot",
-    "short_name": "Vault",
-    "icons": [
-       {
-          "src": "icons/192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-       }
-    ],
-    "theme_color": "#0C0F18",
-    "background_color": "#1649FF",
-    "display": "standalone"
- }
+  "name": "ChatBot",
+  "short_name": "Vault",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "icons/192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#0C0F18",
+  "background_color": "#1649FF",
+  "display": "standalone"
+}
