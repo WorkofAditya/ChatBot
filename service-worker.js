@@ -1,14 +1,14 @@
 const CACHE_NAME = "vault-cache-v8";
 const FILES_TO_CACHE = [
-  "./",
-  "./index.html",
-  "./styles.css",
-  "./js/app.js",
-  "./js/pdf.min.js",
-  "./js/pdf.worker.min.js",
-  "./manifest.json",
-  "./icons/192.png",
-  "./icons/favicon.ico"
+  "/ChatBot/",
+  "/ChatBot/index.html",
+  "/ChatBot/styles.css",
+  "/ChatBot/js/app.js",
+  "/ChatBot/js/pdf.min.js",
+  "/ChatBot/js/pdf.worker.min.js",
+  "/ChatBot/manifest.json",
+  "/ChatBot/icons/192.png",
+  "/ChatBot/icons/favicon.ico"
 ];
 
 // Install: cache everything
