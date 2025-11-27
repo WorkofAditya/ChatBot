@@ -554,7 +554,7 @@ importFile.onchange = async (e) => {
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("./service-worker.js")
+      .register("/ChatBot/service-worker.js")
       .then(() => console.log("Service Worker Registered"))
       .catch((err) => console.error("Service Worker failed:", err));
   });
