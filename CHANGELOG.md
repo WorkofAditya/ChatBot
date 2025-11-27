@@ -1,4 +1,5 @@
 ## Unreleased
+- **2025-11-27** ([84a78e2](https://github.com/WorkofAditya/ChatBot/commit/84a78e2e44ff566ae35413c5f88ffa573144554d)): **Modify cache files for ChatBot resources**
 - **2025-11-27** ([00c8ea4](https://github.com/WorkofAditya/ChatBot/commit/00c8ea4ddd809ff07c228be9cb1568e1d5da2077)): **Add start_url to manifest configuration**
 - **2025-11-21** ([19e0f40](https://github.com/WorkofAditya/ChatBot/commit/19e0f409677ce8b1267b652c07b05ccdd6229427)): **Remove entry for rebuild trigger**
 - **2025-11-21** ([b5323de](https://github.com/WorkofAditya/ChatBot/commit/b5323dedd3baf2289f6d6670c3b2b9a2d69c99ce)): **Update cache name and file paths in service worker**
