@@ -1,4 +1,5 @@
 ## Unreleased
+- **2025-11-27** ([b4d5019](https://github.com/WorkofAditya/ChatBot/commit/b4d50194b18f802c3209a28314ab294d7fc52472)): **Update package name and SHA256 fingerprint in assetlinks**
 - **2025-11-27** ([cff4b32](https://github.com/WorkofAditya/ChatBot/commit/cff4b32b2e4f9fbf4867055612d084cac60581c4)): **Update service worker registration path**
 - **2025-11-27** ([420d324](https://github.com/WorkofAditya/ChatBot/commit/420d3243a0ac189359cebb4957a3516a2f46feb4)): **Update cached files in service worker**
 - **2025-11-27** ([6433e02](https://github.com/WorkofAditya/ChatBot/commit/6433e026edfa1930a6056c2130fdc5757055c5b4)): **Update start_url and icon path in manifest.json**
