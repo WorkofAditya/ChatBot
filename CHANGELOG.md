@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-01 | [daacb7c](https://github.com/workofaditya/ChatBot/commit/daacb7c1bc6151c8b3d976a9a0878963f3d792c8) | Change exported file name to include date and time | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
 | 2025-12-01 | [f84a392](https://github.com/workofaditya/ChatBot/commit/f84a392058b1a262a5c0a78ec66ecf31a3cee9cc) | Update android download link | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
 | 2025-12-01 | [ca9fe76](https://github.com/workofaditya/ChatBot/commit/ca9fe76decba568104d082ac3c1ddf0b6409ac97) | Added new SHA fingerprint | [.well-known/assetlinks.json](https://github.com/workofaditya/ChatBot/blob/main/.well-known/assetlinks.json)  |
 | 2025-12-01 | [7fa49ba](https://github.com/workofaditya/ChatBot/commit/7fa49ba06105ce47bf5e18365b79674fc25183e4) | Update cache version to vault-cache-v10 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
