@@ -1,13 +1,14 @@
 {
   "name": "ChatBot",
   "short_name": "Vault",
-  "start_url": "/",
+  "start_url": "https://chatbot-b3b.pages.dev/",
+  "scope": "https://chatbot-b3b.pages.dev/",
   "display": "standalone",
   "theme_color": "#0C0F18",
   "background_color": "#1649FF",
   "icons": [
     {
-      "src": "/icons/192.png",
+      "src": "https://chatbot-b3b.pages.dev/icons/192.png",
       "sizes": "192x192",
       "type": "image/png"
     }
