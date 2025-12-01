@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-01 | [6537d81](https://github.com/workofaditya/ChatBot/commit/6537d81c366085e0dc5c0dd27e9eb582edbbff34) | Enhance styles for changelog section | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
 | 2025-12-01 | [4abbf73](https://github.com/workofaditya/ChatBot/commit/4abbf732e41bec681fa6617981b2a164a7f7ef96) | Refactor changelog workflow for better output | [.github/workflows/changelog.yml](https://github.com/workofaditya/ChatBot/blob/main/.github/workflows/changelog.yml)  |
 | 2025-12-01 | [715c3e2](https://github.com/workofaditya/ChatBot/commit/715c3e2f20c13a6c3446b853fca02579313bc88d) | Update CHANGELOG.md to display tables for all changes | [CHANGELOG.md](https://github.com/workofaditya/ChatBot/blob/main/CHANGELOG.md)  |
 | 2025-11-27 | [9f0d40e](https://github.com/workofaditya/ChatBot/commit/9f0d40e7423ffbc6d479ff90f96b3245a2e593e6) | Add download section to README | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
