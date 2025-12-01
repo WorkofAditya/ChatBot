@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-01 | [ca9fe76](https://github.com/workofaditya/ChatBot/commit/ca9fe76decba568104d082ac3c1ddf0b6409ac97) | Added new SHA fingerprint | [.well-known/assetlinks.json](https://github.com/workofaditya/ChatBot/blob/main/.well-known/assetlinks.json)  |
 | 2025-12-01 | [7fa49ba](https://github.com/workofaditya/ChatBot/commit/7fa49ba06105ce47bf5e18365b79674fc25183e4) | Update cache version to vault-cache-v10 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
 | 2025-12-01 | [194b728](https://github.com/workofaditya/ChatBot/commit/194b72885d87ae2a9f1d0cefbc7a35debf94975c) | Change URLs in manifest.json to absolute paths | [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json)  |
 | 2025-12-01 | [4547397](https://github.com/workofaditya/ChatBot/commit/45473977ad98f82b816730d78f1143c20f005a25) | Update download link in README | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
