@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-01 | [19898c1](https://github.com/workofaditya/ChatBot/commit/19898c1faaa703cadc719d29c25eeca2fd16d3bb) | Add parseMarkdown function for Markdown parsing | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
 | 2025-12-01 | [6537d81](https://github.com/workofaditya/ChatBot/commit/6537d81c366085e0dc5c0dd27e9eb582edbbff34) | Enhance styles for changelog section | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
 | 2025-12-01 | [4abbf73](https://github.com/workofaditya/ChatBot/commit/4abbf732e41bec681fa6617981b2a164a7f7ef96) | Refactor changelog workflow for better output | [.github/workflows/changelog.yml](https://github.com/workofaditya/ChatBot/blob/main/.github/workflows/changelog.yml)  |
 | 2025-12-01 | [715c3e2](https://github.com/workofaditya/ChatBot/commit/715c3e2f20c13a6c3446b853fca02579313bc88d) | Update CHANGELOG.md to display tables for all changes | [CHANGELOG.md](https://github.com/workofaditya/ChatBot/blob/main/CHANGELOG.md)  |
