@@ -1,12 +1,12 @@
 name: Update Changelog
 
 permissions:
-  contents: write       # IMPORTANT for pushing Changelog.md
+  contents: write
 
 on:
   push:
     branches:
-      - main            # change if needed
+      - main
 
 jobs:
   changelog:
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # we need all tags + full history
+          fetch-depth: 0
 
       - name: Set Git identity
         run: |
@@ -25,38 +25,36 @@ jobs:
 
       - name: Generate Changelog
         run: |
-          repo_url="https://github.com/${GITHUB_REPOSITORY}"
+          repo_url="https://github.com/workofaditya/ChatBot"
+          repo_blob="$repo_url/blob/main"
 
-          # Clear file
           > CHANGELOG.md
 
-          tags=($(git tag --sort=-creatordate))
-
-          ##############################
-          #       UNRELEASED SECTION
-          ##############################
+          tags=($(git tag --sort=-v:refname))
           latest_tag=${tags[0]}
 
           if [ -n "$latest_tag" ]; then
             echo "## Unreleased" >> CHANGELOG.md
+            echo -e "| Date | Commit | Change | File |\n|------|--------|--------|------|" >> CHANGELOG.md
 
-            git log $latest_tag..HEAD \
-              --pretty=format:"- **%ad** ([%h]($repo_url/commit/%H)): **%s**" \
-              --date=short \
-              --invert-grep --grep="Auto-update CHANGELOG.md" \
-              >> CHANGELOG.md
-
+            git log $latest_tag..HEAD --date=short --pretty=format:"%H|%h|%ad|%s" \
+            --invert-grep --grep="Auto-update CHANGELOG.md" | while IFS="|" read hash short date msg; do
+              files=$(git show --name-only --pretty="" "$hash" | sed '/^$/d')
+              file_links=""
+              for f in $files; do
+                file_links+="[${f}](${repo_blob}/${f}) "
+              done
+              echo "| ${date} | [${short}](${repo_url}/commit/${hash}) | ${msg} | ${file_links} |" >> CHANGELOG.md
+            done
             echo -e "\n" >> CHANGELOG.md
           fi
 
-          ##############################
-          #       TAGGED RELEASES
-          ##############################
           for ((i=0; i<${#tags[@]}; i++)); do
             current_tag=${tags[$i]}
             next_tag=${tags[$i+1]}
 
             echo "## $current_tag" >> CHANGELOG.md
+            echo -e "| Date | Commit | Change | File |\n|------|--------|--------|------|" >> CHANGELOG.md
 
             if [ -n "$next_tag" ]; then
               range="$next_tag..$current_tag"
@@ -64,18 +62,20 @@ jobs:
               range="$current_tag"
             fi
 
-            git log $range \
-              --pretty=format:"- **%ad** ([%h]($repo_url/commit/%H)): **%s**" \
-              --date=short \
-              --invert-grep --grep="Auto-update CHANGELOG.md" \
-              >> CHANGELOG.md
-
+            git log $range --date=short --pretty=format:"%H|%h|%ad|%s" \
+            --invert-grep --grep="Auto-update CHANGELOG.md" | while IFS="|" read hash short date msg; do
+              files=$(git show --name-only --pretty="" "$hash" | sed '/^$/d')
+              file_links=""
+              for f in $files; do
+                file_links+="[${f}](${repo_blob}/${f}) "
+              done
+              echo "| ${date} | [${short}](${repo_url}/commit/${hash}) | ${msg} | ${file_links} |" >> CHANGELOG.md
+            done
             echo -e "\n" >> CHANGELOG.md
           done
 
       - name: Commit & Push Changelog
         run: |
-          # if no changes, do nothing
           if git diff --quiet; then
             echo "No changes in CHANGELOG.md, skipping commit."
             exit 0
