@@ -1,101 +1,108 @@
 ## Unreleased
-- **2025-12-01** ([715c3e2](https://github.com/WorkofAditya/ChatBot/commit/715c3e2f20c13a6c3446b853fca02579313bc88d)): **Update CHANGELOG.md to display tables for all changes**
-- **2025-11-27** ([9f0d40e](https://github.com/WorkofAditya/ChatBot/commit/9f0d40e7423ffbc6d479ff90f96b3245a2e593e6)): **Add download section to README**
-- **2025-11-27** ([70c1db9](https://github.com/WorkofAditya/ChatBot/commit/70c1db92adafb7c5a3e34bc244164d37ce44e014)): **Update assetlinks.json with new SHA256 fingerprint**
-- **2025-11-27** ([b4d5019](https://github.com/WorkofAditya/ChatBot/commit/b4d50194b18f802c3209a28314ab294d7fc52472)): **Update package name and SHA256 fingerprint in assetlinks**
-- **2025-11-27** ([cff4b32](https://github.com/WorkofAditya/ChatBot/commit/cff4b32b2e4f9fbf4867055612d084cac60581c4)): **Update service worker registration path**
-- **2025-11-27** ([420d324](https://github.com/WorkofAditya/ChatBot/commit/420d3243a0ac189359cebb4957a3516a2f46feb4)): **Update cached files in service worker**
-- **2025-11-27** ([6433e02](https://github.com/WorkofAditya/ChatBot/commit/6433e026edfa1930a6056c2130fdc5757055c5b4)): **Update start_url and icon path in manifest.json**
-- **2025-11-27** ([a640f4f](https://github.com/WorkofAditya/ChatBot/commit/a640f4f5a966e5e850e87e6d02d4cc2c25b6c908)): **Add assetlinks.json for Android app verification**
-- **2025-11-27** ([6c33fc4](https://github.com/WorkofAditya/ChatBot/commit/6c33fc4cb9796e7f39d3d8985fb49f8b7c9bcf05)): **Update service worker registration path**
-- **2025-11-27** ([7537e2e](https://github.com/WorkofAditya/ChatBot/commit/7537e2ee3cf0e7ba019a71e3f62ace9efdfb4216)): **Modify manifest.json for new URL and icon paths**
-- **2025-11-27** ([84a78e2](https://github.com/WorkofAditya/ChatBot/commit/84a78e2e44ff566ae35413c5f88ffa573144554d)): **Modify cache files for ChatBot resources**
-- **2025-11-27** ([00c8ea4](https://github.com/WorkofAditya/ChatBot/commit/00c8ea4ddd809ff07c228be9cb1568e1d5da2077)): **Add start_url to manifest configuration**
-- **2025-11-21** ([19e0f40](https://github.com/WorkofAditya/ChatBot/commit/19e0f409677ce8b1267b652c07b05ccdd6229427)): **Remove entry for rebuild trigger**
-- **2025-11-21** ([b5323de](https://github.com/WorkofAditya/ChatBot/commit/b5323dedd3baf2289f6d6670c3b2b9a2d69c99ce)): **Update cache name and file paths in service worker**
-- **2025-11-21** ([7344099](https://github.com/WorkofAditya/ChatBot/commit/734409966c62d9de3e1dcbe3f62129d65425c42c)): **Trigger rebuild**
-- **2025-11-21** ([cbf360b](https://github.com/WorkofAditya/ChatBot/commit/cbf360bf11c3e983d2d3bbff216dfa5d06fdf4a7)): **Implement PDF thumbnail generation and caching**
-- **2025-11-21** ([e173520](https://github.com/WorkofAditya/ChatBot/commit/e1735201b0ff6c0d73541b2498c3f995d8438139)): **Add styles for PDF modal and viewer**
-- **2025-11-21** ([49cbbe3](https://github.com/WorkofAditya/ChatBot/commit/49cbbe37b8196fa76432dc36468bd3f6616bd870)): **Integrate PDF.js for PDF viewing functionality**
-- **2025-11-21** ([ad62ce9](https://github.com/WorkofAditya/ChatBot/commit/ad62ce9a783afc0e9601e976180653c7e9c0c196)): **Uploaded pdf.min.js and pdf.worker.min.js**
-- **2025-11-21** ([ad7667c](https://github.com/WorkofAditya/ChatBot/commit/ad7667c2c191b7d024609db4c3e91c028aa6e398)): **Rename app.js to js/app.js**
-- **2025-11-21** ([5f71d04](https://github.com/WorkofAditya/ChatBot/commit/5f71d040bab287643cb5516ae40bbb516fd939ad)): **Remove '[skip pages]' from changelog commit message**
-- **2025-11-21** ([267ca74](https://github.com/WorkofAditya/ChatBot/commit/267ca7479cfa7ea2754d1de736b4fba8707b3813)): **Update cache version to vault-cache-v9**
-- **2025-11-21** ([39a6b7c](https://github.com/WorkofAditya/ChatBot/commit/39a6b7ca514a7027cd808763da28a97c94d63a27)): **Skip pages for auto-update commit message**
-- **2025-11-21** ([01253a7](https://github.com/WorkofAditya/ChatBot/commit/01253a72d18f8ebad252dc4cd116fb5b93453c79)): **Delete .gitattributes**
-- **2025-11-21** ([73d6dd1](https://github.com/WorkofAditya/ChatBot/commit/73d6dd1d81dedebc04f50410526e5748c9a69dde)): **Add export-ignore for CHANGELOG.md**
-- **2025-11-21** ([15e90c3](https://github.com/WorkofAditya/ChatBot/commit/15e90c348c4a8adc981e19c53c2f25803cf069a9)): **Add GitHub Actions workflow for changelog updates**
-- **2025-11-21** ([afaccc8](https://github.com/WorkofAditya/ChatBot/commit/afaccc8a6072666cd982f8201f72e5b238db2775)): **Refactor file handling into renderFile function**
-- **2025-11-21** ([3803f90](https://github.com/WorkofAditya/ChatBot/commit/3803f90a2e181ca22dbc6d7ef12488b966f2b00e)): **Add styles for image modal and zoom animation**
-- **2025-11-21** ([1c1d9b4](https://github.com/WorkofAditya/ChatBot/commit/1c1d9b4dfff84d4309943322d59810bf144ad501)): **Add image modal div to index.html**
-- **2025-11-19** ([c59a1f2](https://github.com/WorkofAditya/ChatBot/commit/c59a1f25afc790d1afc0becd187b8e6a11f5ec96)): **Update cache version to vault-cache-v8**
-- **2025-11-19** ([6a26a5b](https://github.com/WorkofAditya/ChatBot/commit/6a26a5bcb1a9762104ce9a59f82c9088eba5d7c7)): **Update CHANGELOG Structure to remove author's name**
-- **2025-11-19** ([aea37c0](https://github.com/WorkofAditya/ChatBot/commit/aea37c0db14a6d1756f65d78761b13c7fd2301c3)): **Updated CHANGELOG Structure**
-- **2025-11-19** ([59e6f20](https://github.com/WorkofAditya/ChatBot/commit/59e6f20c9925d9b5678d4ed31dadf86629d52a91)): **Added Changelog logic to fetch content from github raw**
-- **2025-11-19** ([f5ceb7b](https://github.com/WorkofAditya/ChatBot/commit/f5ceb7bc1f9895823909495429f6a95ec1d915a9)): **Added style to changelog menu and headings**
-- **2025-11-19** ([054b929](https://github.com/WorkofAditya/ChatBot/commit/054b9298d83a41128629a923bc3e01ac0c4a46a1)): **Added Changelog popup button and menu**
-- **2025-11-18** ([bf7b0c9](https://github.com/WorkofAditya/ChatBot/commit/bf7b0c9287704b7d49c3f639bd4c1a13f994644a)): **Update cache version to vault-cache-v7**
-- **2025-11-18** ([24427d4](https://github.com/WorkofAditya/ChatBot/commit/24427d480326dd5664bedff520fc22aacc266216)): **Implement About popup functionality**
-- **2025-11-18** ([312ccd4](https://github.com/WorkofAditya/ChatBot/commit/312ccd4ad40741dbb10a67bf8b63a91b1b456916)): **Implement styles for about popup component**
-- **2025-11-18** ([ad2c48d](https://github.com/WorkofAditya/ChatBot/commit/ad2c48db84e4169ded5e84460d0f6f10a7f860fb)): **Refactor HTML structure and add About popup**
+| Date | Commit | Change | File |
+|------|--------|--------|------|
+| 2025-12-01 | [4abbf73](https://github.com/workofaditya/ChatBot/commit/4abbf732e41bec681fa6617981b2a164a7f7ef96) | Refactor changelog workflow for better output | [.github/workflows/changelog.yml](https://github.com/workofaditya/ChatBot/blob/main/.github/workflows/changelog.yml)  |
+| 2025-12-01 | [715c3e2](https://github.com/workofaditya/ChatBot/commit/715c3e2f20c13a6c3446b853fca02579313bc88d) | Update CHANGELOG.md to display tables for all changes | [CHANGELOG.md](https://github.com/workofaditya/ChatBot/blob/main/CHANGELOG.md)  |
+| 2025-11-27 | [9f0d40e](https://github.com/workofaditya/ChatBot/commit/9f0d40e7423ffbc6d479ff90f96b3245a2e593e6) | Add download section to README | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
+| 2025-11-27 | [70c1db9](https://github.com/workofaditya/ChatBot/commit/70c1db92adafb7c5a3e34bc244164d37ce44e014) | Update assetlinks.json with new SHA256 fingerprint | [.well-known/assetlinks.json](https://github.com/workofaditya/ChatBot/blob/main/.well-known/assetlinks.json)  |
+| 2025-11-27 | [b4d5019](https://github.com/workofaditya/ChatBot/commit/b4d50194b18f802c3209a28314ab294d7fc52472) | Update package name and SHA256 fingerprint in assetlinks | [.well-known/assetlinks.json](https://github.com/workofaditya/ChatBot/blob/main/.well-known/assetlinks.json)  |
+| 2025-11-27 | [cff4b32](https://github.com/workofaditya/ChatBot/commit/cff4b32b2e4f9fbf4867055612d084cac60581c4) | Update service worker registration path | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
+| 2025-11-27 | [420d324](https://github.com/workofaditya/ChatBot/commit/420d3243a0ac189359cebb4957a3516a2f46feb4) | Update cached files in service worker | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
+| 2025-11-27 | [6433e02](https://github.com/workofaditya/ChatBot/commit/6433e026edfa1930a6056c2130fdc5757055c5b4) | Update start_url and icon path in manifest.json | [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json)  |
+| 2025-11-27 | [a640f4f](https://github.com/workofaditya/ChatBot/commit/a640f4f5a966e5e850e87e6d02d4cc2c25b6c908) | Add assetlinks.json for Android app verification | [.well-known/assetlinks.json](https://github.com/workofaditya/ChatBot/blob/main/.well-known/assetlinks.json)  |
+| 2025-11-27 | [6c33fc4](https://github.com/workofaditya/ChatBot/commit/6c33fc4cb9796e7f39d3d8985fb49f8b7c9bcf05) | Update service worker registration path | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
+| 2025-11-27 | [7537e2e](https://github.com/workofaditya/ChatBot/commit/7537e2ee3cf0e7ba019a71e3f62ace9efdfb4216) | Modify manifest.json for new URL and icon paths | [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json)  |
+| 2025-11-27 | [84a78e2](https://github.com/workofaditya/ChatBot/commit/84a78e2e44ff566ae35413c5f88ffa573144554d) | Modify cache files for ChatBot resources | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
+| 2025-11-27 | [00c8ea4](https://github.com/workofaditya/ChatBot/commit/00c8ea4ddd809ff07c228be9cb1568e1d5da2077) | Add start_url to manifest configuration | [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json)  |
+| 2025-11-21 | [19e0f40](https://github.com/workofaditya/ChatBot/commit/19e0f409677ce8b1267b652c07b05ccdd6229427) | Remove entry for rebuild trigger | [CHANGELOG.md](https://github.com/workofaditya/ChatBot/blob/main/CHANGELOG.md)  |
+| 2025-11-21 | [b5323de](https://github.com/workofaditya/ChatBot/commit/b5323dedd3baf2289f6d6670c3b2b9a2d69c99ce) | Update cache name and file paths in service worker | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
+| 2025-11-21 | [7344099](https://github.com/workofaditya/ChatBot/commit/734409966c62d9de3e1dcbe3f62129d65425c42c) | Trigger rebuild | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
+| 2025-11-21 | [cbf360b](https://github.com/workofaditya/ChatBot/commit/cbf360bf11c3e983d2d3bbff216dfa5d06fdf4a7) | Implement PDF thumbnail generation and caching | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
+| 2025-11-21 | [e173520](https://github.com/workofaditya/ChatBot/commit/e1735201b0ff6c0d73541b2498c3f995d8438139) | Add styles for PDF modal and viewer | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+| 2025-11-21 | [49cbbe3](https://github.com/workofaditya/ChatBot/commit/49cbbe37b8196fa76432dc36468bd3f6616bd870) | Integrate PDF.js for PDF viewing functionality | [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html)  |
+| 2025-11-21 | [ad62ce9](https://github.com/workofaditya/ChatBot/commit/ad62ce9a783afc0e9601e976180653c7e9c0c196) | Uploaded pdf.min.js and pdf.worker.min.js | [js/pdf.min.js](https://github.com/workofaditya/ChatBot/blob/main/js/pdf.min.js) [js/pdf.worker.min.js](https://github.com/workofaditya/ChatBot/blob/main/js/pdf.worker.min.js)  |
+| 2025-11-21 | [ad7667c](https://github.com/workofaditya/ChatBot/commit/ad7667c2c191b7d024609db4c3e91c028aa6e398) | Rename app.js to js/app.js | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
+| 2025-11-21 | [5f71d04](https://github.com/workofaditya/ChatBot/commit/5f71d040bab287643cb5516ae40bbb516fd939ad) | Remove '[skip pages]' from changelog commit message | [.github/workflows/changelog.yml](https://github.com/workofaditya/ChatBot/blob/main/.github/workflows/changelog.yml)  |
+| 2025-11-21 | [267ca74](https://github.com/workofaditya/ChatBot/commit/267ca7479cfa7ea2754d1de736b4fba8707b3813) | Update cache version to vault-cache-v9 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
+| 2025-11-21 | [39a6b7c](https://github.com/workofaditya/ChatBot/commit/39a6b7ca514a7027cd808763da28a97c94d63a27) | Skip pages for auto-update commit message | [.github/workflows/changelog.yml](https://github.com/workofaditya/ChatBot/blob/main/.github/workflows/changelog.yml)  |
+| 2025-11-21 | [01253a7](https://github.com/workofaditya/ChatBot/commit/01253a72d18f8ebad252dc4cd116fb5b93453c79) | Delete .gitattributes | [.gitattributes](https://github.com/workofaditya/ChatBot/blob/main/.gitattributes)  |
+| 2025-11-21 | [73d6dd1](https://github.com/workofaditya/ChatBot/commit/73d6dd1d81dedebc04f50410526e5748c9a69dde) | Add export-ignore for CHANGELOG.md | [.gitattributes](https://github.com/workofaditya/ChatBot/blob/main/.gitattributes)  |
+| 2025-11-21 | [15e90c3](https://github.com/workofaditya/ChatBot/commit/15e90c348c4a8adc981e19c53c2f25803cf069a9) | Add GitHub Actions workflow for changelog updates | [.github/workflows/changelog.yml](https://github.com/workofaditya/ChatBot/blob/main/.github/workflows/changelog.yml)  |
+| 2025-11-21 | [afaccc8](https://github.com/workofaditya/ChatBot/commit/afaccc8a6072666cd982f8201f72e5b238db2775) | Refactor file handling into renderFile function | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js)  |
+| 2025-11-21 | [3803f90](https://github.com/workofaditya/ChatBot/commit/3803f90a2e181ca22dbc6d7ef12488b966f2b00e) | Add styles for image modal and zoom animation | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+| 2025-11-21 | [1c1d9b4](https://github.com/workofaditya/ChatBot/commit/1c1d9b4dfff84d4309943322d59810bf144ad501) | Add image modal div to index.html | [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html)  |
+| 2025-11-19 | [c59a1f2](https://github.com/workofaditya/ChatBot/commit/c59a1f25afc790d1afc0becd187b8e6a11f5ec96) | Update cache version to vault-cache-v8 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
+| 2025-11-19 | [6a26a5b](https://github.com/workofaditya/ChatBot/commit/6a26a5bcb1a9762104ce9a59f82c9088eba5d7c7) | Update CHANGELOG Structure to remove author's name | [CHANGELOG.md](https://github.com/workofaditya/ChatBot/blob/main/CHANGELOG.md)  |
+| 2025-11-19 | [aea37c0](https://github.com/workofaditya/ChatBot/commit/aea37c0db14a6d1756f65d78761b13c7fd2301c3) | Updated CHANGELOG Structure | [CHANGELOG.md](https://github.com/workofaditya/ChatBot/blob/main/CHANGELOG.md)  |
+| 2025-11-19 | [59e6f20](https://github.com/workofaditya/ChatBot/commit/59e6f20c9925d9b5678d4ed31dadf86629d52a91) | Added Changelog logic to fetch content from github raw | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js)  |
+| 2025-11-19 | [f5ceb7b](https://github.com/workofaditya/ChatBot/commit/f5ceb7bc1f9895823909495429f6a95ec1d915a9) | Added style to changelog menu and headings | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+| 2025-11-19 | [054b929](https://github.com/workofaditya/ChatBot/commit/054b9298d83a41128629a923bc3e01ac0c4a46a1) | Added Changelog popup button and menu | [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html)  |
+| 2025-11-18 | [bf7b0c9](https://github.com/workofaditya/ChatBot/commit/bf7b0c9287704b7d49c3f639bd4c1a13f994644a) | Update cache version to vault-cache-v7 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
+| 2025-11-18 | [24427d4](https://github.com/workofaditya/ChatBot/commit/24427d480326dd5664bedff520fc22aacc266216) | Implement About popup functionality | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js)  |
+| 2025-11-18 | [312ccd4](https://github.com/workofaditya/ChatBot/commit/312ccd4ad40741dbb10a67bf8b63a91b1b456916) | Implement styles for about popup component | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+
 
 ## v1.5
-- **2025-11-16** ([4eee1be](https://github.com/WorkofAditya/ChatBot/commit/4eee1beafdf935d754488e4bf352f2748f7fe0da)): **Update CHANGELOG for version 1.5 release**
-- **2025-11-16** ([bdc821e](https://github.com/WorkofAditya/ChatBot/commit/bdc821ead3c2c1c98bddc2915dbab8bf7be58187)): **Update cache version to vault-cache-v6**
-- **2025-11-16** ([129c77f](https://github.com/WorkofAditya/ChatBot/commit/129c77f5143f5d25a1bac8529b0409e37ae9b46e)): **Add confirmation prompt before individual document deletion**
-- **2025-11-16** ([c8628b3](https://github.com/WorkofAditya/ChatBot/commit/c8628b3be539c614d26905f724eec52829c2faef)): **Add styles for export, clear, import buttons and popup**
-- **2025-11-16** ([61da6a0](https://github.com/WorkofAditya/ChatBot/commit/61da6a0e6723ab77fac8492cf7bdcac53e607e84)): **Modify vault toolbar and edit popup buttons**
-- **2025-11-15** ([cbf4f7e](https://github.com/WorkofAditya/ChatBot/commit/cbf4f7ed1cdc98aed8eb2dd6414c6536c71d6043)): **Add styles for edit document list and buttons**
-- **2025-11-15** ([2523be3](https://github.com/WorkofAditya/ChatBot/commit/2523be3c38a953b80e1288220cba4c8497188691)): **Update CHANGELOG with recent changes**
-- **2025-11-14** ([03bf64b](https://github.com/WorkofAditya/ChatBot/commit/03bf64b9963bc81ccaee5e5d18c119d0b79d103c)): **Update cache version to vault-cache-v5**
-- **2025-11-14** ([4280efb](https://github.com/WorkofAditya/ChatBot/commit/4280efb0206d538b13f5b07e53dc0c22cddaa354)): **Add confirmation message after saving document**
-- **2025-11-14** ([8a1c5a1](https://github.com/WorkofAditya/ChatBot/commit/8a1c5a1c3345e4f475291f5eb93ee59349c3fc8c)): **Refactor DB functions and enhance message handling**
-- **2025-11-14** ([cddea42](https://github.com/WorkofAditya/ChatBot/commit/cddea4278723518900581aacb5bd1541428aaa08)): **Add edit and save functionality to popup forms**
-- **2025-11-14** ([ad0439d](https://github.com/WorkofAditya/ChatBot/commit/ad0439d280269bb0a44d1c720cd1e981c8681128)): **Refactor greeting and file handling logic**
-- **2025-11-14** ([bf44340](https://github.com/WorkofAditya/ChatBot/commit/bf443408fd407610de88d95b6431091a0cca2f87)): **Implement conversational handling in chatbot**
-- **2025-11-12** ([ee64e9c](https://github.com/WorkofAditya/ChatBot/commit/ee64e9cf33dfe393f6eac88b581966bdd76fca9e)): **Update cache version to vault-cache-v4**
-- **2025-11-12** ([0bd7df9](https://github.com/WorkofAditya/ChatBot/commit/0bd7df9bb091f0feaa68ca7a6afb411c9c12c277)): **Refactor styles for send and add document buttons**
-- **2025-11-12** ([3adef64](https://github.com/WorkofAditya/ChatBot/commit/3adef64288ac17caf1a7565bb60d3e136b6448fa)): **Add "Add Document" button to input area**
-- **2025-11-12** ([00f8c98](https://github.com/WorkofAditya/ChatBot/commit/00f8c98a468bcf9107ecef729642d4415133b1bf)): **Update button styles in popup actions**
-- **2025-11-12** ([bab7e29](https://github.com/WorkofAditya/ChatBot/commit/bab7e29dbf3a38f145083a6cb2fd6ed522978028)): **Refactor styles for input area and popup components**
-- **2025-11-12** ([2246b19](https://github.com/WorkofAditya/ChatBot/commit/2246b19ea31029da27de6b3a9fe262d8c1ef29e5)): **Enhance send button with SVG icon**
-- **2025-11-11** ([1b73549](https://github.com/WorkofAditya/ChatBot/commit/1b73549aa3240eb5cdcd24d9aedad82ce584e912)): **Update styles for improved UI appearance**
-- **2025-11-02** ([c1b7c77](https://github.com/WorkofAditya/ChatBot/commit/c1b7c77d5e8237baf3db008a9796f44186d68929)): **Added links for each commit in CHANGELOG**
-- **2025-11-02** ([931934e](https://github.com/WorkofAditya/ChatBot/commit/931934ef4ccf0745de30993311460d90115d2275)): **Add CHANGELOG.md with version 1.0 details**
+| Date | Commit | Change | File |
+|------|--------|--------|------|
+| 2025-11-16 | [4eee1be](https://github.com/workofaditya/ChatBot/commit/4eee1beafdf935d754488e4bf352f2748f7fe0da) | Update CHANGELOG for version 1.5 release | [CHANGELOG.md](https://github.com/workofaditya/ChatBot/blob/main/CHANGELOG.md)  |
+| 2025-11-16 | [bdc821e](https://github.com/workofaditya/ChatBot/commit/bdc821ead3c2c1c98bddc2915dbab8bf7be58187) | Update cache version to vault-cache-v6 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
+| 2025-11-16 | [129c77f](https://github.com/workofaditya/ChatBot/commit/129c77f5143f5d25a1bac8529b0409e37ae9b46e) | Add confirmation prompt before individual document deletion | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js)  |
+| 2025-11-16 | [c8628b3](https://github.com/workofaditya/ChatBot/commit/c8628b3be539c614d26905f724eec52829c2faef) | Add styles for export, clear, import buttons and popup | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+| 2025-11-16 | [61da6a0](https://github.com/workofaditya/ChatBot/commit/61da6a0e6723ab77fac8492cf7bdcac53e607e84) | Modify vault toolbar and edit popup buttons | [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html)  |
+| 2025-11-15 | [cbf4f7e](https://github.com/workofaditya/ChatBot/commit/cbf4f7ed1cdc98aed8eb2dd6414c6536c71d6043) | Add styles for edit document list and buttons | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+| 2025-11-15 | [2523be3](https://github.com/workofaditya/ChatBot/commit/2523be3c38a953b80e1288220cba4c8497188691) | Update CHANGELOG with recent changes | [CHANGELOG.md](https://github.com/workofaditya/ChatBot/blob/main/CHANGELOG.md)  |
+| 2025-11-14 | [03bf64b](https://github.com/workofaditya/ChatBot/commit/03bf64b9963bc81ccaee5e5d18c119d0b79d103c) | Update cache version to vault-cache-v5 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
+| 2025-11-14 | [4280efb](https://github.com/workofaditya/ChatBot/commit/4280efb0206d538b13f5b07e53dc0c22cddaa354) | Add confirmation message after saving document | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js)  |
+| 2025-11-14 | [8a1c5a1](https://github.com/workofaditya/ChatBot/commit/8a1c5a1c3345e4f475291f5eb93ee59349c3fc8c) | Refactor DB functions and enhance message handling | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js)  |
+| 2025-11-14 | [cddea42](https://github.com/workofaditya/ChatBot/commit/cddea4278723518900581aacb5bd1541428aaa08) | Add edit and save functionality to popup forms | [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html)  |
+| 2025-11-14 | [ad0439d](https://github.com/workofaditya/ChatBot/commit/ad0439d280269bb0a44d1c720cd1e981c8681128) | Refactor greeting and file handling logic | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js)  |
+| 2025-11-14 | [bf44340](https://github.com/workofaditya/ChatBot/commit/bf443408fd407610de88d95b6431091a0cca2f87) | Implement conversational handling in chatbot | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js)  |
+| 2025-11-12 | [ee64e9c](https://github.com/workofaditya/ChatBot/commit/ee64e9cf33dfe393f6eac88b581966bdd76fca9e) | Update cache version to vault-cache-v4 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
+| 2025-11-12 | [0bd7df9](https://github.com/workofaditya/ChatBot/commit/0bd7df9bb091f0feaa68ca7a6afb411c9c12c277) | Refactor styles for send and add document buttons | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+| 2025-11-12 | [3adef64](https://github.com/workofaditya/ChatBot/commit/3adef64288ac17caf1a7565bb60d3e136b6448fa) | Add "Add Document" button to input area | [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html)  |
+| 2025-11-12 | [00f8c98](https://github.com/workofaditya/ChatBot/commit/00f8c98a468bcf9107ecef729642d4415133b1bf) | Update button styles in popup actions | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+| 2025-11-12 | [bab7e29](https://github.com/workofaditya/ChatBot/commit/bab7e29dbf3a38f145083a6cb2fd6ed522978028) | Refactor styles for input area and popup components | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+| 2025-11-12 | [2246b19](https://github.com/workofaditya/ChatBot/commit/2246b19ea31029da27de6b3a9fe262d8c1ef29e5) | Enhance send button with SVG icon | [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html)  |
+| 2025-11-11 | [1b73549](https://github.com/workofaditya/ChatBot/commit/1b73549aa3240eb5cdcd24d9aedad82ce584e912) | Update styles for improved UI appearance | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+| 2025-11-02 | [c1b7c77](https://github.com/workofaditya/ChatBot/commit/c1b7c77d5e8237baf3db008a9796f44186d68929) | Added links for each commit in CHANGELOG | [CHANGELOG.md](https://github.com/workofaditya/ChatBot/blob/main/CHANGELOG.md)  |
+
 
 ## v1.0
-- **2025-10-24** ([a1f770e](https://github.com/WorkofAditya/ChatBot/commit/a1f770eede5a8888bf1a3f491676c62da4e1491f)): **Update cache version to vault-cache-v3**
-- **2025-10-24** ([533ee84](https://github.com/WorkofAditya/ChatBot/commit/533ee84fe11be09a05612dac3e867a310e499280)): **Implement image download link in chatbox**
-- **2025-10-22** ([4d69b0e](https://github.com/WorkofAditya/ChatBot/commit/4d69b0ebb16f0aa01620cb567e4ff75ffd542a4d)): **Update cache version to vault-cache-v2**
-- **2025-10-22** ([73a18c0](https://github.com/WorkofAditya/ChatBot/commit/73a18c071b80edc08fca463c4325302450f75e85)): **Add styles for popup actions layout**
-- **2025-10-22** ([07392ef](https://github.com/WorkofAditya/ChatBot/commit/07392ef61325da4e57b846636a2a97c6781e7850)): **Wrap buttons in a div for better layout**
-- **2025-10-22** ([8060ec6](https://github.com/WorkofAditya/ChatBot/commit/8060ec67c31ac5caefa01ad841c9c55023e427af)): **Refactor findDoc to use filter and handle multiple results**
-- **2025-10-22** ([bfdbf68](https://github.com/WorkofAditya/ChatBot/commit/bfdbf6869111dc7444039532d81a57af27f0e896)): **Remove redundant background color code**
-- **2025-10-22** ([8e60278](https://github.com/WorkofAditya/ChatBot/commit/8e602782319a4d5e459976646c035e6900381101)): **Change background color to #1649FF**
-- **2025-10-22** ([2f61eee](https://github.com/WorkofAditya/ChatBot/commit/2f61eee5424763548ee988431d7c5c9c39cd2ab3)): **Add files via upload**
-- **2025-10-22** ([9a00001](https://github.com/WorkofAditya/ChatBot/commit/9a000017d861bd1c36fb5768cacc01c1d4f62c59)): **Delete icons/favicon.ico**
-- **2025-10-22** ([16d1571](https://github.com/WorkofAditya/ChatBot/commit/16d1571532682595ab119a909c779c7e8e176bc4)): **Register service worker on window load**
-- **2025-10-22** ([787cdce](https://github.com/WorkofAditya/ChatBot/commit/787cdceac0cc6366bfbe61bd4c4845f886596e29)): **Add service worker for caching assets**
-- **2025-10-22** ([c840969](https://github.com/WorkofAditya/ChatBot/commit/c840969e153c1551cfcd21d84f4b885b2d06c945)): **Update README with project details and features**
-- **2025-10-21** ([a7e10dd](https://github.com/WorkofAditya/ChatBot/commit/a7e10dd446fb2074ff55b9eb7298e490da36fdcc)): **Add files via upload**
-- **2025-10-21** ([7bfc4e6](https://github.com/WorkofAditya/ChatBot/commit/7bfc4e6c9be7455c8a450902926b38c209627729)): **Delete icons/192.png**
-- **2025-10-21** ([d8c9218](https://github.com/WorkofAditya/ChatBot/commit/d8c92184b48ee53e1361494423cbec7ff37fed55)): **Add files via upload**
-- **2025-10-21** ([bba97e2](https://github.com/WorkofAditya/ChatBot/commit/bba97e2fb891f7e1390f8c139efc3a674cc8db78)): **Delete icons/favicon.ico**
-- **2025-10-21** ([4ae4f96](https://github.com/WorkofAditya/ChatBot/commit/4ae4f965d13909c942ba5852fc52618189b78e8c)): **Change theme color in manifest.json**
-- **2025-10-21** ([ff8d2b0](https://github.com/WorkofAditya/ChatBot/commit/ff8d2b03bfe4c15d54f0802d46707860fc35637c)): **Update manifest.json**
-- **2025-10-21** ([912db99](https://github.com/WorkofAditya/ChatBot/commit/912db99a0aed5512b83ad6270d5f750c8080d485)): **test update**
-- **2025-10-21** ([047fff3](https://github.com/WorkofAditya/ChatBot/commit/047fff3fc726f7d563f1dd4a87bf5648aaa3184b)): **test commit**
-- **2025-10-21** ([20731d7](https://github.com/WorkofAditya/ChatBot/commit/20731d7040d395c785e909ae6eeda00b8da10bc7)): **test commit**
-- **2025-10-21** ([5e5bae4](https://github.com/WorkofAditya/ChatBot/commit/5e5bae4010d79012b1ffd50f039d15d4e02019c4)): **Update**
-- **2025-10-21** ([f08cc8f](https://github.com/WorkofAditya/ChatBot/commit/f08cc8faffdfb7908618209192a68fc1f4bbe062)): **added PWA**
-- **2025-10-21** ([fa417f9](https://github.com/WorkofAditya/ChatBot/commit/fa417f9c695ef51df5e382466643499032cfc4c9)): **Enhance file import with validation and error handling**
-- **2025-10-21** ([b2bb455](https://github.com/WorkofAditya/ChatBot/commit/b2bb455eec38592b6d40f950da869c60406550df)): **Refactor vault data storage to use IndexedDB**
-- **2025-10-21** ([6657fcf](https://github.com/WorkofAditya/ChatBot/commit/6657fcf7b31dc51fd93f4b566e5e5abb150b6c2f)): **Refactor toast feedback and document handling**
-- **2025-10-21** ([bb47745](https://github.com/WorkofAditya/ChatBot/commit/bb47745cb986ddf293791e571822f29ae747c5d7)): **Add file input for optional document attachment**
-- **2025-10-21** ([e34b21f](https://github.com/WorkofAditya/ChatBot/commit/e34b21fddb0644ef1814b03554ff80ea34306ce2)): **Add hover effect and shadow to chatbox images**
-- **2025-10-21** ([f9d396c](https://github.com/WorkofAditya/ChatBot/commit/f9d396c42e50699f3147afc5440f85661ec57e1f)): **Enhance chat features and improve vault handling**
-- **2025-10-21** ([a5f6816](https://github.com/WorkofAditya/ChatBot/commit/a5f681632a7ba3079b10626517cb07f280ba57eb)): **Add typing animation and toast notification styles**
-- **2025-10-21** ([5964ddb](https://github.com/WorkofAditya/ChatBot/commit/5964ddb977830eff9e0fd8480cfbb282154a4741)): **Add files via upload**
-- **2025-10-21** ([2dbf8ae](https://github.com/WorkofAditya/ChatBot/commit/2dbf8ae448b4d536b5bb972aeb312ba0e7da47ef)): **Add MIT License file**
-- **2025-10-21** ([2e3a381](https://github.com/WorkofAditya/ChatBot/commit/2e3a381b4bc9b359589febdb20133874d452b488)): **Initial commit**
+| Date | Commit | Change | File |
+|------|--------|--------|------|
+| 2025-10-24 | [a1f770e](https://github.com/workofaditya/ChatBot/commit/a1f770eede5a8888bf1a3f491676c62da4e1491f) | Update cache version to vault-cache-v3 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
+| 2025-10-24 | [533ee84](https://github.com/workofaditya/ChatBot/commit/533ee84fe11be09a05612dac3e867a310e499280) | Implement image download link in chatbox | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js)  |
+| 2025-10-22 | [4d69b0e](https://github.com/workofaditya/ChatBot/commit/4d69b0ebb16f0aa01620cb567e4ff75ffd542a4d) | Update cache version to vault-cache-v2 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
+| 2025-10-22 | [73a18c0](https://github.com/workofaditya/ChatBot/commit/73a18c071b80edc08fca463c4325302450f75e85) | Add styles for popup actions layout | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+| 2025-10-22 | [07392ef](https://github.com/workofaditya/ChatBot/commit/07392ef61325da4e57b846636a2a97c6781e7850) | Wrap buttons in a div for better layout | [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html)  |
+| 2025-10-22 | [8060ec6](https://github.com/workofaditya/ChatBot/commit/8060ec67c31ac5caefa01ad841c9c55023e427af) | Refactor findDoc to use filter and handle multiple results | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js)  |
+| 2025-10-22 | [bfdbf68](https://github.com/workofaditya/ChatBot/commit/bfdbf6869111dc7444039532d81a57af27f0e896) | Remove redundant background color code | [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json)  |
+| 2025-10-22 | [8e60278](https://github.com/workofaditya/ChatBot/commit/8e602782319a4d5e459976646c035e6900381101) | Change background color to #1649FF | [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json)  |
+| 2025-10-22 | [2f61eee](https://github.com/workofaditya/ChatBot/commit/2f61eee5424763548ee988431d7c5c9c39cd2ab3) | Add files via upload | [icons/favicon.ico](https://github.com/workofaditya/ChatBot/blob/main/icons/favicon.ico)  |
+| 2025-10-22 | [9a00001](https://github.com/workofaditya/ChatBot/commit/9a000017d861bd1c36fb5768cacc01c1d4f62c59) | Delete icons/favicon.ico | [icons/favicon.ico](https://github.com/workofaditya/ChatBot/blob/main/icons/favicon.ico)  |
+| 2025-10-22 | [16d1571](https://github.com/workofaditya/ChatBot/commit/16d1571532682595ab119a909c779c7e8e176bc4) | Register service worker on window load | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js)  |
+| 2025-10-22 | [787cdce](https://github.com/workofaditya/ChatBot/commit/787cdceac0cc6366bfbe61bd4c4845f886596e29) | Add service worker for caching assets | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
+| 2025-10-22 | [c840969](https://github.com/workofaditya/ChatBot/commit/c840969e153c1551cfcd21d84f4b885b2d06c945) | Update README with project details and features | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
+| 2025-10-21 | [a7e10dd](https://github.com/workofaditya/ChatBot/commit/a7e10dd446fb2074ff55b9eb7298e490da36fdcc) | Add files via upload | [icons/192.png](https://github.com/workofaditya/ChatBot/blob/main/icons/192.png)  |
+| 2025-10-21 | [7bfc4e6](https://github.com/workofaditya/ChatBot/commit/7bfc4e6c9be7455c8a450902926b38c209627729) | Delete icons/192.png | [icons/192.png](https://github.com/workofaditya/ChatBot/blob/main/icons/192.png)  |
+| 2025-10-21 | [d8c9218](https://github.com/workofaditya/ChatBot/commit/d8c92184b48ee53e1361494423cbec7ff37fed55) | Add files via upload | [icons/favicon.ico](https://github.com/workofaditya/ChatBot/blob/main/icons/favicon.ico)  |
+| 2025-10-21 | [bba97e2](https://github.com/workofaditya/ChatBot/commit/bba97e2fb891f7e1390f8c139efc3a674cc8db78) | Delete icons/favicon.ico | [icons/favicon.ico](https://github.com/workofaditya/ChatBot/blob/main/icons/favicon.ico)  |
+| 2025-10-21 | [4ae4f96](https://github.com/workofaditya/ChatBot/commit/4ae4f965d13909c942ba5852fc52618189b78e8c) | Change theme color in manifest.json | [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json)  |
+| 2025-10-21 | [ff8d2b0](https://github.com/workofaditya/ChatBot/commit/ff8d2b03bfe4c15d54f0802d46707860fc35637c) | Update manifest.json | [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json)  |
+| 2025-10-21 | [912db99](https://github.com/workofaditya/ChatBot/commit/912db99a0aed5512b83ad6270d5f750c8080d485) | test update | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js) [icons/192.png](https://github.com/workofaditya/ChatBot/blob/main/icons/192.png) [icons/favicon.ico](https://github.com/workofaditya/ChatBot/blob/main/icons/favicon.ico) [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html) [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json) [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
+| 2025-10-21 | [047fff3](https://github.com/workofaditya/ChatBot/commit/047fff3fc726f7d563f1dd4a87bf5648aaa3184b) | test commit | [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html) [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json) [site.webmanifest](https://github.com/workofaditya/ChatBot/blob/main/site.webmanifest)  |
+| 2025-10-21 | [20731d7](https://github.com/workofaditya/ChatBot/commit/20731d7040d395c785e909ae6eeda00b8da10bc7) | test commit | [android-chrome-192x192.png](https://github.com/workofaditya/ChatBot/blob/main/android-chrome-192x192.png) [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js) [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html) [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json) [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+| 2025-10-21 | [5e5bae4](https://github.com/workofaditya/ChatBot/commit/5e5bae4010d79012b1ffd50f039d15d4e02019c4) | Update | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js) [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html) [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+| 2025-10-21 | [f08cc8f](https://github.com/workofaditya/ChatBot/commit/f08cc8faffdfb7908618209192a68fc1f4bbe062) | added PWA | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js) [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html) [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json) [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
+| 2025-10-21 | [fa417f9](https://github.com/workofaditya/ChatBot/commit/fa417f9c695ef51df5e382466643499032cfc4c9) | Enhance file import with validation and error handling | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js)  |
+| 2025-10-21 | [b2bb455](https://github.com/workofaditya/ChatBot/commit/b2bb455eec38592b6d40f950da869c60406550df) | Refactor vault data storage to use IndexedDB | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js)  |
+| 2025-10-21 | [6657fcf](https://github.com/workofaditya/ChatBot/commit/6657fcf7b31dc51fd93f4b566e5e5abb150b6c2f) | Refactor toast feedback and document handling | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js)  |
+| 2025-10-21 | [bb47745](https://github.com/workofaditya/ChatBot/commit/bb47745cb986ddf293791e571822f29ae747c5d7) | Add file input for optional document attachment | [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html)  |
+| 2025-10-21 | [e34b21f](https://github.com/workofaditya/ChatBot/commit/e34b21fddb0644ef1814b03554ff80ea34306ce2) | Add hover effect and shadow to chatbox images | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+| 2025-10-21 | [f9d396c](https://github.com/workofaditya/ChatBot/commit/f9d396c42e50699f3147afc5440f85661ec57e1f) | Enhance chat features and improve vault handling | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js)  |
+| 2025-10-21 | [a5f6816](https://github.com/workofaditya/ChatBot/commit/a5f681632a7ba3079b10626517cb07f280ba57eb) | Add typing animation and toast notification styles | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+| 2025-10-21 | [5964ddb](https://github.com/workofaditya/ChatBot/commit/5964ddb977830eff9e0fd8480cfbb282154a4741) | Add files via upload | [app.js](https://github.com/workofaditya/ChatBot/blob/main/app.js) [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html) [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
+| 2025-10-21 | [2dbf8ae](https://github.com/workofaditya/ChatBot/commit/2dbf8ae448b4d536b5bb972aeb312ba0e7da47ef) | Add MIT License file | [LICENSE](https://github.com/workofaditya/ChatBot/blob/main/LICENSE)  |
+
 
