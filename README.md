@@ -20,7 +20,7 @@ You can safely use it offline to manage sensitive information.
 
 ## Download
 
-[<img width="280" height="120" alt="download" src="https://github.com/user-attachments/assets/258b2960-1d52-416e-9c03-0e9472881220" />](https://github.com/WorkofAditya/ChatBot/releases/download/v1.5/Vault.PWA._v1.5.apk)
+[<img width="280" height="120" alt="download" src="https://github.com/user-attachments/assets/258b2960-1d52-416e-9c03-0e9472881220" />](https://github.com/WorkofAditya/ChatBot/releases/download/v1.5/Vault_v1.5.1.apk)
 
 
 ## Privacy
