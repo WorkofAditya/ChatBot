@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-01 | [4547397](https://github.com/workofaditya/ChatBot/commit/45473977ad98f82b816730d78f1143c20f005a25) | Update download link in README | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
 | 2025-12-01 | [53e5101](https://github.com/workofaditya/ChatBot/commit/53e51018bc0c94209e63463773c9df11b0a87441) | Change start_url to root in manifest.json | [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json)  |
 | 2025-12-01 | [17c47a1](https://github.com/workofaditya/ChatBot/commit/17c47a134f2d9262c5196b47364b8a9cc7af916e) | Update start_url in manifest.json | [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json)  |
 | 2025-12-01 | [633a8f4](https://github.com/workofaditya/ChatBot/commit/633a8f45919df2a0a44050cceb27e582c3ca5666) | Update cache version to vault-cache-v9 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
