@@ -917,6 +917,49 @@ button:active {
   margin-top: 10px;
 }
 
+#changelogBody table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 0.9rem;
+}
+
+#changelogBody th,
+#changelogBody td {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+#changelogBody th {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+}
+
+#changelogBody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+#changelogBody tr:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#changelogBody td code {
+  background: rgba(0,0,0,0.55);
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+}
+
+#changelogBody a {
+  color: #99c3ff; 
+}
+
+#changelogBody a:hover {
+  color: #c58af9; 
+}
+
 #imgModal {
   display: none;
   position: fixed;
