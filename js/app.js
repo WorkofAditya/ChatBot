@@ -498,13 +498,27 @@ clearBtn.onclick = async () => {
 
 // Export Vault
 exportBtn.onclick = () => {
-  const blob = new Blob([JSON.stringify(vault, null, 2)], { type: 'application/json' });
+  const now = new Date();
+
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, "0");
+  const d = String(now.getDate()).padStart(2, "0");
+
+  let h = now.getHours();
+  const ampm = h >= 12 ? "P" : "A";
+  h = h % 12 || 12;
+
+  const fileName = `vault_${y}${m}${d}_${h}${ampm}.json`;
+
+  const blob = new Blob([JSON.stringify(vault, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+
+  const a = document.createElement("a");
   a.href = url;
-  a.download = 'vault_backup.json';
+  a.download = fileName;
   a.click();
-  showToast('Vault exported', 'success');
+
+  showToast("Vault exported", "success");
 };
 
 // Import Vault
