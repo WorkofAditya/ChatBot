@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-01 | [17c47a1](https://github.com/workofaditya/ChatBot/commit/17c47a134f2d9262c5196b47364b8a9cc7af916e) | Update start_url in manifest.json | [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json)  |
 | 2025-12-01 | [633a8f4](https://github.com/workofaditya/ChatBot/commit/633a8f45919df2a0a44050cceb27e582c3ca5666) | Update cache version to vault-cache-v9 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
 | 2025-12-01 | [19898c1](https://github.com/workofaditya/ChatBot/commit/19898c1faaa703cadc719d29c25eeca2fd16d3bb) | Add parseMarkdown function for Markdown parsing | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
 | 2025-12-01 | [6537d81](https://github.com/workofaditya/ChatBot/commit/6537d81c366085e0dc5c0dd27e9eb582edbbff34) | Enhance styles for changelog section | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
