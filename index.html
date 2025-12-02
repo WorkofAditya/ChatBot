@@ -21,6 +21,7 @@
     <button id="openChangelogBtn" class="change-btn">Changelog</button>
     <button id="editDocsBtn" type="button" title="Edit Documents">Manage</button>
     <button id="aboutBtn" class="toolbar-btn">About</button>
+    <button id="helpBtn">?</button>
   </div>
   <div class="chatbox" id="chatbox">
     <div class="typing-indicator" id="typingIndicator">
@@ -115,7 +116,16 @@
   <div id="importBar"></div>
   <span id="importText">Importing 0%</span>
 </div>
-  
+
+<div class="about-popup" id="helpPopup">
+  <div class="about-box">
+    <button class="about-close-btn" id="closeHelp">×</button>
+    <h2 class="about-title">User Guide</h2>
+    <div id="helpBody" class="changelog-box-inner"></div>
+  </div>
+</div>
+
+
 <script src="js/app.js"></script>
 </body>
 </html>
