@@ -732,11 +732,20 @@ function escapeHtml(s) {
 }
 
 function inlineFormat(text) {
+  const preserved = [];
+
+  text = text.replace(/<img[\s\S]*?>/gi, match => {
+    preserved.push(match);
+    return `%%IMG${preserved.length - 1}%%`;
+  });
   text = escapeHtml(text);
   text = text.replace(/`([^`]+)`/g, "<code>$1</code>");
   text = text.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
   text = text.replace(/\*([^*]+)\*/g, "<em>$1</em>");
   text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer noopener">$1</a>');
+  preserved.forEach((img, i) => {
+    text = text.replace(`%%IMG${i}%%`, img);
+  });
   return text;
 }
 
@@ -748,6 +757,8 @@ function parseMarkdown(md) {
   let inList = false;
   let listType = null;
   let paraBuffer = [];
+  let inTable = false;
+  let tableBuffer = [];
 
   function flushPara() {
     if (paraBuffer.length === 0) return;
@@ -762,88 +773,76 @@ function parseMarkdown(md) {
     listType = null;
   }
 
+  function flushTable() {
+    if (!inTable || tableBuffer.length === 0) return;
+    const header = tableBuffer[0].split("|").map(s => s.trim()).filter(s => s);
+    out += "<table><thead><tr>";
+    header.forEach(h => out += `<th>${inlineFormat(h)}</th>`);
+    out += "</tr></thead><tbody>";
+    for (let i = 2; i < tableBuffer.length; i++) {
+      const row = tableBuffer[i].split("|").map(s => s.trim()).filter(s => s);
+      out += "<tr>";
+      row.forEach(c => out += `<td>${inlineFormat(c)}</td>`);
+      out += "</tr>";
+    }
+    out += "</tbody></table>\n";
+    inTable = false;
+    tableBuffer = [];
+  }
+
   for (let i = 0; i < lines.length; i++) {
     const raw = lines[i];
 
+    // CODE BLOCK
     if (raw.trim().startsWith("```")) {
-      if (!inCode) {
-        flushPara();
-        closeList();
-        inCode = true;
-        codeBuffer = "";
-        continue;
-      } else {
-        out += `<pre><code>${escapeHtml(codeBuffer)}</code></pre>\n`;
-        inCode = false;
-        codeBuffer = "";
-        continue;
-      }
-    }
-
-    if (inCode) {
-      codeBuffer += raw + "\n";
+      flushPara(); closeList(); flushTable();
+      inCode = !inCode;
+      if (!inCode) out += `<pre><code>${escapeHtml(codeBuffer)}</code></pre>\n`;
+      codeBuffer = "";
       continue;
     }
+    if (inCode) { codeBuffer += raw + "\n"; continue; }
 
-    const line = raw;
-
-    if (/^---+$/.test(line.trim())) {
-      flushPara();
-      closeList();
+    // HORIZONTAL RULE
+    if (/^\s*([-*_])\1{2,}\s*$/.test(raw)) {
+      flushPara(); closeList(); flushTable();
       out += "<hr>\n";
       continue;
     }
 
-    const hMatch = line.match(/^(#{1,6})\s+(.*)/);
-    if (hMatch) {
-      flushPara();
-      closeList();
-      const level = hMatch[1].length;
-      out += `<h${level}>${inlineFormat(hMatch[2].trim())}</h${level}>\n`;
+    // TABLE
+    if (/^\s*\|.*\|\s*$/.test(raw)) {
+      if (!inTable) { flushPara(); closeList(); inTable = true; tableBuffer = []; }
+      tableBuffer.push(raw);
       continue;
-    }
+    } else if (inTable) flushTable();
 
-    const olMatch = line.match(/^\s*\d+\.\s+(.*)/);
-    if (olMatch) {
-      flushPara();
-      if (!inList || listType !== "ol") {
-        closeList();
-        inList = true;
-        listType = "ol";
-        out += "<ol>\n";
-      }
-      out += `<li>${inlineFormat(olMatch[1].trim())}</li>\n`;
-      continue;
-    }
+    // HEADINGS
+    const hMatch = raw.match(/^(#{1,6})\s+(.*)/);
+    if (hMatch) { flushPara(); closeList(); flushTable(); const level = hMatch[1].length; out += `<h${level}>${inlineFormat(hMatch[2].trim())}</h${level}>\n`; continue; }
 
-    const ulMatch = line.match(/^\s*[-+*]\s+(.*)/);
-    if (ulMatch) {
-      flushPara();
-      if (!inList || listType !== "ul") {
-        closeList();
-        inList = true;
-        listType = "ul";
-        out += "<ul>\n";
-      }
-      out += `<li>${inlineFormat(ulMatch[1].trim())}</li>\n`;
-      continue;
-    }
+    // ORDERED LIST
+    const olMatch = raw.match(/^\s*\d+\.\s+(.*)/);
+    if (olMatch) { flushPara(); flushTable(); if (!inList || listType !== "ol") { closeList(); inList = true; listType = "ol"; out += "<ol>\n"; } out += `<li>${inlineFormat(olMatch[1].trim())}</li>\n`; continue; }
 
-    if (line.trim() === "") {
-      flushPara();
-      closeList();
-      continue;
-    }
+    // UNORDERED LIST
+    const ulMatch = raw.match(/^\s*[-+*]\s+(.*)/);
+    if (ulMatch) { flushPara(); flushTable(); if (!inList || listType !== "ul") { closeList(); inList = true; listType = "ul"; out += "<ul>\n"; } out += `<li>${inlineFormat(ulMatch[1].trim())}</li>\n`; continue; }
 
-    paraBuffer.push(line.trim());
+    // EMPTY LINE
+    if (raw.trim() === "") { flushPara(); closeList(); flushTable(); continue; }
+
+    // PARAGRAPH
+    paraBuffer.push(raw.trim());
   }
 
-  flushPara();
-  closeList();
+  flushPara(); closeList(); flushTable();
   if (inCode) out += `<pre><code>${escapeHtml(codeBuffer)}</code></pre>\n`;
 
   return out || "<p style='opacity:.6;'>No changelog content</p>";
 }
+
+
 
 async function fetchChangelogRaw() {
   const urls = [
@@ -906,83 +905,21 @@ window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") imgModal.style.display = "none";
 });
 
-function parseMarkdown(md) {
-  const lines = md.replace(/\r\n/g, "\n").split("\n");
-  let out = "";
-  let inCode = false;
-  let codeBuffer = "";
-  let inList = false;
-  let listType = null;
-  let paraBuffer = [];
-  let inTable = false;
-  let tableBuffer = [];
+const helpBtn = document.getElementById("helpBtn");
+const helpPopup = document.getElementById("helpPopup");
+const closeHelp = document.getElementById("closeHelp");
+const helpBody = document.getElementById("helpBody");
 
-  function flushPara() {
-    if (paraBuffer.length === 0) return;
-    out += `<p>${inlineFormat(paraBuffer.join(" "))}</p>\n`;
-    paraBuffer = [];
-  }
+helpBtn.onclick = async () => {
+  helpPopup.style.display = "flex";
+  helpBody.innerHTML = "<p>Loading...</p>";
 
-  function closeList() {
-    if (!inList) return;
-    out += `</${listType}>\n`;
-    inList = false;
-    listType = null;
-  }
+  const res = await fetch("https://raw.githubusercontent.com/WorkofAditya/ChatBot/refs/heads/main/docs/guide.md");
+  const md = await res.text();
+  helpBody.innerHTML = parseMarkdown(md);
+};
 
-  function flushTable() {
-    if (!inTable) return;
-    if (tableBuffer.length === 0) return;
-    const header = tableBuffer[0].split("|").map(s => s.trim()).filter(s => s);
-    out += "<table><thead><tr>";
-    header.forEach(h => out += `<th>${inlineFormat(h)}</th>`);
-    out += "</tr></thead><tbody>";
-    for (let i = 2; i < tableBuffer.length; i++) {
-      const row = tableBuffer[i].split("|").map(s => s.trim()).filter(s => s);
-      out += "<tr>";
-      row.forEach(c => out += `<td>${inlineFormat(c)}</td>`);
-      out += "</tr>";
-    }
-    out += "</tbody></table>\n";
-    inTable = false;
-    tableBuffer = [];
-  }
 
-  for (let i = 0; i < lines.length; i++) {
-    const raw = lines[i];
-
-    if (raw.trim().startsWith("```")) {
-      flushPara(); closeList(); flushTable();
-      inCode = !inCode;
-      if (!inCode) out += `<pre><code>${escapeHtml(codeBuffer)}</code></pre>\n`;
-      codeBuffer = "";
-      continue;
-    }
-
-    if (inCode) { codeBuffer += raw + "\n"; continue; }
-
-    if (/^\s*\|.*\|\s*$/.test(raw)) {
-      if (!inTable) { flushPara(); closeList(); inTable = true; tableBuffer = []; }
-      tableBuffer.push(raw);
-      continue;
-    } else if (inTable) {
-      flushTable();
-    }
-
-    if (/^---+$/.test(raw.trim())) { flushPara(); closeList(); flushTable(); out += "<hr>\n"; continue; }
-    const hMatch = raw.match(/^(#{1,6})\s+(.*)/);
-    if (hMatch) { flushPara(); closeList(); flushTable(); const level = hMatch[1].length; out += `<h${level}>${inlineFormat(hMatch[2].trim())}</h${level}>\n`; continue; }
-    const olMatch = raw.match(/^\s*\d+\.\s+(.*)/);
-    if (olMatch) { flushPara(); flushTable(); if (!inList || listType !== "ol") { closeList(); inList = true; listType = "ol"; out += "<ol>\n"; } out += `<li>${inlineFormat(olMatch[1].trim())}</li>\n`; continue; }
-    const ulMatch = raw.match(/^\s*[-+*]\s+(.*)/);
-    if (ulMatch) { flushPara(); flushTable(); if (!inList || listType !== "ul") { closeList(); inList = true; listType = "ul"; out += "<ul>\n"; } out += `<li>${inlineFormat(ulMatch[1].trim())}</li>\n`; continue; }
-
-    if (raw.trim() === "") { flushPara(); closeList(); flushTable(); continue; }
-    paraBuffer.push(raw.trim());
-  }
-
-  flushPara(); closeList(); flushTable();
-  if (inCode) out += `<pre><code>${escapeHtml(codeBuffer)}</code></pre>\n`;
-
-  return out || "<p style='opacity:.6;'>No changelog content</p>";
-}
+closeHelp.onclick = () => {
+  helpPopup.style.display = "none";
+};
