@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-02 | [69ec96a](https://github.com/workofaditya/ChatBot/commit/69ec96a6f03beb10da09fa23f2cf37657125eb43) | Add import loader to index.html | [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html)  |
 | 2025-12-01 | [daacb7c](https://github.com/workofaditya/ChatBot/commit/daacb7c1bc6151c8b3d976a9a0878963f3d792c8) | Change exported file name to include date and time | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
 | 2025-12-01 | [f84a392](https://github.com/workofaditya/ChatBot/commit/f84a392058b1a262a5c0a78ec66ecf31a3cee9cc) | Update android download link | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
 | 2025-12-01 | [ca9fe76](https://github.com/workofaditya/ChatBot/commit/ca9fe76decba568104d082ac3c1ddf0b6409ac97) | Added new SHA fingerprint | [.well-known/assetlinks.json](https://github.com/workofaditya/ChatBot/blob/main/.well-known/assetlinks.json)  |
