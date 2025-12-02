@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-02 | [574682f](https://github.com/workofaditya/ChatBot/commit/574682f5e333cbb666944a95d3c2ec167591e85e) | Refector markdown rendering | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
 | 2025-12-02 | [e52a179](https://github.com/workofaditya/ChatBot/commit/e52a179d69ef517dff9a313a32c37dafac48d1f7) | Added styles for guide menu and markdown | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
 | 2025-12-02 | [395f8c4](https://github.com/workofaditya/ChatBot/commit/395f8c4aa10aeb392a581b2e6bf021a952f2909f) | Added Help button and guide menu | [index.html](https://github.com/workofaditya/ChatBot/blob/main/index.html)  |
 | 2025-12-02 | [394c155](https://github.com/workofaditya/ChatBot/commit/394c155acd6c36bde5425328377dd45d75257e44) | Fix spacing | [docs/guide.md](https://github.com/workofaditya/ChatBot/blob/main/docs/guide.md)  |
