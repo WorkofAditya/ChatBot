@@ -1010,3 +1010,29 @@ button:active {
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0,0,0,0.6);
 }
+
+#importLoader {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  text-align: center;
+  z-index: 9999;
+}
+
+
+#importBar {
+  width: 0%;
+  height: 8px;
+  background: #1649ff;
+  border-radius: 10px;
+  transition: width 0.2s;
+}
+
+#importText {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #fff;
+}
