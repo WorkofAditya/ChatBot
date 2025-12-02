@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-02 | [92e39d6](https://github.com/workofaditya/ChatBot/commit/92e39d64faed0ca2d075560c583eceb83081865c) | Fixed a syntax error | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
 | 2025-12-02 | [706bf3c](https://github.com/workofaditya/ChatBot/commit/706bf3c6be6c01f8efc13c748ff979e46a709c6c) | Update cache version to vault-cache-v11 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
 | 2025-12-02 | [56347c1](https://github.com/workofaditya/ChatBot/commit/56347c12c5dcd5e6926b9c73360f5b0ddd6dbabf) | Update app.js to display orderd list correctly | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
 | 2025-12-02 | [574682f](https://github.com/workofaditya/ChatBot/commit/574682f5e333cbb666944a95d3c2ec167591e85e) | Refector markdown rendering | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
