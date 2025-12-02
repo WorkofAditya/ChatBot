@@ -821,7 +821,7 @@ function parseMarkdown(md) {
     const hMatch = raw.match(/^(#{1,6})\s+(.*)/);
     if (hMatch) { flushPara(); closeList(); flushTable(); const level = hMatch[1].length; out += `<h${level}>${inlineFormat(hMatch[2].trim())}</h${level}>\n`; continue; }
 
-    // ORDERED LIST
+    // Ordered List with custom numbers
     const olMatch = raw.match(/^\s*(\d+)\.\s+(.*)/);
     if (olMatch) {
     flushPara(); flushTable();
@@ -829,6 +829,8 @@ function parseMarkdown(md) {
     if (!inList || listType !== "ol") { closeList(); inList = true; listType = "ol"; out += "<ol>\n"; }
     out += `<li value="${num}">${inlineFormat(olMatch[2].trim())}</li>\n`;
     continue;
+}
+
 
     // UNORDERED LIST
     const ulMatch = raw.match(/^\s*[-+*]\s+(.*)/);
