@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-02 | [394c155](https://github.com/workofaditya/ChatBot/commit/394c155acd6c36bde5425328377dd45d75257e44) | Fix spacing | [docs/guide.md](https://github.com/workofaditya/ChatBot/blob/main/docs/guide.md)  |
 | 2025-12-02 | [d8d01a9](https://github.com/workofaditya/ChatBot/commit/d8d01a9f9658139005f2953b1fb5f092b9b251e7) | Removed extra spacing | [docs/guide.md](https://github.com/workofaditya/ChatBot/blob/main/docs/guide.md)  |
 | 2025-12-02 | [0172497](https://github.com/workofaditya/ChatBot/commit/0172497fce54c9dc708aea6cfa31c4b9ad8cd939) | Update guide.md | [docs/guide.md](https://github.com/workofaditya/ChatBot/blob/main/docs/guide.md)  |
 | 2025-12-02 | [aa062d5](https://github.com/workofaditya/ChatBot/commit/aa062d55143349b55659a8868928f97593df80f5) | Create guide.md | [docs/guide.md](https://github.com/workofaditya/ChatBot/blob/main/docs/guide.md)  |
