@@ -2,13 +2,11 @@
 
 This guide explains how to store, access, manage, back up, and restore your personal documents using **ChatBot**.
 
-
 ## 1. Store Personal Documents
 
 1. Click the **➕ (Plus)** icon to open the **Add Document** menu.
 
 <img width="489" height="525" alt="image" src="https://github.com/user-attachments/assets/aaef8789-cf68-469b-bb43-b23275ad5a86" />
-
 
 2. Fill in the required details:
 
