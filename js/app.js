@@ -493,6 +493,10 @@ clearBtn.onclick = async () => {
     vault = [];
     addMessage('Vault cleared successfully.', 'bot');
     showToast('Vault cleared', 'success');
+
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
   }
 };
 
@@ -521,6 +525,7 @@ exportBtn.onclick = () => {
   showToast("Vault exported", "success");
 };
 
+
 // Import Vault
 importBtn.onclick = () => importFile.click();
 
@@ -528,38 +533,53 @@ importFile.onchange = async (e) => {
   const file = e.target.files[0];
   if (!file) return;
 
+  const loader = document.getElementById("importLoader");
+  const bar = document.getElementById("importBar");
+  const text = document.getElementById("importText");
+
+  loader.style.display = "block";
+  bar.style.width = "0%";
+  text.textContent = "Importing 0%";
+
   const reader = new FileReader();
   reader.onload = async (event) => {
     try {
       const data = JSON.parse(event.target.result);
-
-      // Validate it’s an array
       if (!Array.isArray(data)) {
-        alert("Invalid file format. Expected a list of documents.");
+        loader.style.display = "none";
+        alert("Invalid file format.");
         return;
       }
 
-      // Convert legacy entries (from old localStorage system)
-      const converted = data.map(d => {
-        return {
-          name: d.name || "Unnamed",
-          value: d.value || "",
-          info: d.info || "",
-          file: d.file || null, // may already be a DataURL or null
-        };
-      });
+      for (let i = 0; i < data.length; i++) {
+        await saveDocToDB({
+          name: data[i].name || "Unnamed",
+          value: data[i].value || "",
+          info: data[i].info || "",
+          file: data[i].file || null
+        });
 
-      // Save each document to IndexedDB
-      for (const doc of converted) {
-        await saveDocToDB(doc);
+        const percent = Math.round(((i + 1) / data.length) * 100);
+        bar.style.width = percent + "%";
+        text.textContent = "Importing " + percent + "%";
       }
 
       vault = await getAllDocs();
-      addMessage("Vault imported successfully.", "bot");
+
+      setTimeout(() => {
+      loader.style.display = "none";
       showToast("Vault imported successfully!", "success");
+      addMessage("Vault imported successfully.", "bot");
+
+        setTimeout(() => {
+          location.reload();
+          }, 1000);
+          }, 300);
+
+
     } catch (err) {
-      console.error("Import error:", err);
-      alert("Invalid file format or corrupted JSON.");
+      loader.style.display = "none";
+      alert("Invalid or corrupted backup file.");
     }
   };
   reader.readAsText(file);
