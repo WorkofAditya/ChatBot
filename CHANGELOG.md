@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-02 | [f9c67a2](https://github.com/workofaditya/ChatBot/commit/f9c67a24891f40ea593a36b07acab9fd9801dc94) | Add files via upload | [docs/1_add.png](https://github.com/workofaditya/ChatBot/blob/main/docs/1_add.png) [docs/2_search.png](https://github.com/workofaditya/ChatBot/blob/main/docs/2_search.png) [docs/3_manage.png](https://github.com/workofaditya/ChatBot/blob/main/docs/3_manage.png) [docs/4_menu.png](https://github.com/workofaditya/ChatBot/blob/main/docs/4_menu.png) [docs/5_json.png](https://github.com/workofaditya/ChatBot/blob/main/docs/5_json.png) [docs/6.png](https://github.com/workofaditya/ChatBot/blob/main/docs/6.png)  |
 | 2025-12-02 | [58b462c](https://github.com/workofaditya/ChatBot/commit/58b462c87abfcabec967e48051042954e27101fe) | Create placeholder | [docs/placeholder](https://github.com/workofaditya/ChatBot/blob/main/docs/placeholder)  |
 | 2025-12-02 | [ca62635](https://github.com/workofaditya/ChatBot/commit/ca6263531f985fdca3ed91319f1bc2263577c5ca) | Refactor vault import process with progress updates | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
 | 2025-12-02 | [d63c776](https://github.com/workofaditya/ChatBot/commit/d63c7761e3d7002fea385f9cdcab284b2621c19d) | Add styles for import loader and progress bar | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
