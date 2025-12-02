@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-02 | [0172497](https://github.com/workofaditya/ChatBot/commit/0172497fce54c9dc708aea6cfa31c4b9ad8cd939) | Update guide.md | [docs/guide.md](https://github.com/workofaditya/ChatBot/blob/main/docs/guide.md)  |
 | 2025-12-02 | [aa062d5](https://github.com/workofaditya/ChatBot/commit/aa062d55143349b55659a8868928f97593df80f5) | Create guide.md | [docs/guide.md](https://github.com/workofaditya/ChatBot/blob/main/docs/guide.md)  |
 | 2025-12-02 | [59a044d](https://github.com/workofaditya/ChatBot/commit/59a044da1dbd40e0746c5ce1c297fb6f4c47a41c) | Add files via upload | [docs/images/1_add.png](https://github.com/workofaditya/ChatBot/blob/main/docs/images/1_add.png) [docs/images/2_search.png](https://github.com/workofaditya/ChatBot/blob/main/docs/images/2_search.png) [docs/images/3_manage.png](https://github.com/workofaditya/ChatBot/blob/main/docs/images/3_manage.png) [docs/images/4_menu.png](https://github.com/workofaditya/ChatBot/blob/main/docs/images/4_menu.png) [docs/images/5_json.png](https://github.com/workofaditya/ChatBot/blob/main/docs/images/5_json.png) [docs/images/6.png](https://github.com/workofaditya/ChatBot/blob/main/docs/images/6.png)  |
 | 2025-12-02 | [fe0dcd5](https://github.com/workofaditya/ChatBot/commit/fe0dcd5d383a7875bcafa2d7d761458b86e4d90c) | Create placeholder | [docs/images/placeholder](https://github.com/workofaditya/ChatBot/blob/main/docs/images/placeholder)  |
