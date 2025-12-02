@@ -822,8 +822,13 @@ function parseMarkdown(md) {
     if (hMatch) { flushPara(); closeList(); flushTable(); const level = hMatch[1].length; out += `<h${level}>${inlineFormat(hMatch[2].trim())}</h${level}>\n`; continue; }
 
     // ORDERED LIST
-    const olMatch = raw.match(/^\s*\d+\.\s+(.*)/);
-    if (olMatch) { flushPara(); flushTable(); if (!inList || listType !== "ol") { closeList(); inList = true; listType = "ol"; out += "<ol>\n"; } out += `<li>${inlineFormat(olMatch[1].trim())}</li>\n`; continue; }
+    const olMatch = raw.match(/^\s*(\d+)\.\s+(.*)/);
+    if (olMatch) {
+    flushPara(); flushTable();
+    const num = olMatch[1]; // the number in markdown
+    if (!inList || listType !== "ol") { closeList(); inList = true; listType = "ol"; out += "<ol>\n"; }
+    out += `<li value="${num}">${inlineFormat(olMatch[2].trim())}</li>\n`;
+    continue;
 
     // UNORDERED LIST
     const ulMatch = raw.match(/^\s*[-+*]\s+(.*)/);
