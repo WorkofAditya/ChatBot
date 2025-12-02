@@ -25,10 +25,8 @@ This guide explains how to store, access, manage, back up, and restore your pers
    * Display the matching document
    * Show images directly in the chat
    * Provide a **download link** for files
-3. To see **all stored documents**, type:
-```
-Show all
-```
+3. To see **all stored documents**, type: **Show all**
+
 ChatBot will list every document currently stored in your vault.
 
 ---
