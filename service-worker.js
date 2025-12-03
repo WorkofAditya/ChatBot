@@ -8,8 +8,11 @@ const FILES_TO_CACHE = [
   "/js/pdf.worker.min.js",
   "/manifest.json",
   "/icons/192.png",
+  "/icons/512.png",
+  "/icons/maskable.png",
   "/icons/favicon.ico"
 ];
+
 
 // Install: cache everything
 self.addEventListener("install", (event) => {
