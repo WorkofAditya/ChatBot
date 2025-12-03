@@ -1,16 +1,35 @@
 {
-  "name": "ChatBot",
+  "name": "ChatBot Secure Vault",
   "short_name": "Vault",
+  "description": "A private and secure document storage system",
   "start_url": "https://chatbot-b3b.pages.dev/",
   "scope": "https://chatbot-b3b.pages.dev/",
   "display": "standalone",
+  "orientation": "portrait",
   "theme_color": "#0C0F18",
   "background_color": "#1649FF",
+  "lang": "en",
+  "categories": ["productivity", "security", "utilities"],
+  "dir": "ltr",
   "icons": [
     {
       "src": "https://chatbot-b3b.pages.dev/icons/192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://chatbot-b3b.pages.dev/icons/512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://chatbot-b3b.pages.dev/icons/maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
-  ]
+  ],
+  "prefer_related_applications": false
 }
