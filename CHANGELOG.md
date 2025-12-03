@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-03 | [6ea34d8](https://github.com/workofaditya/ChatBot/commit/6ea34d836cabbee8b6b47d0401d090892d9726c2) | Update cache version to vault-cache-v13 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
 | 2025-12-03 | [c830389](https://github.com/workofaditya/ChatBot/commit/c830389727e743066126109fd271aaa15601958d) | Added icons to cache | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
 | 2025-12-03 | [39d90f0](https://github.com/workofaditya/ChatBot/commit/39d90f0e99249a439fc1e313ce94b20502f2fc38) | Update cache version to vault-cache-v12 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
 | 2025-12-03 | [3ed1459](https://github.com/workofaditya/ChatBot/commit/3ed1459660df9a75e24ee6ba4bab4abe25a20d58) | Update manifest.json | [manifest.json](https://github.com/workofaditya/ChatBot/blob/main/manifest.json)  |
