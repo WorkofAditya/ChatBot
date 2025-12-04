@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-04 | [8f06d5a](https://github.com/workofaditya/ChatBot/commit/8f06d5a78032042635007c2bc3db66d819e01798) | Added new SHA fingerprint | [.well-known/assetlinks.json](https://github.com/workofaditya/ChatBot/blob/main/.well-known/assetlinks.json)  |
 
 
 ## v2.0.0
