@@ -3,6 +3,6 @@
       "target": {
         "namespace": "android_app",
         "package_name": "dev.pages.chatbot_b3b.twa",
-        "sha256_cert_fingerprints": ["8F:47:6A:A1:11:E0:F8:4C:C4:1F:CF:E8:26:2B:AD:1E:05:75:E1:2D:64:FB:CC:B6:E4:66:57:91:77:C7:DB:7A"]
+        "sha256_cert_fingerprints": ["94:FE:37:F6:9F:7A:50:A3:77:E7:5A:5B:38:E2:F1:D6:FC:57:3C:26:E8:3E:C0:F0:E5:D3:F2:61:75:01:71:73"]
       }
     }]
