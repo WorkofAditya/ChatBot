@@ -1,4 +1,4 @@
-const CACHE_NAME = "vault-cache-v13";
+const CACHE_NAME = "vault-cache-v14";
 const FILES_TO_CACHE = [
   "/",
   "/index.html",
