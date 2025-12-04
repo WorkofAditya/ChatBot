@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-04 | [9a87d08](https://github.com/workofaditya/ChatBot/commit/9a87d0871c7a71fb5c8a3cc74951657c291bd415) | Added new SHA fingerprint | [.well-known/assetlinks.json](https://github.com/workofaditya/ChatBot/blob/main/.well-known/assetlinks.json)  |
 | 2025-12-03 | [6ea34d8](https://github.com/workofaditya/ChatBot/commit/6ea34d836cabbee8b6b47d0401d090892d9726c2) | Update cache version to vault-cache-v13 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
 | 2025-12-03 | [c830389](https://github.com/workofaditya/ChatBot/commit/c830389727e743066126109fd271aaa15601958d) | Added icons to cache | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
 | 2025-12-03 | [39d90f0](https://github.com/workofaditya/ChatBot/commit/39d90f0e99249a439fc1e313ce94b20502f2fc38) | Update cache version to vault-cache-v12 | [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
