@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-05 | [7a988ba](https://github.com/workofaditya/ChatBot/commit/7a988baedef485a1af997fe6fbe6d2cdfe3e934a) | Rename app/src/main/AndroidManifest.xml to AndroidManifest.xml | [AndroidManifest.xml](https://github.com/workofaditya/ChatBot/blob/main/AndroidManifest.xml)  |
 | 2025-12-05 | [40cae91](https://github.com/workofaditya/ChatBot/commit/40cae91d5dd9d927c156e1a2b971b38dbc4ad3c0) | Update version name and code | [app/build.gradle](https://github.com/workofaditya/ChatBot/blob/main/app/build.gradle)  |
 | 2025-12-05 | [4cdc6c6](https://github.com/workofaditya/ChatBot/commit/4cdc6c67b933c6f0ac11021124f27afe3b67e9dc) | Create sync.yml | [.github/workflows/sync.yml](https://github.com/workofaditya/ChatBot/blob/main/.github/workflows/sync.yml)  |
 | 2025-12-04 | [e32428a](https://github.com/workofaditya/ChatBot/commit/e32428a2f353440e0d27dfda425f1fb968d0a9ff) | Update README.md | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
