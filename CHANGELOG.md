@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-05 | [173bfb5](https://github.com/workofaditya/ChatBot/commit/173bfb598a8c746913d3788ea6b2ea43bbe806aa) | Rename AndroidManifest.xml to app/src/main/AndroidManifest.xml | [app/src/main/AndroidManifest.xml](https://github.com/workofaditya/ChatBot/blob/main/app/src/main/AndroidManifest.xml)  |
 | 2025-12-05 | [7a988ba](https://github.com/workofaditya/ChatBot/commit/7a988baedef485a1af997fe6fbe6d2cdfe3e934a) | Rename app/src/main/AndroidManifest.xml to AndroidManifest.xml | [AndroidManifest.xml](https://github.com/workofaditya/ChatBot/blob/main/AndroidManifest.xml)  |
 | 2025-12-05 | [40cae91](https://github.com/workofaditya/ChatBot/commit/40cae91d5dd9d927c156e1a2b971b38dbc4ad3c0) | Update version name and code | [app/build.gradle](https://github.com/workofaditya/ChatBot/blob/main/app/build.gradle)  |
 | 2025-12-05 | [4cdc6c6](https://github.com/workofaditya/ChatBot/commit/4cdc6c67b933c6f0ac11021124f27afe3b67e9dc) | Create sync.yml | [.github/workflows/sync.yml](https://github.com/workofaditya/ChatBot/blob/main/.github/workflows/sync.yml)  |
