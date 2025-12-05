@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-05 | [40cae91](https://github.com/workofaditya/ChatBot/commit/40cae91d5dd9d927c156e1a2b971b38dbc4ad3c0) | Update version name and code | [app/build.gradle](https://github.com/workofaditya/ChatBot/blob/main/app/build.gradle)  |
 | 2025-12-05 | [4cdc6c6](https://github.com/workofaditya/ChatBot/commit/4cdc6c67b933c6f0ac11021124f27afe3b67e9dc) | Create sync.yml | [.github/workflows/sync.yml](https://github.com/workofaditya/ChatBot/blob/main/.github/workflows/sync.yml)  |
 | 2025-12-04 | [e32428a](https://github.com/workofaditya/ChatBot/commit/e32428a2f353440e0d27dfda425f1fb968d0a9ff) | Update README.md | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
 | 2025-12-04 | [f209560](https://github.com/workofaditya/ChatBot/commit/f20956087544f6ab0602a9caff402051c56a48f9) | Update assetlinks.json with final SHA fingerprint | [.well-known/assetlinks.json](https://github.com/workofaditya/ChatBot/blob/main/.well-known/assetlinks.json)  |
