@@ -95,6 +95,12 @@ async function generatePdfThumbnail(pdfDataURL) {
 
 function renderFile(doc) {
   if (!doc.file) return;
+  const wrapper = document.createElement("div");
+  wrapper.className = "file-block";
+  wrapper.style.display = "flex";
+  wrapper.style.flexDirection = "column";
+  wrapper.style.alignSelf = "flex-start";
+  wrapper.style.marginTop = "6px";
 
   if (doc.file.type.startsWith("image/")) {
     const img = document.createElement("img");
@@ -102,16 +108,12 @@ function renderFile(doc) {
     img.alt = doc.file.name;
     img.style.maxWidth = "180px";
     img.style.borderRadius = "10px";
-    img.style.marginTop = "6px";
-    img.style.display = "block";
     img.style.cursor = "pointer";
-
     img.addEventListener("click", () => {
       imgModalContent.src = doc.file.data;
       imgModal.style.display = "flex";
     });
-
-    chatbox.appendChild(img);
+    wrapper.appendChild(img);
 
     const downloadLink = document.createElement("a");
     downloadLink.href = doc.file.data;
@@ -120,55 +122,45 @@ function renderFile(doc) {
     downloadLink.style.display = "inline-block";
     downloadLink.style.marginTop = "6px";
     downloadLink.style.color = "#8ab4ff";
-    chatbox.appendChild(downloadLink);
+    wrapper.appendChild(downloadLink);
+
+    chatbox.appendChild(wrapper);
     return;
   }
 
-  // PDF
   if (doc.file.type === "application/pdf") {
     const canvas = document.createElement("canvas");
     canvas.style.width = "180px";
     canvas.style.borderRadius = "10px";
-    canvas.style.marginTop = "6px";
     canvas.style.cursor = "pointer";
-    chatbox.appendChild(canvas);
+    wrapper.appendChild(canvas);
 
-    // If thumbnail already cached use it 
     if (doc.pdfThumb) {
       const img = new Image();
       img.src = doc.pdfThumb;
-
       img.onload = () => {
         const ctx = canvas.getContext("2d");
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
       };
-
     } else {
-      // Generate thumbnail and cache it
-      const loadingTask = pdfjsLib.getDocument({
-        data: atob(doc.file.data.split(",")[1])
-      });
-
+      const loadingTask = pdfjsLib.getDocument({ data: atob(doc.file.data.split(",")[1]) });
       loadingTask.promise.then(pdf => {
         pdf.getPage(1).then(page => {
           const viewport = page.getViewport({ scale: 0.3 });
           const ctx = canvas.getContext("2d");
           canvas.height = viewport.height;
           canvas.width = viewport.width;
-
           page.render({ canvasContext: ctx, viewport: viewport }).promise.then(() => {
-            // SAVE THUMBNAIL 
             const thumbData = canvas.toDataURL("image/png");
-            doc.pdfThumb = thumbData;   // cached
-            updateDocument(doc.id, { pdfThumb: thumbData }); // DB update
+            doc.pdfThumb = thumbData;
+            updateDocument(doc.id, { pdfThumb: thumbData });
           });
         });
       });
     }
 
-    // Download Link
     const downloadLink = document.createElement("a");
     downloadLink.href = doc.file.data;
     downloadLink.download = doc.file.name;
@@ -176,8 +168,9 @@ function renderFile(doc) {
     downloadLink.style.display = "inline-block";
     downloadLink.style.marginTop = "6px";
     downloadLink.style.color = "#8ab4ff";
-    chatbox.appendChild(downloadLink);
+    wrapper.appendChild(downloadLink);
 
+    chatbox.appendChild(wrapper);
     return;
   }
 
@@ -188,8 +181,10 @@ function renderFile(doc) {
   link.style.display = "inline-block";
   link.style.marginTop = "6px";
   link.style.color = "#8ab4ff";
-  chatbox.appendChild(link);
+  wrapper.appendChild(link);
+  chatbox.appendChild(wrapper);
 }
+
 
 function updateDocument(id, updates) {
   const request = indexedDB.open(DB_NAME, DB_VERSION);
