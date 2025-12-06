@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-06 | [0832535](https://github.com/workofaditya/ChatBot/commit/0832535ed2d535ca6e56ead01ac8f190f255b39f) | Update README.md | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
 | 2025-12-06 | [02ae0b2](https://github.com/workofaditya/ChatBot/commit/02ae0b2169cdc5707f656c8ad1e14865221dc1ea) | Create privacy_policy.md | [docs/privacy_policy.md](https://github.com/workofaditya/ChatBot/blob/main/docs/privacy_policy.md)  |
 | 2025-12-06 | [eb96b5e](https://github.com/workofaditya/ChatBot/commit/eb96b5ec463d50d7c8edc2a402f7700f9a6bfad6) | Create gradle.properties for F-Droid | [gradle.properties](https://github.com/workofaditya/ChatBot/blob/main/gradle.properties)  |
 | 2025-12-06 | [6984d2e](https://github.com/workofaditya/ChatBot/commit/6984d2e6eef886797831fa65ba8fcc52e7f943ec) | Enable Jetifier | [app/gradle.properties](https://github.com/workofaditya/ChatBot/blob/main/app/gradle.properties)  |
