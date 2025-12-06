@@ -99,7 +99,7 @@ h1 {
   top: 13px;
   left: calc(var(--toolbar-width) + var(--toolbar-gap));
   right: var(--right-gap);
-  padding: 25px 10px;
+  padding: 27px 10px;
   background: rgba(20, 20, 20, 0.25);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
@@ -114,7 +114,7 @@ h1 {
 
 
 .chatbox-header h1 {
-  margin-top: -6px;
+  margin-top: -5px;
   margin-bottom: 0;
   line-height: 1.2;
   font-size: 1.6rem;
@@ -162,32 +162,31 @@ h1 {
 .input-area {
   position: fixed;
   bottom: 18px;
-  left: 50%;
+  left: 55%;
   transform: translateX(-50%);
   width: calc(100% - 140px);
   max-width: 720px;
   display: flex;
-  align-items: center;
-  gap: 10px;
   padding: 20px 14px;
-  border-radius: 0;
-  background: transparent;
-  border: none;
-  backdrop-filter: none;
+    background: rgba(20,20,20,0.25);
+  border-radius: 40px;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255,255,255,0.05);
   z-index: 20;
 }
 
 .input-area input[type="text"] {
   flex: 1;
   padding: 10px 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 30px;
+  border: none;
   background: rgba(255,255,255,0.08);
   color: #fcfcfc;
   font-size: 0.95rem;
   outline: none;
+  box-shadow: 0 0 8px rgba(255,255,255,0.1);
 }
-
 
 
 #userInput {
@@ -506,7 +505,7 @@ button:active {
   }
 }
 
-.vault-toolbar {
+.vault-toolbar {  
   width: var(--toolbar-width);
   position: fixed;
   left: 0;
@@ -515,17 +514,15 @@ button:active {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
   padding: 8px 12px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
   z-index: 50;
 }
-
-
 
 .vault-toolbar button {
   width: 46px;
@@ -550,6 +547,35 @@ button:active {
 
 .vault-toolbar button:active {
   transform: scale(0.96);
+}
+
+.vault-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 27px 0;
+  background: rgba(20, 20, 20, 0.25);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  z-index: 60;
+}
+
+.vault-header h1 {
+  margin-top: -5px;
+  margin-bottom: 0;
+  line-height: 1.2;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #fcfcfc;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+  letter-spacing: 0.8px;
 }
 
 /* Typing animation */
@@ -1242,4 +1268,26 @@ hr {
 .chatbox object {
   align-self: flex-start;
   margin-left: 0;
+}
+
+.header-help-btn {
+  position: absolute;
+  right: 14px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+}
+
+#editDocsBtn {
+  width: 80%;
+  padding: 12px 0;
+  margin-top: 8px;
+  font-size: 1rem;
+  border-radius: 12px;
 }
