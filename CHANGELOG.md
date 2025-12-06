@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-06 | [6984d2e](https://github.com/workofaditya/ChatBot/commit/6984d2e6eef886797831fa65ba8fcc52e7f943ec) | Enable Jetifier | [app/gradle.properties](https://github.com/workofaditya/ChatBot/blob/main/app/gradle.properties)  |
 | 2025-12-06 | [db4ead2](https://github.com/workofaditya/ChatBot/commit/db4ead218174395491819ba8d744fa0084e7fcaf) | Add files via upload | [app/gradle.properties](https://github.com/workofaditya/ChatBot/blob/main/app/gradle.properties)  |
 | 2025-12-05 | [173bfb5](https://github.com/workofaditya/ChatBot/commit/173bfb598a8c746913d3788ea6b2ea43bbe806aa) | Rename AndroidManifest.xml to app/src/main/AndroidManifest.xml | [app/src/main/AndroidManifest.xml](https://github.com/workofaditya/ChatBot/blob/main/app/src/main/AndroidManifest.xml)  |
 | 2025-12-05 | [7a988ba](https://github.com/workofaditya/ChatBot/commit/7a988baedef485a1af997fe6fbe6d2cdfe3e934a) | Rename app/src/main/AndroidManifest.xml to AndroidManifest.xml | [AndroidManifest.xml](https://github.com/workofaditya/ChatBot/blob/main/AndroidManifest.xml)  |
