@@ -20,10 +20,12 @@ You can safely use it offline to manage sensitive information.
 
 ## Download
 
+[<img width="237" height="78" alt="webDemo" src="https://github.com/user-attachments/assets/933cc385-c713-4a6c-9f9a-ce5da72137ef" />](https://chatbot-b3b.pages.dev/)
 
-[<img width="237" height="78" alt="nixe" src="https://github.com/user-attachments/assets/4c960460-7b29-4c31-b1e0-66c60c8f9a80" />](https://github.com/WorkofAditya/ChatBot/releases/download/v2.0.0/ChatBot_V2.0.apk)
+[<img width="237" height="78" alt="bg-Photoroom" src="https://github.com/user-attachments/assets/9b22e905-3a78-422e-bb47-647e0d040aa1" />](https://github.com/WorkofAditya/ChatBot/releases/download/v2.0.0/ChatBot_V2.0.apk)
     
-<a href="https://sourceforge.net/p/chatbot-valut/"><img alt="Download chatbot" src="https://sourceforge.net/sflogo.php?type=18&amp;group_id=3936918" width=200></a>
+[<img width="237" height="78" alt="source-Photoroom" src="https://github.com/user-attachments/assets/dadb5dcd-f7b4-47af-9fd5-46ac4c1b0697" />](https://sourceforge.net/projects/chatbot-valut/)
+
 
 ## Privacy
 No external APIs, no cloud sync, your data never leaves your device.
