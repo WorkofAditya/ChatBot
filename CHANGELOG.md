@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-07 | [33baaf7](https://github.com/workofaditya/ChatBot/commit/33baaf705e51c77631824f4583b8ff983d8f22f5) | Create placeholder | [badges/placeholder](https://github.com/workofaditya/ChatBot/blob/main/badges/placeholder)  |
 | 2025-12-06 | [0832535](https://github.com/workofaditya/ChatBot/commit/0832535ed2d535ca6e56ead01ac8f190f255b39f) | Update README.md | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
 | 2025-12-06 | [02ae0b2](https://github.com/workofaditya/ChatBot/commit/02ae0b2169cdc5707f656c8ad1e14865221dc1ea) | Create privacy_policy.md | [docs/privacy_policy.md](https://github.com/workofaditya/ChatBot/blob/main/docs/privacy_policy.md)  |
 | 2025-12-06 | [eb96b5e](https://github.com/workofaditya/ChatBot/commit/eb96b5ec463d50d7c8edc2a402f7700f9a6bfad6) | Create gradle.properties for F-Droid | [gradle.properties](https://github.com/workofaditya/ChatBot/blob/main/gradle.properties)  |
