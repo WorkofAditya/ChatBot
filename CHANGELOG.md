@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2025-12-30 | [937e7d8](https://github.com/workofaditya/ChatBot/commit/937e7d84182d35f8071a1d9bedb8c564d4831089) | Delete gradle.properties | [gradle.properties](https://github.com/workofaditya/ChatBot/blob/main/gradle.properties)  |
 | 2025-12-20 | [90b3f3c](https://github.com/workofaditya/ChatBot/commit/90b3f3cdd81ec09cc14cb1c74818abfcf0c4ef9b) | Update README.md | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
 | 2025-12-07 | [b94b89b](https://github.com/workofaditya/ChatBot/commit/b94b89b7a9892b3182cd4bceaf9ba4cb3dc98343) | Add files via upload | [badges/android.png](https://github.com/workofaditya/ChatBot/blob/main/badges/android.png) [badges/fdroid.png](https://github.com/workofaditya/ChatBot/blob/main/badges/fdroid.png) [badges/github.png](https://github.com/workofaditya/ChatBot/blob/main/badges/github.png) [badges/izzyondroid.png](https://github.com/workofaditya/ChatBot/blob/main/badges/izzyondroid.png) [badges/playstore.png](https://github.com/workofaditya/ChatBot/blob/main/badges/playstore.png) [badges/sourceforge.png](https://github.com/workofaditya/ChatBot/blob/main/badges/sourceforge.png) [badges/webDemo.png](https://github.com/workofaditya/ChatBot/blob/main/badges/webDemo.png)  |
 | 2025-12-07 | [33baaf7](https://github.com/workofaditya/ChatBot/commit/33baaf705e51c77631824f4583b8ff983d8f22f5) | Create placeholder | [badges/placeholder](https://github.com/workofaditya/ChatBot/blob/main/badges/placeholder)  |
