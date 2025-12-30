@@ -20,7 +20,6 @@ const FILES_TO_CACHE = [
   "/images/6.png"
 ];
 
-
 // Install: cache everything
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -50,14 +49,28 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        const resClone = response.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, resClone);
+    caches.match(event.request).then((cached) => {
+      if (cached) return cached;
+
+      return fetch(event.request)
+        .then((response) => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, clone);
+          });
+          return response;
+        })
+        .catch(() => {
+          if (event.request.mode === "navigate") {
+            return caches.match("/index.html");
+          }
         });
-        return response;
-      })
-      .catch(() => caches.match(event.request))
+    })
   );
+});
+
+self.addEventListener("message", (event) => {
+  if (event.data === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });
