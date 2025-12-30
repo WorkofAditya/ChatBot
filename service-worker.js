@@ -34,9 +34,7 @@ self.addEventListener("activate", (event) => {
     caches.keys().then((keyList) =>
       Promise.all(
         keyList.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
+          if (key !== CACHE_NAME) return caches.delete(key);
         })
       )
     )
@@ -44,12 +42,12 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Fetch: serve from cache when offline
+// Fetch: cache-first for offline
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
   event.respondWith(
-    caches.match(event.request).then((cached) => {
+    caches.match(event.request, { ignoreSearch: true }).then((cached) => {
       if (cached) return cached;
 
       return fetch(event.request)
@@ -69,8 +67,7 @@ self.addEventListener("fetch", (event) => {
   );
 });
 
+// Force update activation from app.js
 self.addEventListener("message", (event) => {
-  if (event.data === "SKIP_WAITING") {
-    self.skipWaiting();
-  }
+  if (event.data === "SKIP_WAITING") self.skipWaiting();
 });
