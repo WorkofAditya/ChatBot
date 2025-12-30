@@ -930,3 +930,44 @@ helpBtn.onclick = async () => {
 closeHelp.onclick = () => {
   helpPopup.style.display = "none";
 };
+
+// LOCAL APP VERSION
+const LOCAL_VERSION = "1"; // increase this for future releases
+
+// URL TO CHECK VERSION
+const REMOTE_VERSION_URL = "https://raw.githubusercontent.com/WorkofAditya/ChatBot/refs/heads/Beta/version.txt";
+
+function checkForAppUpdate() {
+  fetch(REMOTE_VERSION_URL + "?cache=" + Date.now())
+    .then(res => res.text())
+    .then(remote => {
+      const remoteVersion = remote.trim();
+      if (remoteVersion > LOCAL_VERSION) {
+        showUpdatePopup();
+      }
+    })
+    .catch(err => console.warn("Version check failed:", err));
+}
+
+function showUpdatePopup() {
+  const popup = document.getElementById("updatePopup");
+  popup.style.display = "flex";
+
+  document.getElementById("refreshAppBtn").onclick = () => {
+    popup.style.display = "none";
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistration().then(reg => {
+        if (reg) reg.update().then(() => window.location.reload());
+      });
+    } else {
+      window.location.reload();
+    }
+  };
+
+  document.getElementById("dismissUpdateBtn").onclick = () => {
+    popup.style.display = "none";
+  };
+}
+
+// run version check if online
+if (navigator.onLine) checkForAppUpdate();
