@@ -930,3 +930,50 @@ helpBtn.onclick = async () => {
 closeHelp.onclick = () => {
   helpPopup.style.display = "none";
 };
+
+const LOCAL_VERSION = "2";
+const REMOTE_VERSION_URL = "https://raw.githubusercontent.com/WorkofAditya/ChatBot/refs/heads/Beta/version.txt";
+
+let latestRemoteVersion = null;
+
+function checkForAppUpdate() {
+  fetch(REMOTE_VERSION_URL + "?cache=" + Date.now())
+    .then(res => res.text())
+    .then(remote => {
+      const remoteVersion = remote.trim();
+      latestRemoteVersion = remoteVersion;
+
+      const storedVersion = localStorage.getItem("updatedVersion");
+      if (storedVersion === remoteVersion) return;
+
+      if (remoteVersion > LOCAL_VERSION) {
+        showUpdatePopup();
+      }
+    })
+    .catch(() => {});
+}
+
+function showUpdatePopup() {
+  const popup = document.getElementById("updatePopup");
+  popup.style.display = "flex";
+
+  document.getElementById("refreshAppBtn").onclick = async () => {
+    popup.style.display = "none";
+    localStorage.setItem("updatedVersion", latestRemoteVersion);
+
+    if ("serviceWorker" in navigator) {
+      const reg = await navigator.serviceWorker.getRegistration();
+      if (reg && reg.waiting) {
+        reg.waiting.postMessage("SKIP_WAITING");
+      }
+    }
+
+    setTimeout(() => window.location.reload(), 300);
+  };
+
+  document.getElementById("dismissUpdateBtn").onclick = () => {
+    popup.style.display = "none";
+  };
+}
+
+if (navigator.onLine) checkForAppUpdate();

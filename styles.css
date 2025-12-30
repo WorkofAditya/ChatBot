@@ -1128,3 +1128,28 @@ hr {
   margin: 16px 0;
   height: 2px;
 }
+
+#updatePopup .popup-content {
+  max-width: 380px;
+  text-align: center;
+  padding: 28px 22px;
+}
+#updatePopup h2 {
+  font-size: 1.4rem;
+  color: #6ab7ff;
+  margin-bottom: 10px;
+}
+#updatePopup p {
+  font-size: 0.94rem;
+  color: #e1e7f8;
+  margin-bottom: 14px;
+}
+#updatePopup .popup-actions button {
+  background: rgba(60, 110, 200, 0.15);
+  border: 1px solid rgba(60, 110, 200, 0.4);
+  color: #9abfff;
+}
+#updatePopup .popup-actions button:hover {
+  background: rgba(60, 110, 200, 0.24);
+  color: #fff;
+}

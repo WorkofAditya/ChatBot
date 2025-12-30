@@ -1,6 +1,6 @@
-const CACHE_NAME = "vault-cache-v14";
+const APP_VERSION = "1";
+const CACHE_NAME = `vault-cache-v${APP_VERSION}`;
 const FILES_TO_CACHE = [
-  "/",
   "/index.html",
   "/styles.css",
   "/js/app.js",
@@ -13,13 +13,10 @@ const FILES_TO_CACHE = [
   "/icons/favicon.ico"
 ];
 
-
 // Install: cache everything
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(FILES_TO_CACHE);
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(FILES_TO_CACHE))
   );
   self.skipWaiting();
 });
@@ -30,9 +27,7 @@ self.addEventListener("activate", (event) => {
     caches.keys().then((keyList) =>
       Promise.all(
         keyList.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
+          if (key !== CACHE_NAME) return caches.delete(key);
         })
       )
     )
@@ -40,11 +35,32 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Fetch: serve from cache when offline
+// Fetch: cache-first for offline
 self.addEventListener("fetch", (event) => {
+  if (event.request.method !== "GET") return;
+
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
+    caches.match(event.request, { ignoreSearch: true }).then((cached) => {
+      if (cached) return cached;
+
+      return fetch(event.request)
+        .then((response) => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, clone);
+          });
+          return response;
+        })
+        .catch(() => {
+          if (event.request.mode === "navigate") {
+            return caches.match("/index.html");
+          }
+        });
     })
   );
+});
+
+// Force update activation from app.js
+self.addEventListener("message", (event) => {
+  if (event.data === "SKIP_WAITING") self.skipWaiting();
 });
