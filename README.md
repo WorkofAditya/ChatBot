@@ -1,4 +1,27 @@
-# Chatbot 
+<div align="center">
+  <a href="">
+    <img src="https://github.com/user-attachments/assets/3618d3ea-f2d7-4c34-8f51-58f32a46dee3" alt="Logo"  width="150" height="150">
+  </a>
+ 
+  # _Store it_, with [ChatBot    ](https://chatbot-b3b.pages.dev/)
+
+  <p>
+    Made to keep your data <strong> <b>truly <i> yours. </i></b></strong></a>
+    <br>
+    To handle your documents Gracefully,
+    <br> 
+    <b>Developed by <a href="https://github.com/WorkofAditya/">Adityasinh</b></a>
+    <br>
+    <br>
+    <a href="https://github.com/WorkofAditya/ChatBot/issues">Report a bug</a>
+    <br />
+    <a href="https://github.com/WorkofAditya/ChatBot/issues">Request feature</a>
+  </p>
+</div>
+<br>
+
+
+
 
 **Chatbot** is a secure, privacy-focused web app that works entirely offline.  
 It lets you chat with your personal vault to quickly find, store, and manage important documents, notes, and files, all safely saved in your browser using IndexedDB.
