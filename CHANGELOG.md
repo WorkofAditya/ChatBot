@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2026-01-03 | [ef4db4c](https://github.com/workofaditya/ChatBot/commit/ef4db4cd730b54b9ab61d403eca04ab87191c647) | Enhance README with project details and logo | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
 | 2025-12-30 | [441c177](https://github.com/workofaditya/ChatBot/commit/441c17761991284ee75c4bc2e036e72003af2a91) | Merge pull request #2 from WorkofAditya/Beta |  |
 | 2025-12-30 | [ab58f13](https://github.com/workofaditya/ChatBot/commit/ab58f13a5268036b5406be089f5183f2159a1175) | Update version number from 3 to 2 | [version.txt](https://github.com/workofaditya/ChatBot/blob/main/version.txt)  |
 | 2025-12-30 | [23e43d2](https://github.com/workofaditya/ChatBot/commit/23e43d21aa0bbed5dc73356d5193183781ada8d1) | Update LOCAL_VERSION to 2 | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
