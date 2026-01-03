@@ -1,6 +1,6 @@
 <div align="center">
   <a href="">
-    <img src="https://github.com/user-attachments/assets/3618d3ea-f2d7-4c34-8f51-58f32a46dee3" alt="Logo"  width="150" height="150">
+    <img src="https://raw.githubusercontent.com/WorkofAditya/ChatBot/refs/heads/main/icons/Bot.png" alt="Logo"  width="150" height="150">
   </a>
  
   # _Store it_, with [ChatBot    ](https://chatbot-b3b.pages.dev/)
