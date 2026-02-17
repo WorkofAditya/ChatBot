@@ -76,6 +76,36 @@ const clearBtn = document.getElementById('clearBtn');
 const exportBtn = document.getElementById('exportBtn');
 const importBtn = document.getElementById('importBtn');
 const importFile = document.getElementById('importFile');
+const documentsList = document.getElementById('documentsList');
+const newRecordBtn = document.getElementById('newRecordBtn');
+
+function formatTimestamp() {
+  return new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+}
+
+function formatDocDate(ts) {
+  const date = ts ? new Date(ts) : new Date();
+  return date.toLocaleDateString([], { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function renderDocumentsPanel() {
+  if (!documentsList) return;
+  documentsList.innerHTML = '';
+  if (vault.length === 0) {
+    const empty = document.createElement('p');
+    empty.className = 'empty-docs';
+    empty.textContent = 'No documents yet';
+    documentsList.appendChild(empty);
+    return;
+  }
+
+  vault.forEach(doc => {
+    const card = document.createElement('article');
+    card.className = 'doc-card';
+    card.innerHTML = `<div class="doc-card-main"><span class="doc-folder-icon">📁</span><div><p class="doc-card-name">${doc.name}</p><p class="doc-card-date">${formatDocDate(doc.createdAt)}</p></div></div><button class="edit-btn panel-edit-btn" data-id="${doc.id}" type="button">Edit</button>`;
+    documentsList.appendChild(card);
+  });
+}
 
 async function generatePdfThumbnail(pdfDataURL) {
   const pdf = await pdfjsLib.getDocument({ url: pdfDataURL }).promise;
@@ -96,14 +126,20 @@ async function generatePdfThumbnail(pdfDataURL) {
 function renderFile(doc) {
   if (!doc.file) return;
 
+  const wrapper = document.createElement('div');
+  wrapper.className = 'doc-preview-card';
+  wrapper.innerHTML = `<div class="doc-preview-head"><span class="doc-preview-icon">📄</span><div><strong>${doc.file.name || doc.name}</strong><p>File Number: ${doc.value || '-'}</p></div></div><div class="doc-preview-thumb"></div><a class="doc-download" href="${doc.file.data}" download="${doc.file.name || doc.name}">Download</a>`;
+  const thumb = wrapper.querySelector('.doc-preview-thumb');
+  chatbox.appendChild(wrapper);
+
   if (doc.file.type.startsWith("image/")) {
     const img = document.createElement("img");
     img.src = doc.file.data;
     img.alt = doc.file.name;
-    img.style.maxWidth = "180px";
-    img.style.borderRadius = "10px";
-    img.style.marginTop = "6px";
-    img.style.display = "block";
+    img.style.width = "100%";
+    img.style.maxHeight = "120px";
+    img.style.objectFit = "cover";
+    img.style.borderRadius = "8px";
     img.style.cursor = "pointer";
 
     img.addEventListener("click", () => {
@@ -111,27 +147,19 @@ function renderFile(doc) {
       imgModal.style.display = "flex";
     });
 
-    chatbox.appendChild(img);
-
-    const downloadLink = document.createElement("a");
-    downloadLink.href = doc.file.data;
-    downloadLink.download = doc.file.name;
-    downloadLink.textContent = `Download ${doc.file.name}`;
-    downloadLink.style.display = "inline-block";
-    downloadLink.style.marginTop = "6px";
-    downloadLink.style.color = "#8ab4ff";
-    chatbox.appendChild(downloadLink);
+    thumb.appendChild(img);
     return;
   }
 
   // PDF
   if (doc.file.type === "application/pdf") {
     const canvas = document.createElement("canvas");
-    canvas.style.width = "180px";
-    canvas.style.borderRadius = "10px";
-    canvas.style.marginTop = "6px";
+    canvas.style.width = "100%";
+    canvas.style.maxHeight = "120px";
+    canvas.style.objectFit = "cover";
+    canvas.style.borderRadius = "8px";
     canvas.style.cursor = "pointer";
-    chatbox.appendChild(canvas);
+    thumb.appendChild(canvas);
 
     // If thumbnail already cached use it 
     if (doc.pdfThumb) {
@@ -168,27 +196,10 @@ function renderFile(doc) {
       });
     }
 
-    // Download Link
-    const downloadLink = document.createElement("a");
-    downloadLink.href = doc.file.data;
-    downloadLink.download = doc.file.name;
-    downloadLink.textContent = `Download ${doc.file.name}`;
-    downloadLink.style.display = "inline-block";
-    downloadLink.style.marginTop = "6px";
-    downloadLink.style.color = "#8ab4ff";
-    chatbox.appendChild(downloadLink);
-
     return;
   }
 
-  const link = document.createElement("a");
-  link.href = doc.file.data;
-  link.download = doc.file.name;
-  link.textContent = `Download ${doc.file.name}`;
-  link.style.display = "inline-block";
-  link.style.marginTop = "6px";
-  link.style.color = "#8ab4ff";
-  chatbox.appendChild(link);
+  thumb.textContent = 'Preview unavailable';
 }
 
 function updateDocument(id, updates) {
@@ -211,6 +222,8 @@ function updateDocument(id, updates) {
 
 // Helper Functions
 function addMessage(content, sender) {
+  const row = document.createElement('div');
+  row.className = sender === 'user' ? 'message-row user-row' : 'message-row bot-row';
   const div = document.createElement('div');
   div.className = sender === 'user' ? 'user-message' : 'bot-message';
 
@@ -221,7 +234,13 @@ function addMessage(content, sender) {
     div.textContent = content;
   }
 
-  chatbox.appendChild(div);
+  const time = document.createElement('span');
+  time.className = 'message-time';
+  time.textContent = formatTimestamp();
+
+  row.appendChild(div);
+  row.appendChild(time);
+  chatbox.appendChild(row);
 
   // Auto-scroll
   setTimeout(() => {
@@ -233,6 +252,7 @@ function addMessage(content, sender) {
 let vault = [];
 (async () => {
   vault = await getAllDocs();
+  renderDocumentsPanel();
 })();
 
 
@@ -392,6 +412,8 @@ userInput.addEventListener("keypress", (e) => {
 
 
 // Add Document Popup
+if (newRecordBtn) newRecordBtn.onclick = () => addDocBtn.click();
+
 addDocBtn.onclick = () => {
   // Reset edit mode
   saveDocBtn.removeAttribute("data-edit-id");
@@ -445,6 +467,7 @@ if (editId) {
     value,
     info,
     file: fileData ? fileData : oldDoc.file,
+    createdAt: oldDoc.createdAt || Date.now(),
   };
 
   const putReq = store.put(updatedDoc);
@@ -459,6 +482,7 @@ await waitForTx(tx);
 
 // Reload vault so array matches DB contents
 vault = await getAllDocs();
+renderDocumentsPanel();
 
 popup.style.display = "none";
 saveDocBtn.removeAttribute("data-edit-id");
@@ -471,9 +495,10 @@ saveDocBtn.removeAttribute("data-edit-id");
 }
 
 //add
-  const newDoc = { name, value, info, file: fileData };
+  const newDoc = { name, value, info, file: fileData, createdAt: Date.now() };
   await saveDocToDB(newDoc);
   vault = await getAllDocs();
+  renderDocumentsPanel();
   addMessage(`${name} was safely stored to vault.`, "bot");
   popup.style.display = "none";
   showToast("Document saved!", "success");
@@ -491,6 +516,7 @@ clearBtn.onclick = async () => {
   if (confirm('Are you sure you want to clear the vault?')) {
     await clearVaultDB();
     vault = [];
+    renderDocumentsPanel();
     addMessage('Vault cleared successfully.', 'bot');
     showToast('Vault cleared', 'success');
 
@@ -565,6 +591,7 @@ importFile.onchange = async (e) => {
       }
 
       vault = await getAllDocs();
+      renderDocumentsPanel();
 
       setTimeout(() => {
       loader.style.display = "none";
@@ -636,6 +663,28 @@ document.getElementById("closeEditPopup").onclick = () => {
     document.getElementById("editPopup").style.display = "none";
 };
   
+if (documentsList) {
+  documentsList.addEventListener("click", async (e) => {
+    const btn = e.target.closest('.panel-edit-btn');
+    if (!btn) return;
+    const id = Number(btn.dataset.id);
+
+    const db = await openDB();
+    const store = db.transaction(STORE_NAME, "readonly").objectStore(STORE_NAME);
+    const req = store.get(id);
+
+    req.onsuccess = () => {
+      const doc = req.result;
+      document.getElementById("docName").value = doc.name;
+      document.getElementById("docValue").value = doc.value;
+      document.getElementById("docInfo").value = doc.info || "";
+      document.getElementById("docFile").value = "";
+      saveDocBtn.setAttribute("data-edit-id", id);
+      popup.style.display = "flex";
+    };
+  });
+}
+
 document.getElementById("editDocsList").addEventListener("click", async (e) => {
     const target = e.target;
 
@@ -664,6 +713,7 @@ document.getElementById("editDocsList").addEventListener("click", async (e) => {
   if (itemEl) itemEl.remove();
 
   vault = await getAllDocs();
+  renderDocumentsPanel();
 
   showToast("Document deleted!", "success");
   return;
@@ -722,6 +772,7 @@ aboutPopup.onclick = e => {
 };
 
 const openChangelogBtn = document.getElementById("openChangelogBtn");
+const openChangelogMenuBtn = document.getElementById("openChangelogMenuBtn");
 const changelogPopup = document.getElementById("changelogPopup");
 const closeChangelogBtn = document.getElementById("closeChangelogBtn");
 const refreshChangelogBtn = document.getElementById("refreshChangelogBtn");
@@ -878,10 +929,19 @@ async function loadChangelogToPopup() {
   }
 }
 
-openChangelogBtn.addEventListener("click", () => {
-  changelogPopup.style.display = "flex";
-  loadChangelogToPopup();
-});
+if (openChangelogBtn) {
+  openChangelogBtn.addEventListener("click", () => {
+    changelogPopup.style.display = "flex";
+    loadChangelogToPopup();
+  });
+}
+
+if (openChangelogMenuBtn) {
+  openChangelogMenuBtn.addEventListener("click", () => {
+    changelogPopup.style.display = "flex";
+    loadChangelogToPopup();
+  });
+}
 
 closeChangelogBtn.addEventListener("click", () => {
   changelogPopup.style.display = "none";

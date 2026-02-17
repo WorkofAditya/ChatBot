@@ -16,30 +16,94 @@
 <body>
 <!-- MAIN VAULT CONTAINER -->
 <div class="vault-container">
-  <h1>Chatbot</h1>
-  <div class="vault-toolbar">
-    <button id="editDocsBtn" type="button" title="Edit Documents">Manage</button>
-    <button id="aboutBtn" class="toolbar-btn">About</button>
-    <button id="helpBtn">?</button>
-  </div>
-  <div class="chatbox" id="chatbox">
-    <div class="typing-indicator" id="typingIndicator">
-      <span></span><span></span><span></span>
+  <aside class="left-sidebar">
+    <div class="brand-row">
+      <div class="brand-avatar">A</div>
+      <h1>Document Assistant</h1>
     </div>
-  </div>
-  <div class="input-area">
-    <button id="addDocBtn" title="Add Document">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
-        <path d="M12 5v14m-7-7h14" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <input type="text" id="userInput" placeholder="Type your query...">
-    <button id="sendBtn" title="Send">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M12 5L6 11H10V19H14V11H18L12 5Z" fill="#141414"/>
-      </svg>
-    </button>
-  </div>
+    <div class="profile-row">
+      <img src="icons/Bot.png" alt="User avatar">
+      <span>Adityasinh</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item active" type="button">
+        <span>📁</span>
+        Documents
+      </button>
+      <button class="nav-item" type="button">
+        <span>💬</span>
+        Chat
+      </button>
+      <button class="nav-item" type="button">
+        <span>⚙️</span>
+        Settings
+      </button>
+    </nav>
+  </aside>
+
+  <main class="chat-panel">
+    <header class="topbar">
+      <div class="topbar-search-wrap">
+        <input type="search" placeholder="Search..." class="topbar-search">
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" type="button" title="Notifications">🔔</button>
+        <details class="menu-dropdown">
+          <summary class="icon-btn" title="Menu">☰</summary>
+          <div class="menu-dropdown-content">
+            <button id="editDocsBtn" type="button">Manage</button>
+            <button id="aboutBtn" type="button">About</button>
+            <button id="openChangelogMenuBtn" type="button">Changelog</button>
+            <button id="helpBtn" type="button">Help</button>
+          </div>
+        </details>
+      </div>
+    </header>
+
+    <h2 class="chat-title">Chat</h2>
+
+    <div class="chatbox" id="chatbox">
+      <div class="typing-indicator" id="typingIndicator">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="input-area">
+      <button id="addDocBtn" title="Add Document" class="attach-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
+          <path d="M12 5v14m-7-7h14" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <input type="text" id="userInput" placeholder="Type a message...">
+      <button id="sendBtn" title="Send">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 5L6 11H10V19H14V11H18L12 5Z" fill="#141414"/>
+        </svg>
+      </button>
+    </div>
+  </main>
+
+  <aside class="documents-panel">
+    <div class="documents-header">
+      <h2>Documents</h2>
+    </div>
+    <div class="documents-subheader">
+      <h3>Your Files</h3>
+      <button id="newRecordBtn" type="button">New Record</button>
+    </div>
+    <div id="documentsList" class="documents-list"></div>
+
+    <details class="actions-dropdown">
+      <summary>Actions</summary>
+      <div class="actions-dropdown-content">
+        <button id="exportBtn" type="button">Export</button>
+        <button id="importBtn" type="button">Import</button>
+        <button id="clearBtn" type="button">Delete all</button>
+      </div>
+    </details>
+  </aside>
+
   <input type="file" id="importFile" accept="application/json" style="display:none;">
 </div>
 
@@ -60,15 +124,12 @@
 </div>
 
 <!-- EDIT DOCUMENT POPUP -->
-<div class="popup" id="editPopup">
+<div class="popup" id="editPopup" style="display:none;">
   <div class="popup-content" style="max-height: 420px; overflow-y: auto;">
     <h2>Edit Documents</h2>
     <div id="editDocsList" class="edit-doc-list"></div>
   </div>
   <div class="edit-actions">
-    <button id="exportBtn">Export</button>
-    <button id="importBtn">Import</button>
-    <button id="clearBtn">Delete all</button>
     <button id="closeEditPopup">Close</button>
   </div>
 </div>
