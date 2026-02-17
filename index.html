@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chatbot</title>
+<title>Document Assistant</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="icons/favicon.ico" type="image/ico">
 <link rel="manifest" href="manifest.json" />
@@ -11,36 +11,76 @@
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc = "js/pdf.worker.min.js";
 </script>
-
 </head>
 <body>
-<!-- MAIN VAULT CONTAINER -->
-<div class="vault-container">
-  <h1>Chatbot</h1>
-  <div class="vault-toolbar">
-    <button id="editDocsBtn" type="button" title="Edit Documents">Manage</button>
-    <button id="aboutBtn" class="toolbar-btn">About</button>
-    <button id="helpBtn">?</button>
-  </div>
-  <div class="chatbox" id="chatbox">
-    <div class="typing-indicator" id="typingIndicator">
-      <span></span><span></span><span></span>
+<div class="app-shell">
+  <aside class="left-sidebar panel">
+    <div class="brand-block">
+      <h1>Document Assistant</h1>
+      <div class="profile-card">
+        <div class="avatar">DA</div>
+        <div>
+          <p class="profile-name">Local User</p>
+          <p class="profile-sub">Offline Mode</p>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="input-area">
-    <button id="addDocBtn" title="Add Document">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
-        <path d="M12 5v14m-7-7h14" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <input type="text" id="userInput" placeholder="Type your query...">
-    <button id="sendBtn" title="Send">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M12 5L6 11H10V19H14V11H18L12 5Z" fill="#141414"/>
-      </svg>
-    </button>
-  </div>
-  <input type="file" id="importFile" accept="application/json" style="display:none;">
+
+    <nav class="nav-list">
+      <button class="nav-item" data-section="documents"><span>📁</span>Documents</button>
+      <button class="nav-item active" data-section="chat"><span>💬</span>Chat</button>
+      <button class="nav-item" data-section="settings"><span>⚙️</span>Settings</button>
+    </nav>
+  </aside>
+
+  <main class="chat-center panel">
+    <header class="chat-topbar">
+      <h2>Chat</h2>
+      <div class="topbar-tools">
+        <div class="search-wrap">
+          <span>🔎</span>
+          <input type="text" id="chatSearch" placeholder="Search chat or documents">
+        </div>
+        <button class="icon-btn" id="menuToggleBtn" title="Utilities">☰</button>
+        <div class="utilities-menu" id="utilitiesMenu">
+          <button id="editDocsBtn" type="button">Manage</button>
+          <button id="aboutBtn" type="button">About</button>
+          <button id="openChangelogBtn" type="button">Changelog</button>
+          <button id="helpBtn" type="button">Guide</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="chatbox" id="chatbox">
+      <div class="typing-indicator" id="typingIndicator">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="input-area">
+      <button id="attachBtn" title="Attach">📎</button>
+      <input type="text" id="userInput" placeholder="Type your query...">
+      <button id="sendBtn" title="Send">➤</button>
+    </div>
+    <input type="file" id="importFile" accept="application/json" style="display:none;">
+  </main>
+
+  <aside class="right-sidebar panel">
+    <div class="docs-header">
+      <h3>Your Files</h3>
+      <button id="addDocBtn" type="button">New Record</button>
+    </div>
+    <div id="docsPanelList" class="docs-panel-list"></div>
+
+    <div class="actions-wrap">
+      <button id="actionsMenuBtn" type="button">Actions ▾</button>
+      <div class="actions-menu" id="actionsMenu">
+        <button id="exportBtn">Export</button>
+        <button id="importBtn">Import</button>
+        <button id="clearBtn">Delete all</button>
+      </div>
+    </div>
+  </aside>
 </div>
 
 <!-- ADD DOCUMENT POPUP -->
@@ -66,9 +106,6 @@
     <div id="editDocsList" class="edit-doc-list"></div>
   </div>
   <div class="edit-actions">
-    <button id="exportBtn">Export</button>
-    <button id="importBtn">Import</button>
-    <button id="clearBtn">Delete all</button>
     <button id="closeEditPopup">Close</button>
   </div>
 </div>
@@ -86,11 +123,10 @@
     <div class="about-links-row">
       <a href="https://github.com/WorkofAditya/ChatBot" target="_blank">GitHub</a>
       <a href="https://codepen.io/WorkofAditya/pen/azNBRWr" target="_blank">CodePen</a>
-      <a href="#" id="openChangelogBtn">Changelog</a>
     </div>
 
     <p class="about-dev">Developed by <b>Adityasinh Sodha</b></p>
-        <p class="about-version">Version: <b>v2.0.1</b></p>
+    <p class="about-version">Version: <b>v2.0.1</b></p>
   </div>
 </div>
 
@@ -126,7 +162,6 @@
   </div>
 </div>
 
-<!-- UPDATE POPUP -->
 <div id="updatePopup" class="popup">
   <div class="popup-content">
     <h2>Update Available</h2>

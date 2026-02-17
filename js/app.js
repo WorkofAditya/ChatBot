@@ -69,6 +69,7 @@ const chatbox = document.getElementById('chatbox');
 const userInput = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendBtn');
 const addDocBtn = document.getElementById('addDocBtn');
+const attachBtn = document.getElementById('attachBtn');
 const popup = document.getElementById('popup');
 const saveDocBtn = document.getElementById('saveDocBtn');
 const cancelBtn = document.getElementById('cancelBtn');
@@ -76,6 +77,12 @@ const clearBtn = document.getElementById('clearBtn');
 const exportBtn = document.getElementById('exportBtn');
 const importBtn = document.getElementById('importBtn');
 const importFile = document.getElementById('importFile');
+const docsPanelList = document.getElementById('docsPanelList');
+const menuToggleBtn = document.getElementById('menuToggleBtn');
+const utilitiesMenu = document.getElementById('utilitiesMenu');
+const actionsMenuBtn = document.getElementById('actionsMenuBtn');
+const actionsMenu = document.getElementById('actionsMenu');
+const navItems = document.querySelectorAll('.nav-item');
 
 async function generatePdfThumbnail(pdfDataURL) {
   const pdf = await pdfjsLib.getDocument({ url: pdfDataURL }).promise;
@@ -93,102 +100,52 @@ async function generatePdfThumbnail(pdfDataURL) {
   return canvas.toDataURL();
 }
 
-function renderFile(doc) {
-  if (!doc.file) return;
+function renderFile(doc, container) {
+  if (!doc.file || !container) return;
 
-  if (doc.file.type.startsWith("image/")) {
-    const img = document.createElement("img");
-    img.src = doc.file.data;
-    img.alt = doc.file.name;
-    img.style.maxWidth = "180px";
-    img.style.borderRadius = "10px";
-    img.style.marginTop = "6px";
-    img.style.display = "block";
-    img.style.cursor = "pointer";
+  const card = document.createElement("div");
+  card.className = "doc-preview-card";
 
-    img.addEventListener("click", () => {
-      imgModalContent.src = doc.file.data;
-      imgModal.style.display = "flex";
-    });
+  const thumb = doc.file.type.startsWith("image/") ? doc.file.data : (doc.pdfThumb || "icons/192.png");
+  card.innerHTML = `
+    <div class="doc-preview-head">
+      <img class="doc-thumb" src="${thumb}" alt="${doc.file.name}">
+      <div class="doc-meta">
+        <strong>📄 ${doc.file.name}</strong>
+        <p>File #${doc.id || "N/A"}</p>
+      </div>
+    </div>
+    <button class="download-btn">Download</button>
+  `;
 
-    chatbox.appendChild(img);
+  card.querySelector(".download-btn").onclick = () => {
+    const link = document.createElement("a");
+    link.href = doc.file.data;
+    link.download = doc.file.name;
+    link.click();
+  };
 
-    const downloadLink = document.createElement("a");
-    downloadLink.href = doc.file.data;
-    downloadLink.download = doc.file.name;
-    downloadLink.textContent = `Download ${doc.file.name}`;
-    downloadLink.style.display = "inline-block";
-    downloadLink.style.marginTop = "6px";
-    downloadLink.style.color = "#8ab4ff";
-    chatbox.appendChild(downloadLink);
-    return;
-  }
-
-  // PDF
-  if (doc.file.type === "application/pdf") {
-    const canvas = document.createElement("canvas");
-    canvas.style.width = "180px";
-    canvas.style.borderRadius = "10px";
-    canvas.style.marginTop = "6px";
-    canvas.style.cursor = "pointer";
-    chatbox.appendChild(canvas);
-
-    // If thumbnail already cached use it 
-    if (doc.pdfThumb) {
-      const img = new Image();
-      img.src = doc.pdfThumb;
-
-      img.onload = () => {
+  if (doc.file.type === "application/pdf" && !doc.pdfThumb) {
+    const loadingTask = pdfjsLib.getDocument({ data: atob(doc.file.data.split(",")[1]) });
+    loadingTask.promise.then(pdf => {
+      pdf.getPage(1).then(page => {
+        const viewport = page.getViewport({ scale: 0.3 });
+        const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0);
-      };
-
-    } else {
-      // Generate thumbnail and cache it
-      const loadingTask = pdfjsLib.getDocument({
-        data: atob(doc.file.data.split(",")[1])
-      });
-
-      loadingTask.promise.then(pdf => {
-        pdf.getPage(1).then(page => {
-          const viewport = page.getViewport({ scale: 0.3 });
-          const ctx = canvas.getContext("2d");
-          canvas.height = viewport.height;
-          canvas.width = viewport.width;
-
-          page.render({ canvasContext: ctx, viewport: viewport }).promise.then(() => {
-            // SAVE THUMBNAIL 
-            const thumbData = canvas.toDataURL("image/png");
-            doc.pdfThumb = thumbData;   // cached
-            updateDocument(doc.id, { pdfThumb: thumbData }); // DB update
-          });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        page.render({ canvasContext: ctx, viewport }).promise.then(() => {
+          const thumbData = canvas.toDataURL("image/png");
+          doc.pdfThumb = thumbData;
+          updateDocument(doc.id, { pdfThumb: thumbData });
+          const img = card.querySelector(".doc-thumb");
+          if (img) img.src = thumbData;
         });
       });
-    }
-
-    // Download Link
-    const downloadLink = document.createElement("a");
-    downloadLink.href = doc.file.data;
-    downloadLink.download = doc.file.name;
-    downloadLink.textContent = `Download ${doc.file.name}`;
-    downloadLink.style.display = "inline-block";
-    downloadLink.style.marginTop = "6px";
-    downloadLink.style.color = "#8ab4ff";
-    chatbox.appendChild(downloadLink);
-
-    return;
+    });
   }
 
-  const link = document.createElement("a");
-  link.href = doc.file.data;
-  link.download = doc.file.name;
-  link.textContent = `Download ${doc.file.name}`;
-  link.style.display = "inline-block";
-  link.style.marginTop = "6px";
-  link.style.color = "#8ab4ff";
-  chatbox.appendChild(link);
+  container.appendChild(card);
 }
 
 function updateDocument(id, updates) {
@@ -211,6 +168,9 @@ function updateDocument(id, updates) {
 
 // Helper Functions
 function addMessage(content, sender) {
+  const wrapper = document.createElement('div');
+  wrapper.className = `message-wrap ${sender === 'user' ? 'user' : 'bot'}`;
+
   const div = document.createElement('div');
   div.className = sender === 'user' ? 'user-message' : 'bot-message';
 
@@ -221,7 +181,13 @@ function addMessage(content, sender) {
     div.textContent = content;
   }
 
-  chatbox.appendChild(div);
+  const time = document.createElement('span');
+  time.className = 'message-time';
+  time.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  wrapper.appendChild(div);
+  wrapper.appendChild(time);
+  chatbox.appendChild(wrapper);
 
   // Auto-scroll
   setTimeout(() => {
@@ -229,10 +195,56 @@ function addMessage(content, sender) {
   }, 1000);
 }
 
+function renderDocsPanel() {
+  if (!docsPanelList) return;
+  docsPanelList.innerHTML = "";
+
+  if (vault.length === 0) {
+    docsPanelList.innerHTML = "<p style='color:#a7afc3;'>No documents yet.</p>";
+    return;
+  }
+
+  vault.forEach(doc => {
+    const card = document.createElement("div");
+    card.className = "doc-card";
+    const date = doc.createdAt ? new Date(doc.createdAt).toLocaleDateString() : "No date";
+    card.innerHTML = `
+      <div>
+        <div class="doc-card-title">📁 ${doc.name}</div>
+        <small>${date}</small>
+      </div>
+      <button class="edit-btn" data-id="${doc.id}">Edit</button>
+    `;
+    docsPanelList.appendChild(card);
+  });
+}
+
+menuToggleBtn?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  utilitiesMenu.classList.toggle("open");
+});
+actionsMenuBtn?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  actionsMenu.classList.toggle("open");
+});
+document.addEventListener("click", () => {
+  utilitiesMenu?.classList.remove("open");
+  actionsMenu?.classList.remove("open");
+});
+navItems.forEach(item => {
+  item.addEventListener("click", () => {
+    navItems.forEach(n => n.classList.remove("active"));
+    item.classList.add("active");
+  });
+});
+attachBtn?.addEventListener("click", () => addDocBtn.click());
+
+
 
 let vault = [];
 (async () => {
   vault = await getAllDocs();
+  renderDocsPanel();
 })();
 
 
@@ -313,7 +325,8 @@ if (intentWords.some(w => lower.includes(w))) {
   if (doc.info) reply += `<br>${doc.info}`;
   addMessage(reply, "bot");
 
-  renderFile(doc);
+  const lastMsg = chatbox.lastElementChild;
+  renderFile(doc, lastMsg);
 
 });
 
@@ -352,7 +365,8 @@ if (showAllCmds.some(cmd => lower === cmd || lower.includes(cmd))) {
     addMessage(reply, 'bot');
 
     // FILE HANDLING
-    renderFile(doc);
+    const lastMsg = chatbox.lastElementChild;
+  renderFile(doc, lastMsg);
 
   });
 
@@ -368,7 +382,8 @@ if (showAllCmds.some(cmd => lower === cmd || lower.includes(cmd))) {
         if (doc.info) reply += `<br>${doc.info}`;
         addMessage(reply, 'bot');
 
-        renderFile(doc);
+        const lastMsg = chatbox.lastElementChild;
+  renderFile(doc, lastMsg);
 
       });
 
@@ -459,6 +474,7 @@ await waitForTx(tx);
 
 // Reload vault so array matches DB contents
 vault = await getAllDocs();
+renderDocsPanel();
 
 popup.style.display = "none";
 saveDocBtn.removeAttribute("data-edit-id");
@@ -471,9 +487,10 @@ saveDocBtn.removeAttribute("data-edit-id");
 }
 
 //add
-  const newDoc = { name, value, info, file: fileData };
+  const newDoc = { name, value, info, file: fileData, createdAt: new Date().toISOString() };
   await saveDocToDB(newDoc);
   vault = await getAllDocs();
+  renderDocsPanel();
   addMessage(`${name} was safely stored to vault.`, "bot");
   popup.style.display = "none";
   showToast("Document saved!", "success");
@@ -491,6 +508,7 @@ clearBtn.onclick = async () => {
   if (confirm('Are you sure you want to clear the vault?')) {
     await clearVaultDB();
     vault = [];
+    renderDocsPanel();
     addMessage('Vault cleared successfully.', 'bot');
     showToast('Vault cleared', 'success');
 
@@ -556,7 +574,8 @@ importFile.onchange = async (e) => {
           name: data[i].name || "Unnamed",
           value: data[i].value || "",
           info: data[i].info || "",
-          file: data[i].file || null
+          file: data[i].file || null,
+          createdAt: data[i].createdAt || new Date().toISOString()
         });
 
         const percent = Math.round(((i + 1) / data.length) * 100);
@@ -565,6 +584,7 @@ importFile.onchange = async (e) => {
       }
 
       vault = await getAllDocs();
+      renderDocsPanel();
 
       setTimeout(() => {
       loader.style.display = "none";
@@ -601,6 +621,26 @@ window.addEventListener("load", () => {
     "bot"
   );
 });
+
+
+function openEditDocument(id) {
+  const db = indexedDB.open(DB_NAME, DB_VERSION);
+  db.onsuccess = () => {
+    const store = db.result.transaction(STORE_NAME, "readonly").objectStore(STORE_NAME);
+    const req = store.get(Number(id));
+    req.onsuccess = () => {
+      const doc = req.result;
+      if (!doc) return;
+      document.getElementById("docName").value = doc.name;
+      document.getElementById("docValue").value = doc.value;
+      document.getElementById("docInfo").value = doc.info || "";
+      document.getElementById("docFile").value = "";
+      saveDocBtn.setAttribute("data-edit-id", id);
+      document.getElementById("editPopup").style.display = "none";
+      popup.style.display = "flex";
+    };
+  };
+}
 
 document.getElementById("editDocsBtn").onclick = async () => {
     const db = await openDB();
@@ -664,6 +704,7 @@ document.getElementById("editDocsList").addEventListener("click", async (e) => {
   if (itemEl) itemEl.remove();
 
   vault = await getAllDocs();
+  renderDocsPanel();
 
   showToast("Document deleted!", "success");
   return;
@@ -673,32 +714,18 @@ document.getElementById("editDocsList").addEventListener("click", async (e) => {
     // EDIT BUTTON
     if (target.classList.contains("edit-btn")) {
         const id = Number(target.dataset.id);
-
-        const db = await openDB();
-        const store = db.transaction(STORE_NAME, "readonly").objectStore(STORE_NAME);
-        const req = store.get(id);
-
-        req.onsuccess = () => {
-            const doc = req.result;
-
-            // Fill popup fields
-            document.getElementById("docName").value = doc.name;
-            document.getElementById("docValue").value = doc.value;
-            document.getElementById("docInfo").value = doc.info || "";
-            document.getElementById("docFile").value = "";
-
-            // Mark popup as EDIT MODE
-            saveDocBtn.setAttribute("data-edit-id", id);
-
-            // Close edit list
-            document.getElementById("editPopup").style.display = "none";
-
-            // Open form popup
-            popup.style.display = "flex";
-        };
-
+        openEditDocument(id);
         return;
     }
+});
+
+
+
+docsPanelList?.addEventListener("click", (e) => {
+  const target = e.target;
+  if (target.classList.contains("edit-btn")) {
+    openEditDocument(target.dataset.id);
+  }
 });
 
 // About popup
