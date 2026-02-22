@@ -932,7 +932,7 @@ closeHelp.onclick = () => {
 };
 
 const LOCAL_VERSION = "2";
-const REMOTE_VERSION_URL = "https://raw.githubusercontent.com/WorkofAditya/ChatBot/refs/heads/Beta/version.txt";
+const REMOTE_VERSION_URL = "https://raw.githubusercontent.com/WorkofAditya/ChatBot/refs/heads/main/version.txt";
 
 let latestRemoteVersion = null;
 
