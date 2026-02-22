@@ -11,35 +11,65 @@
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc = "js/pdf.worker.min.js";
 </script>
-
 </head>
 <body>
-<!-- MAIN VAULT CONTAINER -->
-<div class="vault-container">
-  <h1>Chatbot</h1>
-  <div class="vault-toolbar">
-    <button id="editDocsBtn" type="button" title="Edit Documents">Manage</button>
-    <button id="aboutBtn" class="toolbar-btn">About</button>
-    <button id="helpBtn">?</button>
-  </div>
-  <div class="chatbox" id="chatbox">
-    <div class="typing-indicator" id="typingIndicator">
-      <span></span><span></span><span></span>
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="brand-block">
+      <div class="brand-avatar">C</div>
+      <div>
+        <h1>ChatBot Vault</h1>
+        <p>Secure local assistant</p>
+      </div>
     </div>
-  </div>
-  <div class="input-area">
-    <button id="addDocBtn" title="Add Document">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
-        <path d="M12 5v14m-7-7h14" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <input type="text" id="userInput" placeholder="Type your query...">
-    <button id="sendBtn" title="Send">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M12 5L6 11H10V19H14V11H18L12 5Z" fill="#141414"/>
-      </svg>
-    </button>
-  </div>
+
+    <div class="sidebar-actions">
+      <button id="addDocBtn" title="Add Document" class="icon-btn">＋</button>
+      <button id="editDocsBtn" type="button" title="Documents" class="ghost-btn">Documents</button>
+      <button id="aboutBtn" class="ghost-btn">About</button>
+      <button id="helpBtn" class="ghost-btn">Guide</button>
+    </div>
+  </aside>
+
+  <main class="app-main">
+    <header class="chat-header">
+      <div>
+        <h2>Chat</h2>
+        <p>Ask for any saved document instantly</p>
+      </div>
+    </header>
+
+    <div class="chat-scroll" id="chatbox">
+      <div class="typing-indicator" id="typingIndicator">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="chat-composer">
+      <input type="text" id="userInput" placeholder="Type your query...">
+      <button id="sendBtn" title="Send">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 5L6 11H10V19H14V11H18L12 5Z" fill="#141414"/>
+        </svg>
+      </button>
+    </div>
+  </main>
+
+  <aside class="app-docs" id="docsPanel">
+    <div class="docs-header-row">
+      <h3>Documents</h3>
+      <button id="closeDocsPanel" class="icon-btn" title="Close">×</button>
+    </div>
+    <p class="docs-subtitle">Your Files</p>
+    <div id="editDocsList" class="edit-doc-list"></div>
+
+    <div class="edit-actions">
+      <button id="exportBtn">Export</button>
+      <button id="importBtn">Import</button>
+      <button id="clearBtn">Delete all</button>
+    </div>
+  </aside>
+
   <input type="file" id="importFile" accept="application/json" style="display:none;">
 </div>
 
@@ -59,16 +89,12 @@
   </div>
 </div>
 
-<!-- EDIT DOCUMENT POPUP -->
 <div class="popup" id="editPopup">
   <div class="popup-content" style="max-height: 420px; overflow-y: auto;">
     <h2>Edit Documents</h2>
-    <div id="editDocsList" class="edit-doc-list"></div>
+    <div class="edit-doc-list"></div>
   </div>
   <div class="edit-actions">
-    <button id="exportBtn">Export</button>
-    <button id="importBtn">Import</button>
-    <button id="clearBtn">Delete all</button>
     <button id="closeEditPopup">Close</button>
   </div>
 </div>
@@ -90,7 +116,7 @@
     </div>
 
     <p class="about-dev">Developed by <b>Adityasinh Sodha</b></p>
-        <p class="about-version">Version: <b>v2.0.1</b></p>
+    <p class="about-version">Version: <b>v2.0.1</b></p>
   </div>
 </div>
 

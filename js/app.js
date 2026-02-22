@@ -76,6 +76,8 @@ const clearBtn = document.getElementById('clearBtn');
 const exportBtn = document.getElementById('exportBtn');
 const importBtn = document.getElementById('importBtn');
 const importFile = document.getElementById('importFile');
+const docsPanel = document.getElementById('docsPanel');
+const closeDocsPanel = document.getElementById('closeDocsPanel');
 
 async function generatePdfThumbnail(pdfDataURL) {
   const pdf = await pdfjsLib.getDocument({ url: pdfDataURL }).promise;
@@ -233,12 +235,38 @@ function addMessage(content, sender) {
 let vault = [];
 (async () => {
   vault = await getAllDocs();
+  renderDocsPanel(vault);
 })();
 
 
 function findDoc(query) {
   query = query.toLowerCase();
   return vault.filter(d => d.name.toLowerCase().includes(query));
+}
+
+function renderDocsPanel(docs = vault) {
+  const list = document.getElementById("editDocsList");
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  if (!docs.length) {
+    list.innerHTML = '<div class="edit-doc-item"><span><strong>No documents yet</strong></span></div>';
+    return;
+  }
+
+  docs.forEach((doc) => {
+    const item = document.createElement("div");
+    item.className = "edit-doc-item";
+    item.innerHTML = `
+      <span><strong>${doc.name}</strong></span>
+      <div class="edit-buttons">
+        <button class="edit-btn" data-id="${doc.id}">Edit</button>
+        <button class="delete-btn" data-id="${doc.id}">Delete</button>
+      </div>
+    `;
+    list.appendChild(item);
+  });
 }
 
 // Typing Animation
@@ -462,8 +490,7 @@ vault = await getAllDocs();
 
 popup.style.display = "none";
 saveDocBtn.removeAttribute("data-edit-id");
-
-
+renderDocsPanel(vault);
 
   addMessage(`${name} updated successfully.`, "bot");
   showToast("Document updated!", "success");
@@ -476,6 +503,7 @@ saveDocBtn.removeAttribute("data-edit-id");
   vault = await getAllDocs();
   addMessage(`${name} was safely stored to vault.`, "bot");
   popup.style.display = "none";
+  renderDocsPanel(vault);
   showToast("Document saved!", "success");
 
   document.getElementById("docName").value = "";
@@ -603,34 +631,14 @@ window.addEventListener("load", () => {
 });
 
 document.getElementById("editDocsBtn").onclick = async () => {
-    const db = await openDB();
-    const tx = db.transaction(STORE_NAME, "readonly");
-    const store = tx.objectStore(STORE_NAME);
-    const req = store.getAll();
-
-    req.onsuccess = () => {
-        const docs = req.result;
-        const list = document.getElementById("editDocsList");
-        list.innerHTML = "";
-
-        docs.forEach(doc => {
-            const item = document.createElement("div");
-            item.className = "edit-doc-item";
-
-            item.innerHTML = `
-                <span><strong>${doc.name}</strong></span>
-                <div class="edit-buttons">
-                    <button class="edit-btn" data-id="${doc.id}">Edit</button>
-                    <button class="delete-btn" data-id="${doc.id}">Delete</button>
-                </div>
-            `;
-
-            list.appendChild(item);
-        });
-
-        document.getElementById("editPopup").style.display = "flex";
-    };
+  vault = await getAllDocs();
+  renderDocsPanel(vault);
+  docsPanel?.classList.add("open");
 };
+
+closeDocsPanel?.addEventListener("click", () => {
+  docsPanel?.classList.remove("open");
+});
 
 document.getElementById("closeEditPopup").onclick = () => {
     document.getElementById("editPopup").style.display = "none";
@@ -660,10 +668,8 @@ document.getElementById("editDocsList").addEventListener("click", async (e) => {
 
   await waitForTx(tx);
 
-  const itemEl = target.closest('.edit-doc-item');
-  if (itemEl) itemEl.remove();
-
   vault = await getAllDocs();
+  renderDocsPanel(vault);
 
   showToast("Document deleted!", "success");
   return;
@@ -689,9 +695,6 @@ document.getElementById("editDocsList").addEventListener("click", async (e) => {
 
             // Mark popup as EDIT MODE
             saveDocBtn.setAttribute("data-edit-id", id);
-
-            // Close edit list
-            document.getElementById("editPopup").style.display = "none";
 
             // Open form popup
             popup.style.display = "flex";
