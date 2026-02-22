@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2026-02-22 | [6b39475](https://github.com/workofaditya/ChatBot/commit/6b39475aa838acf3158052d02c57c9c45b407499) | Update remote version URL to main branch | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
 | 2026-01-03 | [ada37f3](https://github.com/workofaditya/ChatBot/commit/ada37f3e16bfde7c50daa51ce3eff6645b97d85d) | Update logo image source in README.md | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
 | 2026-01-03 | [fbe9048](https://github.com/workofaditya/ChatBot/commit/fbe9048d2f7acd4d0f3398dc975980f07db35993) | Add files via upload | [icons/Bot.png](https://github.com/workofaditya/ChatBot/blob/main/icons/Bot.png)  |
 | 2026-01-03 | [ef4db4c](https://github.com/workofaditya/ChatBot/commit/ef4db4cd730b54b9ab61d403eca04ab87191c647) | Enhance README with project details and logo | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
