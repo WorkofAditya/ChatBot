@@ -920,7 +920,7 @@ closeHelp.onclick = () => {
   helpPopup.style.display = "none";
 };
 
-const LOCAL_VERSION = "2";
+const LOCAL_VERSION = "3";
 const REMOTE_VERSION_URL = "https://raw.githubusercontent.com/WorkofAditya/ChatBot/refs/heads/main/version.txt";
 
 let latestRemoteVersion = null;
