@@ -1001,3 +1001,13 @@ function showUpdatePopup() {
 }
 
 if (navigator.onLine) checkForAppUpdate();
+
+// Fatch app version from Github RAW
+fetch("https://raw.githubusercontent.com/WorkofAditya/ChatBot/main/version.txt")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("appVersion").textContent = data.trim();
+  })
+  .catch(() => {
+    document.getElementById("appVersion").textContent = "Unknown";
+  });
