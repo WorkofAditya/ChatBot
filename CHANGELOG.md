@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2026-03-03 | [e354ae8](https://github.com/workofaditya/ChatBot/commit/e354ae8d095caed73543b710288c794e1bc89347) | Update version number to 3 | [version.txt](https://github.com/workofaditya/ChatBot/blob/main/version.txt)  |
 | 2026-03-03 | [f35185e](https://github.com/workofaditya/ChatBot/commit/f35185e798ce3843815d3dda3555a7e5372158a3) | Update LOCAL_VERSION from 2 to 3 | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
 | 2026-03-03 | [8b1e277](https://github.com/workofaditya/ChatBot/commit/8b1e2772d8aa4582e0d24ba009ba998a40e7be03) | Add styles for file download link | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
 | 2026-03-03 | [90f36fe](https://github.com/workofaditya/ChatBot/commit/90f36feb7a5aa769e9675e7441da717d936a963f) | Refactor download link creation in renderFile function | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
