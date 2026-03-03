@@ -96,6 +96,16 @@ async function generatePdfThumbnail(pdfDataURL) {
 function renderFile(doc) {
   if (!doc.file) return;
 
+  const createDownloadLink = () => {
+    const downloadLink = document.createElement("a");
+    downloadLink.href = doc.file.data;
+    downloadLink.download = doc.file.name;
+    downloadLink.textContent = "Download";
+    downloadLink.className = "file-download-link";
+    downloadLink.setAttribute("aria-label", `Download ${doc.file.name}`);
+    return downloadLink;
+  };
+
   if (doc.file.type.startsWith("image/")) {
     const img = document.createElement("img");
     img.src = doc.file.data;
@@ -113,14 +123,7 @@ function renderFile(doc) {
 
     chatbox.appendChild(img);
 
-    const downloadLink = document.createElement("a");
-    downloadLink.href = doc.file.data;
-    downloadLink.download = doc.file.name;
-    downloadLink.textContent = `Download ${doc.file.name}`;
-    downloadLink.style.display = "inline-block";
-    downloadLink.style.marginTop = "6px";
-    downloadLink.style.color = "#8ab4ff";
-    chatbox.appendChild(downloadLink);
+    chatbox.appendChild(createDownloadLink());
     return;
   }
 
@@ -169,26 +172,12 @@ function renderFile(doc) {
     }
 
     // Download Link
-    const downloadLink = document.createElement("a");
-    downloadLink.href = doc.file.data;
-    downloadLink.download = doc.file.name;
-    downloadLink.textContent = `Download ${doc.file.name}`;
-    downloadLink.style.display = "inline-block";
-    downloadLink.style.marginTop = "6px";
-    downloadLink.style.color = "#8ab4ff";
-    chatbox.appendChild(downloadLink);
+    chatbox.appendChild(createDownloadLink());
 
     return;
   }
 
-  const link = document.createElement("a");
-  link.href = doc.file.data;
-  link.download = doc.file.name;
-  link.textContent = `Download ${doc.file.name}`;
-  link.style.display = "inline-block";
-  link.style.marginTop = "6px";
-  link.style.color = "#8ab4ff";
-  chatbox.appendChild(link);
+  chatbox.appendChild(createDownloadLink());
 }
 
 function updateDocument(id, updates) {
