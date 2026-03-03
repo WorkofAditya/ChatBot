@@ -1,4 +1,4 @@
-const APP_VERSION = "1";
+const APP_VERSION = "3";
 const CACHE_NAME = `vault-cache-v${APP_VERSION}`;
 const FILES_TO_CACHE = [
   "/index.html",
