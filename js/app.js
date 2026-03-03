@@ -925,9 +925,35 @@ const REMOTE_VERSION_URL = "https://raw.githubusercontent.com/WorkofAditya/ChatB
 
 let latestRemoteVersion = null;
 
+function parseVersion(version) {
+  return String(version)
+    .trim()
+    .split(".")
+    .map((part) => Number.parseInt(part, 10) || 0);
+}
+
+function isRemoteVersionNewer(remoteVersion, localVersion) {
+  const remote = parseVersion(remoteVersion);
+  const local = parseVersion(localVersion);
+  const maxLen = Math.max(remote.length, local.length);
+
+  for (let i = 0; i < maxLen; i++) {
+    const remotePart = remote[i] || 0;
+    const localPart = local[i] || 0;
+
+    if (remotePart > localPart) return true;
+    if (remotePart < localPart) return false;
+  }
+
+  return false;
+}
+
 function checkForAppUpdate() {
   fetch(REMOTE_VERSION_URL + "?cache=" + Date.now())
-    .then(res => res.text())
+    .then((res) => {
+      if (!res.ok) throw new Error("Failed to fetch remote version");
+      return res.text();
+    })
     .then(remote => {
       const remoteVersion = remote.trim();
       latestRemoteVersion = remoteVersion;
@@ -935,7 +961,7 @@ function checkForAppUpdate() {
       const storedVersion = localStorage.getItem("updatedVersion");
       if (storedVersion === remoteVersion) return;
 
-      if (remoteVersion > LOCAL_VERSION) {
+      if (isRemoteVersionNewer(remoteVersion, LOCAL_VERSION)) {
         showUpdatePopup();
       }
     })
@@ -951,10 +977,19 @@ function showUpdatePopup() {
     localStorage.setItem("updatedVersion", latestRemoteVersion);
 
     if ("serviceWorker" in navigator) {
-      const reg = await navigator.serviceWorker.getRegistration();
-      if (reg && reg.waiting) {
-        reg.waiting.postMessage("SKIP_WAITING");
-      }
+      const registrations = await navigator.serviceWorker.getRegistrations();
+
+      await Promise.all(
+        registrations.map(async (reg) => {
+          if (reg.waiting) reg.waiting.postMessage("SKIP_WAITING");
+          await reg.update();
+        })
+      );
+    }
+
+    if ("caches" in window) {
+      const cacheNames = await caches.keys();
+      await Promise.all(cacheNames.map((cacheName) => caches.delete(cacheName)));
     }
 
     setTimeout(() => window.location.reload(), 300);
