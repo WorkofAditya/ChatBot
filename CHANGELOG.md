@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2026-03-03 | [c8f825c](https://github.com/workofaditya/ChatBot/commit/c8f825cc4677e407667a1c00a63478c79be066a9) | Update version to 4 only for testing | [version.txt](https://github.com/workofaditya/ChatBot/blob/main/version.txt)  |
 | 2026-03-03 | [9ecf618](https://github.com/workofaditya/ChatBot/commit/9ecf618db8c627a59a00a53a78a170defeea209e) | Merge pull request #10 from WorkofAditya/Alpha |  |
 | 2026-03-03 | [534e536](https://github.com/workofaditya/ChatBot/commit/534e53646f8b49e53b939d8455a6c1a0ad618d1f) | Fix app update check and force cache refresh | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js) [service-worker.js](https://github.com/workofaditya/ChatBot/blob/main/service-worker.js)  |
 | 2026-03-03 | [e354ae8](https://github.com/workofaditya/ChatBot/commit/e354ae8d095caed73543b710288c794e1bc89347) | Update version number to 3 | [version.txt](https://github.com/workofaditya/ChatBot/blob/main/version.txt)  |
