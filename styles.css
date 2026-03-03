@@ -512,6 +512,30 @@ button:active {
   transform: scale(1.05);
 }
 
+.file-download-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  margin-top: 8px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(8, 9, 12, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgb(252, 252, 252);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.file-download-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fcfcfc;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
 .popup-actions {
   display: flex;
   justify-content: space-between; /* puts buttons at ends */
