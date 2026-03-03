@@ -1,6 +1,7 @@
 ## Unreleased
 | Date | Commit | Change | File |
 |------|--------|--------|------|
+| 2026-03-03 | [8b1e277](https://github.com/workofaditya/ChatBot/commit/8b1e2772d8aa4582e0d24ba009ba998a40e7be03) | Add styles for file download link | [styles.css](https://github.com/workofaditya/ChatBot/blob/main/styles.css)  |
 | 2026-03-03 | [90f36fe](https://github.com/workofaditya/ChatBot/commit/90f36feb7a5aa769e9675e7441da717d936a963f) | Refactor download link creation in renderFile function | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
 | 2026-02-22 | [6b39475](https://github.com/workofaditya/ChatBot/commit/6b39475aa838acf3158052d02c57c9c45b407499) | Update remote version URL to main branch | [js/app.js](https://github.com/workofaditya/ChatBot/blob/main/js/app.js)  |
 | 2026-01-03 | [ada37f3](https://github.com/workofaditya/ChatBot/commit/ada37f3e16bfde7c50daa51ce3eff6645b97d85d) | Update logo image source in README.md | [README.md](https://github.com/workofaditya/ChatBot/blob/main/README.md)  |
