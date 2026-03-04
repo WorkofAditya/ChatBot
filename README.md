@@ -3,7 +3,7 @@
     <img src="https://raw.githubusercontent.com/WorkofAditya/ChatBot/refs/heads/main/icons/Bot.png" alt="Logo"  width="150" height="150">
   </a>
  
-  # _Store it_, with [ChatBot    ](https://chatbot-b3b.pages.dev/)
+  # _Store it_, with [ChatBot](https://chatbot-b3b.pages.dev/)
 
   <p>
     Made to keep your data <strong> <b>truly <i> yours. </i></b></strong></a>
