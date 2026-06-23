@@ -1177,3 +1177,393 @@ hr {
   background: rgba(60, 110, 200, 0.24);
   color: #fff;
 }
+
+/* Professional UI refresh */
+:root {
+  color-scheme: dark;
+  --bg: #0f172a;
+  --bg-2: #111827;
+  --surface: rgba(15, 23, 42, 0.84);
+  --surface-strong: rgba(17, 24, 39, 0.94);
+  --surface-soft: rgba(30, 41, 59, 0.72);
+  --line: rgba(148, 163, 184, 0.22);
+  --line-strong: rgba(148, 163, 184, 0.36);
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --muted-strong: #cbd5e1;
+  --primary: #38bdf8;
+  --primary-2: #2563eb;
+  --accent: #a78bfa;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --shadow: 0 24px 80px rgba(2, 6, 23, 0.52);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  height: auto;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 34%),
+    radial-gradient(circle at bottom right, rgba(167, 139, 250, 0.16), transparent 32%),
+    linear-gradient(135deg, var(--bg), #020617 78%);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.vault-container {
+  position: relative;
+  width: min(100%, 520px);
+  max-width: 520px;
+  padding: 26px;
+  gap: 18px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.76));
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  text-align: left;
+}
+
+.vault-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.16), transparent 34%, rgba(167, 139, 250, 0.12));
+  opacity: 0.9;
+}
+
+.vault-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+.vault-container:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 28px 90px rgba(2, 6, 23, 0.62), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-mark {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-2) 55%, var(--accent));
+  color: white;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  box-shadow: 0 16px 34px rgba(37, 99, 235, 0.36);
+}
+
+.brand-copy {
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.vault-container h1 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1.75rem, 5vw, 2.35rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  text-shadow: none;
+}
+
+.app-subtitle {
+  margin: 8px 0 0;
+  color: var(--muted-strong);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.vault-toolbar {
+  justify-content: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 8px;
+  background: rgba(15, 23, 42, 0.64);
+  border-color: var(--line);
+  border-radius: 16px;
+}
+
+button,
+.vault-toolbar button,
+.popup-actions button,
+.edit-actions button {
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(51, 65, 85, 0.9), rgba(30, 41, 59, 0.9));
+  color: var(--text);
+  border-radius: 12px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  box-shadow: 0 8px 18px rgba(2, 6, 23, 0.22);
+}
+
+button:hover,
+.vault-toolbar button:hover,
+.popup-actions button:hover,
+.edit-actions button:hover {
+  border-color: rgba(56, 189, 248, 0.58);
+  background: linear-gradient(180deg, rgba(14, 165, 233, 0.24), rgba(37, 99, 235, 0.18));
+  box-shadow: 0 12px 28px rgba(14, 165, 233, 0.18);
+  color: #ffffff;
+}
+
+.chatbox {
+  position: relative;
+  height: min(46vh, 380px);
+  min-height: 320px;
+  padding: 18px;
+  background: rgba(2, 6, 23, 0.44);
+  border-color: var(--line);
+  border-radius: 22px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.empty-state {
+  margin: auto;
+  max-width: 280px;
+  align-self: center;
+  text-align: center;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.empty-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--primary);
+  border: 1px solid rgba(56, 189, 248, 0.24);
+}
+
+.empty-state strong {
+  display: block;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.empty-state p {
+  margin: 6px 0 0;
+  font-size: 0.88rem;
+}
+
+.chatbox:has(.user-message) .empty-state,
+.chatbox:has(.bot-message) .empty-state,
+.chatbox:has(.typing) .empty-state {
+  display: none;
+}
+
+.user-message,
+.bot-message {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 12px 14px;
+  font-size: 0.94rem;
+  line-height: 1.55;
+  box-shadow: 0 12px 26px rgba(2, 6, 23, 0.22);
+}
+
+.user-message {
+  background: linear-gradient(135deg, var(--primary-2), #0ea5e9);
+  color: white;
+  border-bottom-right-radius: 6px;
+}
+
+.bot-message,
+.typing,
+.typing-indicator {
+  background: rgba(30, 41, 59, 0.86);
+  color: var(--muted-strong);
+  border-bottom-left-radius: 6px;
+}
+
+.input-area {
+  gap: 10px;
+  margin-top: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(2, 6, 23, 0.42);
+}
+
+#userInput,
+.input-area input {
+  min-height: 46px;
+  padding: 0 54px 0 16px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.76);
+  color: var(--text);
+  box-shadow: none;
+}
+
+#userInput::placeholder,
+.popup-content input::placeholder,
+.popup-content textarea::placeholder {
+  color: #64748b;
+}
+
+.input-area input:focus,
+.popup-content input:focus,
+.popup-content textarea:focus {
+  border-color: rgba(56, 189, 248, 0.58);
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12);
+  background: rgba(15, 23, 42, 0.96);
+}
+
+#addDocBtn {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  margin-right: 0;
+  background: rgba(15, 23, 42, 0.82);
+  border-color: var(--line);
+}
+
+#sendBtn {
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.28);
+}
+
+#sendBtn:hover {
+  background: linear-gradient(135deg, #7dd3fc, var(--primary-2));
+}
+
+.popup,
+.about-popup,
+#helpPopup,
+#imgModal,
+#pdfModal {
+  background: rgba(2, 6, 23, 0.74);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.popup-content,
+.about-box,
+.edit-actions {
+  background: var(--surface-strong);
+  border-color: var(--line);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  color: var(--text);
+}
+
+.popup-content h2,
+.about-title,
+#changelogBody h1,
+#changelogBody h2,
+#changelogBody h3,
+#helpBody h1,
+#helpBody h2,
+#helpBody h3 {
+  color: var(--text);
+  text-shadow: none;
+  letter-spacing: -0.03em;
+}
+
+.popup-content input,
+.popup-content textarea,
+#changelogBody,
+.edit-doc-item,
+#helpBody pre {
+  background: rgba(15, 23, 42, 0.72);
+  border-color: var(--line);
+  color: var(--text);
+}
+
+.about-links-row a,
+.file-download-link {
+  color: #7dd3fc;
+  border-color: rgba(56, 189, 248, 0.22);
+  background: rgba(56, 189, 248, 0.08);
+}
+
+#exportBtn { border-color: rgba(34, 197, 94, 0.35); background: rgba(34, 197, 94, 0.14); }
+#importBtn { border-color: rgba(56, 189, 248, 0.35); background: rgba(56, 189, 248, 0.14); }
+#clearBtn { border-color: rgba(239, 68, 68, 0.36); background: rgba(239, 68, 68, 0.14); }
+#closeEditPopup { border-color: rgba(245, 158, 11, 0.36); background: rgba(245, 158, 11, 0.14); }
+
+.toast {
+  background: rgba(15, 23, 42, 0.94);
+  border-color: var(--line);
+  border-radius: 14px;
+  box-shadow: 0 16px 36px rgba(2, 6, 23, 0.34);
+}
+
+@media (max-width: 560px) {
+  body {
+    padding: 14px;
+    align-items: stretch;
+  }
+
+  .vault-container {
+    width: 100%;
+    min-height: calc(100vh - 28px);
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .app-header {
+    align-items: flex-start;
+  }
+
+  .brand-mark {
+    width: 50px;
+    height: 50px;
+    flex-basis: 50px;
+  }
+
+  .vault-toolbar,
+  .edit-actions,
+  .about-links-row {
+    flex-wrap: wrap;
+  }
+
+  .vault-toolbar button,
+  .edit-actions button,
+  .about-links-row a {
+    flex: 1 1 auto;
+  }
+
+  .chatbox {
+    min-height: 360px;
+    height: auto;
+    flex: 1;
+  }
+}
+
+.chatbox.has-messages .empty-state {
+  display: none;
+}

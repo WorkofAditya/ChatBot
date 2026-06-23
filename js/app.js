@@ -211,6 +211,7 @@ function addMessage(content, sender) {
   }
 
   chatbox.appendChild(div);
+  chatbox.classList.add('has-messages');
 
   // Auto-scroll
   setTimeout(() => {

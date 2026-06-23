@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chatbot</title>
+<title>ChatBot Vault</title>
+<meta name="theme-color" content="#0f172a">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="icons/favicon.ico" type="image/ico">
 <link rel="manifest" href="manifest.json" />
@@ -16,13 +17,25 @@
 <body>
 <!-- MAIN VAULT CONTAINER -->
 <div class="vault-container">
-  <h1>Chatbot</h1>
-  <div class="vault-toolbar">
-    <button id="editDocsBtn" type="button" title="Edit Documents">Manage</button>
+  <header class="app-header">
+    <div class="brand-mark" aria-hidden="true">CB</div>
+    <div class="brand-copy">
+      <p class="eyebrow">Private AI Vault</p>
+      <h1>ChatBot</h1>
+      <p class="app-subtitle">Secure local knowledge base for your documents and notes.</p>
+    </div>
+  </header>
+  <div class="vault-toolbar" aria-label="Primary actions">
+    <button id="editDocsBtn" type="button" title="Edit Documents">Manage Vault</button>
     <button id="aboutBtn" class="toolbar-btn">About</button>
-    <button id="helpBtn">?</button>
+    <button id="helpBtn" aria-label="Open help">Help</button>
   </div>
-  <div class="chatbox" id="chatbox">
+  <div class="chatbox" id="chatbox" aria-live="polite">
+    <div class="empty-state">
+      <span class="empty-icon">✦</span>
+      <strong>Ready when you are</strong>
+      <p>Ask a question or add documents to build your private assistant.</p>
+    </div>
     <div class="typing-indicator" id="typingIndicator">
       <span></span><span></span><span></span>
     </div>
@@ -33,7 +46,7 @@
         <path d="M12 5v14m-7-7h14" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
-    <input type="text" id="userInput" placeholder="Type your query...">
+    <input type="text" id="userInput" placeholder="Ask about your saved documents..." aria-label="Message input">
     <button id="sendBtn" title="Send">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path d="M12 5L6 11H10V19H14V11H18L12 5Z" fill="#141414"/>
