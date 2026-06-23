@@ -411,10 +411,45 @@ button:active {
 }
 
 @media (max-width: 500px) {
-  .vault-container {
-    width: 92%;
-    padding: 24px 20px;
+  body {
+    align-items: stretch;
+    justify-content: stretch;
+    min-height: 100vh;
+    min-height: 100dvh;
   }
+
+  .vault-container {
+    width: 100%;
+    max-width: none;
+    min-height: 100vh;
+    min-height: 100dvh;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 0;
+    padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+    box-shadow: none;
+    gap: 12px;
+  }
+
+  .vault-container:hover {
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .vault-container h1 {
+    margin: 0;
+  }
+
+  .vault-toolbar {
+    margin-bottom: 0;
+  }
+
+  .chatbox {
+    flex: 1;
+    min-height: 0;
+    height: auto;
+  }
+
   .popup-content {
     max-width: 92%;
   }
