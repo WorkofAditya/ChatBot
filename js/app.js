@@ -76,6 +76,48 @@ const clearBtn = document.getElementById('clearBtn');
 const exportBtn = document.getElementById('exportBtn');
 const importBtn = document.getElementById('importBtn');
 const importFile = document.getElementById('importFile');
+const collectionList = document.getElementById('collectionList');
+const collectionPopup = document.getElementById('collectionPopup');
+const collectionName = document.getElementById('collectionName');
+const docCollection = document.getElementById('docCollection');
+const collectionFilterBtn = document.getElementById('collectionFilterBtn');
+const collectionFilterMenu = document.getElementById('collectionFilterMenu');
+const filterLabel = document.getElementById('filterLabel');
+const collectionSidebar = document.getElementById('collectionSidebar');
+
+const COLLECTIONS_KEY = 'vaultCollections';
+let collections = JSON.parse(localStorage.getItem(COLLECTIONS_KEY) || '[]');
+let selectedCollectionIds = new Set();
+
+function persistCollections() {
+  localStorage.setItem(COLLECTIONS_KEY, JSON.stringify(collections));
+}
+
+function collectionNameFor(id) {
+  return collections.find(collection => collection.id === id)?.name || 'Unfiled';
+}
+
+function renderCollectionControls() {
+  const counts = vault.reduce((result, doc) => {
+    if (doc.collectionId) result[doc.collectionId] = (result[doc.collectionId] || 0) + 1;
+    return result;
+  }, {});
+  collectionList.innerHTML = '';
+  collections.forEach(collection => {
+    const item = document.createElement('div');
+    item.className = `collection-item${selectedCollectionIds.has(collection.id) ? ' is-selected' : ''}`;
+    item.innerHTML = `<button class="collection-select" type="button" data-collection-id="${collection.id}"><span class="collection-name">${collection.name}</span><span class="collection-count">${counts[collection.id] || 0}</span></button><button class="collection-delete" type="button" data-delete-collection-id="${collection.id}" aria-label="Delete ${collection.name}" title="Delete collection">×</button>`;
+    collectionList.appendChild(item);
+  });
+  docCollection.innerHTML = '<option value="">Unfiled</option>' + collections.map(collection => `<option value="${collection.id}">${collection.name}</option>`).join('');
+  const isGlobal = selectedCollectionIds.size === 0;
+  filterLabel.textContent = isGlobal ? 'All collections' : `${selectedCollectionIds.size} collection${selectedCollectionIds.size === 1 ? '' : 's'}`;
+  collectionFilterMenu.innerHTML = `<label class="filter-option"><input type="checkbox" id="globalCollectionFilter" ${isGlobal ? 'checked' : ''}> All collections</label><div class="filter-divider"></div>${collections.length ? collections.map(collection => `<label class="filter-option"><input type="checkbox" data-filter-collection-id="${collection.id}" ${selectedCollectionIds.has(collection.id) ? 'checked' : ''}> ${collection.name}</label>`).join('') : '<p class="filter-empty">Create a collection to narrow your search.</p>'}`;
+}
+
+function isDocumentInSearchScope(doc) {
+  return selectedCollectionIds.size === 0 || selectedCollectionIds.has(doc.collectionId);
+}
 
 async function generatePdfThumbnail(pdfDataURL) {
   const pdf = await pdfjsLib.getDocument({ url: pdfDataURL }).promise;
@@ -222,12 +264,13 @@ function addMessage(content, sender) {
 let vault = [];
 (async () => {
   vault = await getAllDocs();
+  renderCollectionControls();
 })();
 
 
 function findDoc(query) {
   query = query.toLowerCase();
-  return vault.filter(d => d.name.toLowerCase().includes(query));
+  return vault.filter(d => isDocumentInSearchScope(d) && d.name.toLowerCase().includes(query));
 }
 
 // Typing Animation
@@ -328,14 +371,16 @@ const showAllCmds = [
 
 if (showAllCmds.some(cmd => lower === cmd || lower.includes(cmd))) {
 
-  if (vault.length === 0) {
+  const scopedVault = vault.filter(isDocumentInSearchScope);
+
+  if (scopedVault.length === 0) {
     addMessage("Your vault is empty. Add a document first!", "bot");
     return;
   }
 
-  addMessage(`You have ${vault.length} stored documents:`, "bot");
+  addMessage(`You have ${scopedVault.length} stored documents in this search scope:`, "bot");
 
-  vault.forEach((doc, index) => {
+  scopedVault.forEach((doc, index) => {
     let reply = `${index + 1}. ${doc.name}: ${doc.value}`;
     if (doc.info) reply += `<br>${doc.info}`;
     addMessage(reply, 'bot');
@@ -379,6 +424,79 @@ userInput.addEventListener("keypress", (e) => {
   }
 });
 
+collectionFilterBtn.onclick = () => {
+  const isOpen = !collectionFilterMenu.hidden;
+  collectionFilterMenu.hidden = isOpen;
+  collectionFilterBtn.setAttribute('aria-expanded', String(!isOpen));
+};
+
+collectionFilterMenu.addEventListener('change', (event) => {
+  const input = event.target;
+  if (input.id === 'globalCollectionFilter' && input.checked) {
+    selectedCollectionIds.clear();
+  } else if (input.dataset.filterCollectionId) {
+    if (input.checked) selectedCollectionIds.add(input.dataset.filterCollectionId);
+    else selectedCollectionIds.delete(input.dataset.filterCollectionId);
+  }
+  renderCollectionControls();
+});
+
+document.addEventListener('click', (event) => {
+  if (!event.target.closest('.collection-filter')) {
+    collectionFilterMenu.hidden = true;
+    collectionFilterBtn.setAttribute('aria-expanded', 'false');
+  }
+});
+
+document.getElementById('newCollectionBtn').onclick = () => {
+  collectionName.value = '';
+  collectionPopup.style.display = 'flex';
+  setTimeout(() => collectionName.focus(), 0);
+};
+document.getElementById('cancelCollectionBtn').onclick = () => (collectionPopup.style.display = 'none');
+document.getElementById('saveCollectionBtn').onclick = () => {
+  const name = collectionName.value.trim();
+  if (!name) return showToast('Collection name is required', 'error');
+  if (collections.some(collection => collection.name.toLowerCase() === name.toLowerCase())) return showToast('A collection with that name already exists', 'error');
+  const collection = { id: crypto.randomUUID(), name };
+  collections.push(collection);
+  persistCollections();
+  selectedCollectionIds = new Set([collection.id]);
+  renderCollectionControls();
+  collectionPopup.style.display = 'none';
+  showToast('Collection created', 'success');
+};
+
+collectionList.addEventListener('click', async (event) => {
+  const selectButton = event.target.closest('[data-collection-id]');
+  const deleteButton = event.target.closest('[data-delete-collection-id]');
+  if (selectButton) {
+    const id = selectButton.dataset.collectionId;
+    selectedCollectionIds = new Set(selectedCollectionIds.has(id) ? [] : [id]);
+    renderCollectionControls();
+    collectionSidebar.classList.remove('is-open');
+  }
+  if (deleteButton) {
+    const id = deleteButton.dataset.deleteCollectionId;
+    const collection = collections.find(item => item.id === id);
+    if (!collection || !confirm(`Delete “${collection.name}”? Its documents will remain unfiled.`)) return;
+    collections = collections.filter(item => item.id !== id);
+    selectedCollectionIds.delete(id);
+    const db = await openDB();
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    const store = tx.objectStore(STORE_NAME);
+    vault.filter(doc => doc.collectionId === id).forEach(doc => store.put({ ...doc, collectionId: '' }));
+    await waitForTx(tx);
+    vault = await getAllDocs();
+    persistCollections();
+    renderCollectionControls();
+    showToast('Collection deleted', 'success');
+  }
+});
+
+document.getElementById('sidebarToggle').onclick = () => collectionSidebar.classList.add('is-open');
+document.getElementById('closeSidebarBtn').onclick = () => collectionSidebar.classList.remove('is-open');
+
 
 // Add Document Popup
 addDocBtn.onclick = () => {
@@ -390,6 +508,7 @@ addDocBtn.onclick = () => {
   document.getElementById("docValue").value = "";
   document.getElementById("docInfo").value = "";
   document.getElementById("docFile").value = "";
+  docCollection.value = selectedCollectionIds.size === 1 ? [...selectedCollectionIds][0] : '';
 
   // Open popup
   popup.style.display = "flex";
@@ -404,6 +523,7 @@ saveDocBtn.onclick = async () => {
   const info = document.getElementById("docInfo").value.trim();
   const fileInput = document.getElementById("docFile");
   const file = fileInput.files[0];
+  const collectionId = docCollection.value;
 
   if (!name) return showToast("Document name is required", "error");
 
@@ -434,6 +554,7 @@ if (editId) {
     value,
     info,
     file: fileData ? fileData : oldDoc.file,
+    collectionId,
   };
 
   const putReq = store.put(updatedDoc);
@@ -448,6 +569,7 @@ await waitForTx(tx);
 
 // Reload vault so array matches DB contents
 vault = await getAllDocs();
+renderCollectionControls();
 
 popup.style.display = "none";
 saveDocBtn.removeAttribute("data-edit-id");
@@ -460,9 +582,10 @@ saveDocBtn.removeAttribute("data-edit-id");
 }
 
 //add
-  const newDoc = { name, value, info, file: fileData };
+  const newDoc = { name, value, info, file: fileData, collectionId };
   await saveDocToDB(newDoc);
   vault = await getAllDocs();
+  renderCollectionControls();
   addMessage(`${name} was safely stored to vault.`, "bot");
   popup.style.display = "none";
   showToast("Document saved!", "success");
@@ -503,7 +626,8 @@ exportBtn.onclick = () => {
 
   const fileName = `vault_${y}${m}${d}_${h}${ampm}.json`;
 
-  const blob = new Blob([JSON.stringify(vault, null, 2)], { type: "application/json" });
+  const backup = { version: 2, collections, documents: vault };
+  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement("a");
@@ -533,11 +657,20 @@ importFile.onchange = async (e) => {
   const reader = new FileReader();
   reader.onload = async (event) => {
     try {
-      const data = JSON.parse(event.target.result);
+      const parsed = JSON.parse(event.target.result);
+      const data = Array.isArray(parsed) ? parsed : parsed.documents;
       if (!Array.isArray(data)) {
         loader.style.display = "none";
         alert("Invalid file format.");
         return;
+      }
+
+      if (Array.isArray(parsed.collections)) {
+        const existingNames = new Set(collections.map(collection => collection.name.toLowerCase()));
+        parsed.collections.forEach(collection => {
+          if (collection?.id && collection?.name && !existingNames.has(collection.name.toLowerCase())) collections.push(collection);
+        });
+        persistCollections();
       }
 
       for (let i = 0; i < data.length; i++) {
@@ -545,7 +678,8 @@ importFile.onchange = async (e) => {
           name: data[i].name || "Unnamed",
           value: data[i].value || "",
           info: data[i].info || "",
-          file: data[i].file || null
+          file: data[i].file || null,
+          collectionId: collections.some(collection => collection.id === data[i].collectionId) ? data[i].collectionId : ''
         });
 
         const percent = Math.round(((i + 1) / data.length) * 100);
@@ -554,6 +688,7 @@ importFile.onchange = async (e) => {
       }
 
       vault = await getAllDocs();
+      renderCollectionControls();
 
       setTimeout(() => {
       loader.style.display = "none";
@@ -607,7 +742,7 @@ document.getElementById("editDocsBtn").onclick = async () => {
             item.className = "edit-doc-item";
 
             item.innerHTML = `
-                <span><strong>${doc.name}</strong></span>
+                <span><strong>${doc.name}</strong><small>${collectionNameFor(doc.collectionId)}</small></span>
                 <div class="edit-buttons">
                     <button class="edit-btn" data-id="${doc.id}">Edit</button>
                     <button class="delete-btn" data-id="${doc.id}">Delete</button>
@@ -653,6 +788,7 @@ document.getElementById("editDocsList").addEventListener("click", async (e) => {
   if (itemEl) itemEl.remove();
 
   vault = await getAllDocs();
+  renderCollectionControls();
 
   showToast("Document deleted!", "success");
   return;
@@ -675,6 +811,7 @@ document.getElementById("editDocsList").addEventListener("click", async (e) => {
             document.getElementById("docValue").value = doc.value;
             document.getElementById("docInfo").value = doc.info || "";
             document.getElementById("docFile").value = "";
+            docCollection.value = doc.collectionId || '';
 
             // Mark popup as EDIT MODE
             saveDocBtn.setAttribute("data-edit-id", id);
