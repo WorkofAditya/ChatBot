@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chatbot</title>
+<title>ChatBot — Private document vault</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="icons/favicon.ico" type="image/ico">
 <link rel="manifest" href="manifest.json" />
@@ -14,33 +14,53 @@
 
 </head>
 <body>
-<!-- MAIN VAULT CONTAINER -->
-<div class="vault-container">
-  <h1>Chatbot</h1>
-  <div class="vault-toolbar">
-    <button id="editDocsBtn" type="button" title="Edit Documents">Manage</button>
-    <button id="aboutBtn" class="toolbar-btn">About</button>
-    <button id="helpBtn">?</button>
-  </div>
+<div class="app-shell">
+  <aside class="collection-sidebar" id="collectionSidebar" aria-label="Document collections">
+    <div class="sidebar-header">
+      <div class="brand"><img class="brand-logo" src="icons/Bot.png" alt="ChatBot logo"><div class="brand-copy"><h1>ChatBot</h1><p>Your private document vault</p></div></div>
+      <button id="closeSidebarBtn" class="sidebar-close" type="button" aria-label="Close collections">×</button>
+    </div>
+    <button id="newCollectionBtn" class="new-collection-btn" type="button"><span aria-hidden="true">+</span> New collection</button>
+    <div class="sidebar-label">Collections</div>
+    <div class="collection-list" id="collectionList"></div>
+    <div class="sidebar-footer"><span class="privacy-dot" aria-hidden="true"></span> Stored only on this device</div>
+  </aside>
+  <main class="vault-container">
+  <header class="app-header">
+    <div class="header-start"><button id="sidebarToggle" class="sidebar-toggle" type="button" aria-label="Open collections"><span></span><span></span><span></span></button><div class="mobile-brand">ChatBot</div></div>
+    <nav class="vault-toolbar" aria-label="Application actions">
+      <button id="editDocsBtn" type="button" title="Manage your documents">Manage</button>
+      <button id="aboutBtn" type="button">About</button>
+      <button id="helpBtn" type="button" aria-label="Open user guide" title="User guide">?</button>
+    </nav>
+  </header>
+  <section class="search-intro" aria-labelledby="search-heading">
+    <p class="eyebrow">Document search</p>
+    <h2 id="search-heading">Find what you need, when you need it.</h2>
+    <p>Search your saved documents by the name you remember. Everything stays on this device.</p>
+  </section>
   <div class="chatbox" id="chatbox">
     <div class="typing-indicator" id="typingIndicator">
       <span></span><span></span><span></span>
     </div>
   </div>
-  <div class="input-area">
-    <button id="addDocBtn" title="Add Document">
+  <div class="composer-wrap"><div class="input-area" role="search">
+    <button id="addDocBtn" type="button" title="Add a document" aria-label="Add a document">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
         <path d="M12 5v14m-7-7h14" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
-    <input type="text" id="userInput" placeholder="Type your query...">
-    <button id="sendBtn" title="Send">
+    <input type="text" id="userInput" aria-label="Search your documents" placeholder="Search your documents..." autocomplete="off">
+    <div class="collection-filter"><button id="collectionFilterBtn" class="filter-btn" type="button" aria-haspopup="dialog" aria-expanded="false"><span id="filterLabel">All collections</span><span aria-hidden="true">⌄</span></button><div id="collectionFilterMenu" class="filter-menu" hidden></div></div>
+    <button id="sendBtn" type="button" title="Search" aria-label="Search">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path d="M12 5L6 11H10V19H14V11H18L12 5Z" fill="#141414"/>
       </svg>
     </button>
   </div>
+  </div></div>
   <input type="file" id="importFile" accept="application/json" style="display:none;">
+  </main>
 </div>
 
 <!-- ADD DOCUMENT POPUP -->
@@ -49,13 +69,26 @@
     <h2 id="popupTitle">Add Document</h2>
     <input type="text" id="docName" placeholder="Document Name">
     <input type="text" id="docValue" placeholder="Document Number / Value">
+    <label for="docCollection">Collection</label>
+    <select id="docCollection" aria-label="Document collection"></select>
     <label for="docFile">Attach File (optional):</label>
     <input type="file" id="docFile" accept=".pdf,.png,.jpg,.jpeg,.gif,.txt,.doc,.docx,.zip" />
+    <label id="removeFileOption" class="remove-file-option" hidden><input type="checkbox" id="removeExistingFile"> Remove attached file</label>
     <textarea id="docInfo" placeholder="Additional Information (optional)"></textarea>
     <div class="popup-actions">
       <button id="saveDocBtn" type="button">Save</button>
       <button id="cancelBtn" type="button">Cancel</button>
     </div>
+  </div>
+</div>
+
+<div class="popup" id="collectionPopup">
+  <div class="popup-content collection-popup-content">
+    <h2>Create collection</h2>
+    <p class="modal-description">Keep related documents together, such as personal records or family documents.</p>
+    <label for="collectionName">Collection name</label>
+    <input id="collectionName" type="text" maxlength="50" placeholder="e.g. Father's documents" autocomplete="off">
+    <div class="popup-actions"><button id="saveCollectionBtn" type="button">Create collection</button><button id="cancelCollectionBtn" type="button">Cancel</button></div>
   </div>
 </div>
 
