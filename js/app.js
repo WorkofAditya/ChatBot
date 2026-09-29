@@ -85,14 +85,18 @@ const collectionFilterMenu = document.getElementById('collectionFilterMenu');
 const filterLabel = document.getElementById('filterLabel');
 const collectionSidebar = document.getElementById('collectionSidebar');
 const searchIntro = document.querySelector('.search-intro');
+const removeFileOption = document.getElementById('removeFileOption');
+const removeExistingFile = document.getElementById('removeExistingFile');
 
 const COLLECTIONS_KEY = 'vaultCollections';
 let collections = JSON.parse(localStorage.getItem(COLLECTIONS_KEY) || '[]');
 let selectedCollectionIds = new Set();
 let expandedCollectionIds = new Set();
+let openDocumentMenuId = null;
 
 function dismissSearchIntro() {
   searchIntro.classList.add('is-dismissed');
+  document.querySelector('.vault-container').classList.add('intro-dismissed');
 }
 
 function persistCollections() {
@@ -103,19 +107,25 @@ function collectionNameFor(id) {
   return collections.find(collection => collection.id === id)?.name || 'Unfiled';
 }
 
+function documentsForCollection(id) {
+  return id === '__unfiled__' ? vault.filter(doc => !doc.collectionId) : vault.filter(doc => doc.collectionId === id);
+}
+
 function renderCollectionControls() {
   const counts = vault.reduce((result, doc) => {
     if (doc.collectionId) result[doc.collectionId] = (result[doc.collectionId] || 0) + 1;
     return result;
   }, {});
   collectionList.innerHTML = '';
-  collections.forEach(collection => {
+  const visibleCollections = [...collections, { id: '__unfiled__', name: 'Unfiled documents' }];
+  visibleCollections.forEach(collection => {
     const item = document.createElement('div');
-    const collectionDocs = vault.filter(doc => doc.collectionId === collection.id);
+    const collectionDocs = documentsForCollection(collection.id);
     const isExpanded = expandedCollectionIds.has(collection.id);
     item.className = `collection-item${selectedCollectionIds.has(collection.id) ? ' is-selected' : ''}${isExpanded ? ' is-expanded' : ''}`;
-    const documents = isExpanded ? `<div class="collection-documents">${collectionDocs.length ? collectionDocs.map(doc => `<button class="collection-document" type="button" data-document-id="${doc.id}" title="Open ${doc.name}">${doc.file?.type?.startsWith('image/') ? `<img src="${doc.file.data}" alt="">` : '<span class="document-placeholder" aria-hidden="true">⌁</span>'}<span>${doc.name}</span></button>`).join('') : '<p class="collection-empty">No documents yet</p>'}</div>` : '';
-    item.innerHTML = `<button class="collection-select" type="button" data-collection-id="${collection.id}" aria-expanded="${isExpanded}"><span class="collection-name">${collection.name}</span><span class="collection-count">${counts[collection.id] || 0}</span><span class="collection-chevron" aria-hidden="true">⌄</span></button><button class="collection-delete" type="button" data-delete-collection-id="${collection.id}" aria-label="Delete ${collection.name}" title="Delete collection">×</button>${documents}`;
+    const documents = isExpanded ? `<div class="collection-documents">${collectionDocs.length ? collectionDocs.map(doc => `<div class="collection-document-row"><button class="collection-document" type="button" data-document-id="${doc.id}" title="Open ${doc.name}">${doc.file?.type?.startsWith('image/') ? `<img src="${doc.file.data}" alt="">` : '<span class="document-placeholder" aria-hidden="true">⌁</span>'}<span>${doc.name}</span></button><button class="document-menu-toggle" type="button" data-document-menu-id="${doc.id}" aria-label="Actions for ${doc.name}" aria-expanded="${openDocumentMenuId === doc.id}">⋯</button>${openDocumentMenuId === doc.id ? `<div class="document-menu"><button type="button" data-edit-document-id="${doc.id}">Edit</button><button type="button" data-delete-document-id="${doc.id}">Delete</button></div>` : ''}</div>`).join('') : '<p class="collection-empty">No documents yet</p>'}</div>` : '';
+    const deleteCollection = collection.id === '__unfiled__' ? '' : `<button class="collection-delete" type="button" data-delete-collection-id="${collection.id}" aria-label="Delete ${collection.name}" title="Delete collection">×</button>`;
+    item.innerHTML = `<button class="collection-select" type="button" data-collection-id="${collection.id}" aria-expanded="${isExpanded}"><span class="collection-name">${collection.name}</span><span class="collection-count">${collectionDocs.length}</span><span class="collection-chevron" aria-hidden="true">⌄</span></button>${deleteCollection}${documents}`;
     collectionList.appendChild(item);
   });
   docCollection.innerHTML = '<option value="">Unfiled</option>' + collections.map(collection => `<option value="${collection.id}">${collection.name}</option>`).join('');
@@ -125,7 +135,19 @@ function renderCollectionControls() {
 }
 
 function isDocumentInSearchScope(doc) {
-  return selectedCollectionIds.size === 0 || selectedCollectionIds.has(doc.collectionId);
+  return selectedCollectionIds.size === 0 || selectedCollectionIds.has(doc.collectionId) || (selectedCollectionIds.has('__unfiled__') && !doc.collectionId);
+}
+
+function openDocumentForEditing(doc) {
+  document.getElementById("docName").value = doc.name;
+  document.getElementById("docValue").value = doc.value;
+  document.getElementById("docInfo").value = doc.info || "";
+  document.getElementById("docFile").value = "";
+  docCollection.value = doc.collectionId || '';
+  removeExistingFile.checked = false;
+  removeFileOption.hidden = !doc.file;
+  saveDocBtn.setAttribute("data-edit-id", doc.id);
+  popup.style.display = "flex";
 }
 
 async function generatePdfThumbnail(pdfDataURL) {
@@ -487,6 +509,35 @@ collectionList.addEventListener('click', async (event) => {
     else expandedCollectionIds.add(id);
     renderCollectionControls();
   }
+  const menuToggle = event.target.closest('[data-document-menu-id]');
+  if (menuToggle) {
+    const id = Number(menuToggle.dataset.documentMenuId);
+    openDocumentMenuId = openDocumentMenuId === id ? null : id;
+    renderCollectionControls();
+    return;
+  }
+  const editDocumentButton = event.target.closest('[data-edit-document-id]');
+  if (editDocumentButton) {
+    const doc = vault.find(item => item.id === Number(editDocumentButton.dataset.editDocumentId));
+    if (doc) openDocumentForEditing(doc);
+    openDocumentMenuId = null;
+    return;
+  }
+  const deleteDocumentButton = event.target.closest('[data-delete-document-id]');
+  if (deleteDocumentButton) {
+    const id = Number(deleteDocumentButton.dataset.deleteDocumentId);
+    const doc = vault.find(item => item.id === id);
+    if (!doc || !confirm(`Delete “${doc.name}”?`)) return;
+    const db = await openDB();
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    tx.objectStore(STORE_NAME).delete(id);
+    await waitForTx(tx);
+    vault = await getAllDocs();
+    openDocumentMenuId = null;
+    renderCollectionControls();
+    showToast('Document deleted', 'success');
+    return;
+  }
   const documentButton = event.target.closest('[data-document-id]');
   if (documentButton) {
     const doc = vault.find(item => item.id === Number(documentButton.dataset.documentId));
@@ -531,6 +582,8 @@ addDocBtn.onclick = () => {
   document.getElementById("docValue").value = "";
   document.getElementById("docInfo").value = "";
   document.getElementById("docFile").value = "";
+  removeExistingFile.checked = false;
+  removeFileOption.hidden = true;
   docCollection.value = selectedCollectionIds.size === 1 ? [...selectedCollectionIds][0] : '';
 
   // Open popup
@@ -547,6 +600,7 @@ saveDocBtn.onclick = async () => {
   const fileInput = document.getElementById("docFile");
   const file = fileInput.files[0];
   const collectionId = docCollection.value;
+  const shouldRemoveFile = removeExistingFile.checked;
 
   if (!name) return showToast("Document name is required", "error");
 
@@ -576,8 +630,9 @@ if (editId) {
     name,
     value,
     info,
-    file: fileData ? fileData : oldDoc.file,
+    file: fileData ? fileData : (shouldRemoveFile ? null : oldDoc.file),
     collectionId,
+    pdfThumb: fileData || shouldRemoveFile ? null : oldDoc.pdfThumb,
   };
 
   const putReq = store.put(updatedDoc);
@@ -595,6 +650,7 @@ vault = await getAllDocs();
 renderCollectionControls();
 
 popup.style.display = "none";
+removeFileOption.hidden = true;
 saveDocBtn.removeAttribute("data-edit-id");
 
 
@@ -828,22 +884,8 @@ document.getElementById("editDocsList").addEventListener("click", async (e) => {
 
         req.onsuccess = () => {
             const doc = req.result;
-
-            // Fill popup fields
-            document.getElementById("docName").value = doc.name;
-            document.getElementById("docValue").value = doc.value;
-            document.getElementById("docInfo").value = doc.info || "";
-            document.getElementById("docFile").value = "";
-            docCollection.value = doc.collectionId || '';
-
-            // Mark popup as EDIT MODE
-            saveDocBtn.setAttribute("data-edit-id", id);
-
-            // Close edit list
             document.getElementById("editPopup").style.display = "none";
-
-            // Open form popup
-            popup.style.display = "flex";
+            openDocumentForEditing(doc);
         };
 
         return;
