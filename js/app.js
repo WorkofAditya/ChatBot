@@ -84,10 +84,16 @@ const collectionFilterBtn = document.getElementById('collectionFilterBtn');
 const collectionFilterMenu = document.getElementById('collectionFilterMenu');
 const filterLabel = document.getElementById('filterLabel');
 const collectionSidebar = document.getElementById('collectionSidebar');
+const searchIntro = document.querySelector('.search-intro');
 
 const COLLECTIONS_KEY = 'vaultCollections';
 let collections = JSON.parse(localStorage.getItem(COLLECTIONS_KEY) || '[]');
 let selectedCollectionIds = new Set();
+let expandedCollectionIds = new Set();
+
+function dismissSearchIntro() {
+  searchIntro.classList.add('is-dismissed');
+}
 
 function persistCollections() {
   localStorage.setItem(COLLECTIONS_KEY, JSON.stringify(collections));
@@ -105,8 +111,11 @@ function renderCollectionControls() {
   collectionList.innerHTML = '';
   collections.forEach(collection => {
     const item = document.createElement('div');
-    item.className = `collection-item${selectedCollectionIds.has(collection.id) ? ' is-selected' : ''}`;
-    item.innerHTML = `<button class="collection-select" type="button" data-collection-id="${collection.id}"><span class="collection-name">${collection.name}</span><span class="collection-count">${counts[collection.id] || 0}</span></button><button class="collection-delete" type="button" data-delete-collection-id="${collection.id}" aria-label="Delete ${collection.name}" title="Delete collection">×</button>`;
+    const collectionDocs = vault.filter(doc => doc.collectionId === collection.id);
+    const isExpanded = expandedCollectionIds.has(collection.id);
+    item.className = `collection-item${selectedCollectionIds.has(collection.id) ? ' is-selected' : ''}${isExpanded ? ' is-expanded' : ''}`;
+    const documents = isExpanded ? `<div class="collection-documents">${collectionDocs.length ? collectionDocs.map(doc => `<button class="collection-document" type="button" data-document-id="${doc.id}" title="Open ${doc.name}">${doc.file?.type?.startsWith('image/') ? `<img src="${doc.file.data}" alt="">` : '<span class="document-placeholder" aria-hidden="true">⌁</span>'}<span>${doc.name}</span></button>`).join('') : '<p class="collection-empty">No documents yet</p>'}</div>` : '';
+    item.innerHTML = `<button class="collection-select" type="button" data-collection-id="${collection.id}" aria-expanded="${isExpanded}"><span class="collection-name">${collection.name}</span><span class="collection-count">${counts[collection.id] || 0}</span><span class="collection-chevron" aria-hidden="true">⌄</span></button><button class="collection-delete" type="button" data-delete-collection-id="${collection.id}" aria-label="Delete ${collection.name}" title="Delete collection">×</button>${documents}`;
     collectionList.appendChild(item);
   });
   docCollection.innerHTML = '<option value="">Unfiled</option>' + collections.map(collection => `<option value="${collection.id}">${collection.name}</option>`).join('');
@@ -305,6 +314,7 @@ sendBtn.onclick = () => {
   const text = userInput.value.trim();
   if (!text) return;
 
+  dismissSearchIntro();
   addMessage(text, 'user');
   userInput.value = '';
 
@@ -472,8 +482,20 @@ collectionList.addEventListener('click', async (event) => {
   const deleteButton = event.target.closest('[data-delete-collection-id]');
   if (selectButton) {
     const id = selectButton.dataset.collectionId;
-    selectedCollectionIds = new Set(selectedCollectionIds.has(id) ? [] : [id]);
+    selectedCollectionIds = new Set([id]);
+    if (expandedCollectionIds.has(id)) expandedCollectionIds.delete(id);
+    else expandedCollectionIds.add(id);
     renderCollectionControls();
+  }
+  const documentButton = event.target.closest('[data-document-id]');
+  if (documentButton) {
+    const doc = vault.find(item => item.id === Number(documentButton.dataset.documentId));
+    if (!doc) return;
+    dismissSearchIntro();
+    addMessage(`${doc.name}: ${doc.value}`, 'bot');
+    if (doc.info) addMessage(doc.info, 'bot');
+    renderFile(doc);
+    chatbox.scrollTop = chatbox.scrollHeight;
     collectionSidebar.classList.remove('is-open');
   }
   if (deleteButton) {
@@ -482,6 +504,7 @@ collectionList.addEventListener('click', async (event) => {
     if (!collection || !confirm(`Delete “${collection.name}”? Its documents will remain unfiled.`)) return;
     collections = collections.filter(item => item.id !== id);
     selectedCollectionIds.delete(id);
+    expandedCollectionIds.delete(id);
     const db = await openDB();
     const tx = db.transaction(STORE_NAME, 'readwrite');
     const store = tx.objectStore(STORE_NAME);
